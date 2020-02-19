@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\MedicPrescription;
 use App\Form\MedicPrescriptionType;
@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * @Route("/admin")
+ * @Route("/Admin")
  */
 class MedicPrescriptionController extends AbstractController
 {
@@ -39,7 +39,7 @@ class MedicPrescriptionController extends AbstractController
      */
     public function index(MedicPrescriptionRepository $medicPrescriptionRepository): Response
     {
-        return $this->render('admin/medic_prescription/index.html.twig', [
+        return $this->render('Admin/medic_prescription/index.html.twig', [
             'medic_prescriptions' => $medicPrescriptionRepository->findAll(),
         ]);
     }
@@ -65,7 +65,7 @@ class MedicPrescriptionController extends AbstractController
             return $this->redirectToRoute('medic_prescription_index');
         }
 
-        return $this->render('admin/medic_prescription/new.html.twig', [
+        return $this->render('Admin/medic_prescription/new.html.twig', [
             'medic_prescription' => $medicPrescription,
             'form' => $form->createView(),
         ]);
@@ -114,7 +114,7 @@ class MedicPrescriptionController extends AbstractController
             return $this->redirectToRoute('medic_prescription_index');
         }
 
-        return $this->render('admin/medic_prescription/edit.html.twig', [
+        return $this->render('Admin/medic_prescription/edit.html.twig', [
             'medic_prescription' => $medicPrescription,
             'form' => $form->createView(),
         ]);

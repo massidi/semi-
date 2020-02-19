@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,7 +12,7 @@ class PharmacistController extends AbstractController
      */
     public function index()
     {
-        return $this->render('admin/pharmacist/index.html.twig', [
+        return $this->render('Admin/pharmacist/index.html.twig', [
             'controller_name' => 'PharmacistController',
         ]);
     }

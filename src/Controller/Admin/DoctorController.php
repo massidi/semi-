@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Doctor;
 use App\Entity\MedicPrescription;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin")
+ * @Route("/Admin")
  */
 
 class DoctorController extends AbstractController
@@ -44,7 +44,7 @@ class DoctorController extends AbstractController
     public function index()
     {
        $doctors=$this->repository->findAll();
-        return $this->render('admin/doctor/index.html.twig', [
+        return $this->render('Admin/doctor/index.html.twig', [
             'doctor' => $doctors,
         ]);
     }
@@ -68,7 +68,7 @@ class DoctorController extends AbstractController
 
 
         }
-        return $this->render('admin/doctor/new.html.twig',['form'=>$form->createView(),
+        return $this->render('Admin/doctor/new.html.twig',['form'=>$form->createView(),
             'doctors'=>$doctor,]);
 
     }
@@ -92,7 +92,7 @@ class DoctorController extends AbstractController
         }
 
          $doctors=$this->repository->findAll();
-        return $this->render('admin/doctor/edit.html.twig',['form'=>$form->createView(),
+        return $this->render('Admin/doctor/edit.html.twig',['form'=>$form->createView(),
             'doctors'=>$doctors,
         ]);
 
