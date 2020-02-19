@@ -1,0 +1,25 @@
+
+
+{{ form_start(form) }}
+
+<div class="row">
+    <div class="col-md-4">{{ form_row(form.dateOfBirth) }}</div>
+    <div class="col-md-4">{{ form_row(form.age) }}</div>
+    <div class="col-md-2">{{ form_row(form.diagnostic) }}</div>
+</div>
+<div class="row">
+
+    <div class="col-md-2">{{ form_row(form.blood_pressure) }}</div>
+    <div class="col-md-2">{{ form_row(form.pulse_rate) }}</div>
+    <div class="col-md-2">{{ form_row(form.unite) }}</div>
+    <div class="col-md-2">{{ form_row(form.dosage) }}</div>
+</div>
+<div class="row">
+    <div class="col-md-5">{{ form_row(form.examination) }}</div>
+    <div class="col-md-2">{{ form_row(form.health_regine) }}</div>
+    <div class="col-md-1">{{ form_row(form.contact) }}</div>
+
+</div>
+    {{ form_rest(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MedicPrescription index{% endblock %}
+
+{% block body %}
+    <h1>MedicPrescription index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateOfBirth</th>
+                <th>Age</th>
+                <th>Contact</th>
+                <th>Diagnostic</th>
+                <th>Blood_pressure</th>
+                <th>Pulse_rate</th>
+                <th>Drug</th>
+                <th>Unite</th>
+                <th>Dosage</th>
+                <th>Examination</th>
+                <th>Health_regine</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for medic_prescription in medic_prescriptions %}
+            <tr>
+                <td>{{ medic_prescription.id }}</td>
+                <td>{{ medic_prescription.dateOfBirth ? medic_prescription.dateOfBirth|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ medic_prescription.age }}</td>
+                <td>{{ medic_prescription.contact }}</td>
+                <td>{{ medic_prescription.diagnostic }}</td>
+                <td>{{ medic_prescription.bloodPressure }}</td>
+                <td>{{ medic_prescription.pulseRate }}</td>
+                <td>{{ medic_prescription.drug }}</td>
+                <td>{{ medic_prescription.unite }}</td>
+                <td>{{ medic_prescription.dosage }}</td>
+                <td>{{ medic_prescription.examination }}</td>
+                <td>{{ medic_prescription.healthRegine }}</td>
+                <td>
+                    <a href="{{ path('medic_prescription_show', {'id': medic_prescription.id}) }}">show</a>
+                    <a href="{{ path('medic_prescription_edit', {'id': medic_prescription.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('medic_prescription_new') }}">Create new</a>
+{% endblock %}

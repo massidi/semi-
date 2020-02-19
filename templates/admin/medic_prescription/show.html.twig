@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MedicPrescription{% endblock %}
+
+{% block body %}
+    <h1>MedicPrescription</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ medic_prescription.id }}</td>
+            </tr>
+            <tr>
+                <th>DateOfBirth</th>
+                <td>{{ medic_prescription.dateOfBirth ? medic_prescription.dateOfBirth|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ medic_prescription.age }}</td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td>{{ medic_prescription.contact }}</td>
+            </tr>
+            <tr>
+                <th>Diagnostic</th>
+                <td>{{ medic_prescription.diagnostic }}</td>
+            </tr>
+            <tr>
+                <th>Blood_pressure</th>
+                <td>{{ medic_prescription.bloodPressure }}</td>
+            </tr>
+            <tr>
+                <th>Pulse_rate</th>
+                <td>{{ medic_prescription.pulseRate }}</td>
+            </tr>
+            <tr>
+                <th>Drug</th>
+                <td>{{ medic_prescription.drug }}</td>
+            </tr>
+            <tr>
+                <th>Unite</th>
+                <td>{{ medic_prescription.unite }}</td>
+            </tr>
+            <tr>
+                <th>Dosage</th>
+                <td>{{ medic_prescription.dosage }}</td>
+            </tr>
+            <tr>
+                <th>Examination</th>
+                <td>{{ medic_prescription.examination }}</td>
+            </tr>
+            <tr>
+                <th>Health_regine</th>
+                <td>{{ medic_prescription.healthRegine }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('medic_prescription_index') }}">back to list</a>
+
+    <a href="{{ path('medic_prescription_edit', {'id': medic_prescription.id}) }}">edit</a>
+
+    {{ include('medic_prescription/_delete_form.html.twig') }}
+{% endblock %}
