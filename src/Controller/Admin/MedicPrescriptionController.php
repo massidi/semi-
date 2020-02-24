@@ -45,7 +45,7 @@ class MedicPrescriptionController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="medic_prescription_new", methods={"GET","POST"})
+     * @Route("/medic_prescription_new", name="medic_prescription_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */
