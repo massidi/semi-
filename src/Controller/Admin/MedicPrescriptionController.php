@@ -121,7 +121,7 @@ class MedicPrescriptionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="medic_prescription_delete", methods={"DELETE"})
+     * @Route("/medic_prescription_delete/{id}", name="medic_prescription_delete", methods={"DELETE"})
      * @param Request $request
      * @param MedicPrescription $medicPrescription
      * @return Response

@@ -1,55 +1,70 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.html.twig' %}
 
-{% block title %}MedicPrescription index{% endblock %}
+{% block title %}TABLE OF PRESCRIPTION{% endblock %}
 
-{% block body %}
-    <h1>MedicPrescription index</h1>
+{% block contenu %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <h1>TABLE OF PRESCRIPTION</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>DateOfBirth</th>
-                <th>Age</th>
-                <th>Contact</th>
-                <th>Diagnostic</th>
-                <th>Blood_pressure</th>
-                <th>Pulse_rate</th>
-                <th>Drug</th>
-                <th>Unite</th>
-                <th>Dosage</th>
-                <th>Examination</th>
-                <th>Health_regine</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for medic_prescription in medic_prescriptions %}
-            <tr>
-                <td>{{ medic_prescription.id }}</td>
-                <td>{{ medic_prescription.dateOfBirth ? medic_prescription.dateOfBirth|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ medic_prescription.age }}</td>
-                <td>{{ medic_prescription.contact }}</td>
-                <td>{{ medic_prescription.diagnostic }}</td>
-                <td>{{ medic_prescription.bloodPressure }}</td>
-                <td>{{ medic_prescription.pulseRate }}</td>
-                <td>{{ medic_prescription.drug }}</td>
-                <td>{{ medic_prescription.unite }}</td>
-                <td>{{ medic_prescription.dosage }}</td>
-                <td>{{ medic_prescription.examination }}</td>
-                <td>{{ medic_prescription.healthRegine }}</td>
-                <td>
-                    <a href="{{ path('medic_prescription_show', {'id': medic_prescription.id}) }}">show</a>
-                    <a href="{{ path('medic_prescription_edit', {'id': medic_prescription.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="13">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>DateOfBirth</th>
+                        <th>Age</th>
+                        <th>Contact</th>
+                        <th>Diagnostic</th>
+                        <th>Blood_pressure</th>
 
-    <a href="{{ path('medic_prescription_new') }}">Create new</a>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for medic_prescription in medic_prescriptions %}
+                        <tr>
+                            <td>{{ medic_prescription.id }}</td>
+                            <td>{{ medic_prescription.dateOfBirth ? medic_prescription.dateOfBirth|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ medic_prescription.age }}</td>
+                            <td>{{ medic_prescription.contact }}</td>
+                            <td>{{ medic_prescription.diagnostic }}</td>
+                            <td>{{ medic_prescription.bloodPressure }}</td>
+
+                            <td>
+                                <a href="{{ path('medic_prescription_edit', {'id': medic_prescription.id}) }}" class="btn btn-primary a-btn-slide-text">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    <span><strong>Edit</strong></span>
+                                </a>
+
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <a href="{{ path('medic_prescription_delete',{'id':medic_prescription.id}) }}" class="btn btn-primary a-btn-slide-text">
+                                        <span class="glyphicon glyphicon-remove AQ|s|z" aria-hidden="true"></span>
+                                        <span><strong>Delete</strong></span>
+                                    </a>
+                                </div>
+
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="13">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="col-sm-2">
+                    <span class="badge badge-pill badge-secondary">
+                <a href="{{ path('medic_prescription_new') }}">Create new</a>
+                </span>
+            </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
 {% endblock %}

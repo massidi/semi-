@@ -1,13 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.html.twig' %}
 
-{% block title %}Edit MedicPrescription{% endblock %}
+{% block title %}Edit Prescription{% endblock %}
 
-{% block body %}
-    <h1>Edit MedicPrescription</h1>
+{% block contenu %}
+    <h1>Prescription</h1>
 
-    {{ include('medic_prescription/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/medic_prescription/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('medic_prescription_index') }}">back to list</a>
 
-    {{ include('medic_prescription/_delete_form.html.twig') }}
+    <a href=" {{ include('admin/medic_prescription/_delete_form.html.twig') }}">delete</a>
+
 {% endblock %}
