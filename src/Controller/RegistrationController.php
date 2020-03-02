@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 
 //use Doctrine\Common\Persistence\ObjectManager;
@@ -16,13 +18,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistrationController extends AbstractController
 {
-   /* private $manager;
+    private $manager;
 
-    public  function  __construct(ObjectManager $manager)
+    public  function  __construct(EntityManagerInterface $manager)
     {
 
         $this->manager=$manager;
-    }*/
+    }
 
     /**
      * @Route("/register", name="app_register")
@@ -45,9 +47,9 @@ class RegistrationController extends AbstractController
                 )
             );
 
-           //$entityManager = $this->getDoctrine()->getManager();
-           // $this->manager->persist($users);
-            //$this->manager->flush();
+
+            $this->manager->persist($users);
+            $this->manager->flush();
 
             // do anything else you need here, like send an email
 

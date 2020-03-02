@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DoctorRepository")
@@ -23,6 +27,10 @@ class Doctor
 
     /**
      * @ORM\Column(type="string", length=255)
+     * * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your lastname cannot contain a number")
      */
     private $type;
 
@@ -33,11 +41,15 @@ class Doctor
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(
+     *   message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+
      */
     private $mobile;
 
@@ -50,6 +62,16 @@ class Doctor
      * @ORM\Column(type="string", length=255)
      */
     private $specialization;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MedicPrescription", mappedBy="docName")
+     */
+    private $medicPrescriptions;
+
+    public function __construct()
+    {
+        $this->medicPrescriptions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -136,6 +158,37 @@ class Doctor
     public function setSpecialization(string $specialization): self
     {
         $this->specialization = $specialization;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MedicPrescription[]
+     */
+    public function getMedicPrescriptions(): Collection
+    {
+        return $this->medicPrescriptions;
+    }
+
+    public function addMedicPrescription(MedicPrescription $medicPrescription): self
+    {
+        if (!$this->medicPrescriptions->contains($medicPrescription)) {
+            $this->medicPrescriptions[] = $medicPrescription;
+            $medicPrescription->setDocName($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedicPrescription(MedicPrescription $medicPrescription): self
+    {
+        if ($this->medicPrescriptions->contains($medicPrescription)) {
+            $this->medicPrescriptions->removeElement($medicPrescription);
+            // set the owning side to null (unless already changed)
+            if ($medicPrescription->getDocName() === $this) {
+                $medicPrescription->setDocName(null);
+            }
+        }
 
         return $this;
     }

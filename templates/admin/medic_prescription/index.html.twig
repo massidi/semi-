@@ -3,6 +3,7 @@
 {% block title %}TABLE OF PRESCRIPTION{% endblock %}
 
 {% block contenu %}
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -11,7 +12,9 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>Doctor_Name</th>
+                        <th>id</th>
+
                         <th>DateOfBirth</th>
                         <th>Age</th>
                         <th>Contact</th>
@@ -23,7 +26,10 @@
                     </thead>
                     <tbody>
                     {% for medic_prescription in medic_prescriptions %}
+                        {{ dump(medic_prescription) }}
                         <tr>
+                            <td>{{ medic_prescription.id }}</td>
+
                             <td>{{ medic_prescription.id }}</td>
                             <td>{{ medic_prescription.dateOfBirth ? medic_prescription.dateOfBirth|date('Y-m-d H:i:s') : '' }}</td>
                             <td>{{ medic_prescription.age }}</td>

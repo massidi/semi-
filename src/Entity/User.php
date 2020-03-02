@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -24,11 +25,13 @@ class User implements UserInterface, \ Serializable
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      */
     private $first_name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      */
     private $last_name;
 
@@ -53,20 +56,27 @@ class User implements UserInterface, \ Serializable
     private $status;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      *
-     */
-    private $prescriptions;
+     */private $prescriptions;
 
     public function __construct()
     {
         $this->prescriptions = new ArrayCollection();
     }
 
+
     public function getId(): ?int
     {
         return $this->id;
     }
+    /**
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your firstname cannot contain a number"
+     * )
+     */
 
     public function getFirstName(): ?string
     {
@@ -79,6 +89,13 @@ class User implements UserInterface, \ Serializable
 
         return $this;
     }
+    /**
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your lastname cannot contain a number"
+     * )
+     */
 
     public function getLastName(): ?string
     {
@@ -115,6 +132,11 @@ class User implements UserInterface, \ Serializable
 
         return $this;
     }
+    /**
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
+     */
 
     public function getEmail(): ?string
     {

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DPP system</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('home/fonts/icomoon/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('home/css/bootstrap.min.css') }}" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href=" https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('home/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('home/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('home/css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('home/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('home/css/owl.theme.default.min.css') }}">
+
+
+
+    <link rel="stylesheet" href="{{ asset('home/css/aos.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('home/css/style.css') }}">
+
+</head>
+
+<body>
+<div class="site-wrap">
+
+
+    <div class="site-navbar py-2">
+
+        <div class="search-wrap">
+            <div class="container">
+                <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+                <form action="#" method="post">
+                    <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+                </form>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="logo">
+                    <div class="site-logo">
+                        <a href="index.html" class="js-logo-clone">DDP System</a>
+                    </div>
+                </div>
+                <div class="main-nav d-none d-lg-block">
+                    <nav class="site-navigation text-right text-md-center" role="navigation">
+                        <ul class="site-menu js-clone-nav d-none d-lg-block">
+                            <li class="active"><a href="index.html">Home</a></li>
+                            <li><a href="shop.html">Store</a></li>
+                            <li class="has-children">
+                                <a href="#">Dropdown</a>
+                                <ul class="dropdown">
+
+                                    <li><a  data-target="#patientInfoModal" data-toggle="modal" href="#">Patient Info</a></li>
+                                    <li><a href="chat.html">Chat</a></li>
+                                    <li><a data-target="#presModal" data-toggle="modal" href="#">Prescription</a></li>
+
+                                </ul>
+                            </li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+
+                            <!-- <div class="incons"> -->
+                            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+
+
+                            <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
+                                        class="icon-menu"></span>
+
+                            </a>
+                            <li class="has-children">
+                                <a href="{{ path('login') }}" class="icons-btn d-inline-block bag">
+                                    <span class="icon-user"></span></a>
+                                <ul class="dropdown">
+
+                                    <li><a  data-target="#userProfilModalModal" data-toggle="modal" href="#">Profile</a></li>
+                                    <li><a href="#">Logout</a></li>
+
+
+
+                                </ul>
+                    </nav>
+                </div>
+
+
+                <!-- Button trigger modal -->
+                <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                  Launch demo modal
+                </button>-->
+
+                <!-- Modal for p info -->
+                <div class="modal fade" id="patientInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Patient Info</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="patient-info">
+                                    <div class="image-container">
+                                        <img scr="{{ asset('home/images/per.jpg') }}" style="width:100%">
+                                        <div class="title">
+                                            <h2>LORITA MAKAYA<h2>
+                                        </div>
+                                    </div>
+                                    <div class="main-container">
+                                        <p><i class="fa fa-envelope info"></i>makaya000@gmail.com</P>
+                                        <p><i class="fa fa-home info"></i>address</P>
+                                        <p><i class="fa fa-phone info"></i>9733034000</P>
+                                        <p><i class="fa fa-hospital-o info"></i>St Josephoseph</P>
+                                        <p><i class="fa fa-user info"></i>Dr. LORD DIONGA</P>
+                                    </div>
+
+                                </div>
+
+                            </div>sssss
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal for profil -->
+                <div class="modal fade" id="userProfilModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">User profil</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="user-profil">
+                                    <form>
+
+                                        <input type="text" name="username" placeholder="username">
+                                        <input type="password" name="pass" placeholder="password"><br><br>
+                                        <a href="cof.html"><input type="button" value="log in"></a><br>
+                                        <br><br>
+                                        <div id="container">
+                                            <a href="re.html" style=" margin-right:0px; font-size:13px; font-family:tahoma, geneva, sans-serif; ">reset password</a><br>
+                                            <a href="fo.html" style=" margin-right:0px; font-size:13px;font-family:tahoma, geneva, sans-serif; ">forgot password</a>
+                                        </div><br><br><br><br><br>
+
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Save</button>
+                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal for pres -->
+
+                <div class="modal fade" id="presModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Enter the code</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="POST">
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Prescription code</label>
+                                        <input type="number" class="form-control" name="pres_code" id="pres_code">
+                                    </div>
+
+                                </form>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="site-blocks-cover" style="background-image: url({{ asset('home/images/hero_1.jpg') }});">
+           {% block contenu %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 mx-auto order-lg-2 align-self-center">
+                        <div class="site-block-cover-content text-center">
+                            <h2 class="sub-title">TRUST OUR SECURITY SERVICES</h2>
+                            <h1>Welcome To DPP System</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+        <div class="site-section">
+            <div class="container">
+                <div class="row">
+                    <div class="title-section text-center col-12">
+                        <h2 class="text-uppercase">Popular Products</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4 text-center item mb-4">
+
+                        <a href="shop-single.html"> <img src="{{ asset('home/images/product_01.png') }}" alt="Image"></a>
+                        <h3 class="text-dark"><a href="shop-single.html">Bioderma</a></h3>
+                        <p class="price"><del>95.00</del> &mdash; $55.00</p>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 text-center item mb-4">
+                        <a href="shop-single.html"> <img src="{{ asset('home/images/product_02.png') }}" alt="Image"></a>
+                        <h3 class="text-dark"><a href="shop-single.html">Chanca Piedra</a></h3>
+                        <p class="price">$70.00</p>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 text-center item mb-4">
+                        <a href="shop-single.html"> <img src="{{ asset('home/images/product_03.png') }}" alt="Image"></a>
+                        <h3 class="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
+                        <p class="price">$120.00</p>
+                    </div>
+
+
+                </div>
+                <div class="site-section bg-secondary bg-image" style="background-image: url({{ asset('home/images/bg_2.jpg') }});">
+                    <div class="container">
+                        <div class="row align-items-stretch">
+                            <div class="col-lg-6 mb-5 mb-lg-0">
+                                <a href="#" class="banner-1 h-100 d-flex" style="background-image: url({{ asset('home/images/bg_1.jpg') }});">
+                                    <div class="banner-1-inner align-self-center">
+                                        <h2>Pharma Products</h2>
+                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae ex ad minus rem odio voluptatem.
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-lg-6 mb-5 mb-lg-0">
+                                <a href="#" class="banner-1 h-100 d-flex" style="background-image: url({{ asset('home/images/bg_2.jpg') }});">
+                                    <div class="banner-1-inner ml-auto  align-self-center">
+                                        <h2>Rated by Experts</h2>
+                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae ex ad minus rem odio voluptatem.
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <footer class="site-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+
+                            <div class="block-7">
+                                <h3 class="footer-heading mb-4">About Us</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quae reiciendis distinctio voluptates
+                                    sed dolorum excepturi iure eaque, aut unde.</p>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
+                            <h3 class="footer-heading mb-4">Quick Links</h3>
+                            <ul class="list-unstyled">
+                                <li><a href="#">Patient Info</a></li>
+                                <li><a href="chat.html">Chat</a></li>
+                                <li><a href="#">Notification</a></li>
+
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3">
+                            <div class="block-5 mb-5">
+                                <h3 class="footer-heading mb-4">Contact Info</h3>
+                                <ul class="list-unstyled">
+                                    <li class="address">203 Fake St. Mountain View, San Francisco, California, USA</li>
+                                    <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
+                                    <li class="email">emailaddress@domain.com</li>
+                                </ul>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="row pt-5 mt-5 text-center">
+                        <div class="col-md-12">
+                            <p>
+
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
+                                with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://dppsystem.com" target="_blank"
+                                                                                         class="text-primary">DPPsystem</a>
+
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </footer>
+
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="{{ asset('home/js/popper.min.js') }}" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="{{ asset('home/js/bootstrap.min.js') }}" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

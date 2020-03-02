@@ -5,9 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Doctor;
 use App\Entity\MedicPrescription;
 use App\Form\DoctorType;
-use App\Form\PrescriptionType;
 use App\Repository\DoctorRepository;
-//use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,7 +48,7 @@ class DoctorController extends AbstractController
     }
 
     /**
-     * @Route("/new",name="new")
+     * @Route("/doctor_new",name="doctor_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -71,6 +69,19 @@ class DoctorController extends AbstractController
         return $this->render('Admin/doctor/new.html.twig',['form'=>$form->createView(),
             'doctors'=>$doctor,]);
 
+    }
+
+    /**
+     * @Route("/show_doctor/{id}/",name="show_doctor")
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function show($id)
+    {
+       $doctors=$this->repository->find($id);
+       return $this->render("Admin/doctor/show.html.twig",[
+           'doctor'=>$doctors
+       ]);
     }
 
     /**

@@ -71,6 +71,12 @@ class MedicPrescription
      */
     private $health_regine;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Doctor", inversedBy="medicPrescriptions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $docName;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -204,6 +210,18 @@ class MedicPrescription
     public function setHealthRegine(string $health_regine): self
     {
         $this->health_regine = $health_regine;
+
+        return $this;
+    }
+
+    public function getDocName(): ?doctor
+    {
+        return $this->docName;
+    }
+
+    public function setDocName(?doctor $docName): self
+    {
+        $this->docName = $docName;
 
         return $this;
     }

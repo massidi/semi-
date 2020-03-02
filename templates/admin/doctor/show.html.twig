@@ -1,0 +1,50 @@
+{% extends 'admin.html.twig' %}
+
+{% block contenu %}
+
+
+        <h1>My Information</h1>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>NAME</th>
+                <td>{{ doctor.name }}</td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>{{ doctor.department}}</td>
+            </tr>
+            <tr>
+                <th>EMAIL</th>
+                <td>{{ doctor.email}}</td>
+            </tr>
+            <tr>
+                <th>NAME OF THE HOSPITAL</th>
+                <td>{{ doctor.hospitalName }}</td>
+            </tr>
+            <tr>
+                <th>MOBILE</th>
+                <td>{{ doctor.mobile }}</td>
+            </tr>
+            <tr>
+                <th>SPECIALIZATION</th>
+                <td>{{ doctor.specialization }}</td>
+            </tr>
+            <tr>
+                <th>Pulse_rate</th>
+                <td>{{ doctor.type }}</td>
+            </tr>
+
+            </tbody>
+        </table>
+
+        <a href="{{ path('doctor_index') }}">back to list</a>
+
+        <a href="{{ path('doctor_new')}}">edit</a>
+
+    {% endblock %}
+
+
+{% endblock %}
+
