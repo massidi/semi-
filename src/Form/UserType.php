@@ -18,6 +18,7 @@ class UserType extends AbstractType
             ->add('age')
             ->add('email')
             ->add('status')
+            ->add('username')
         ;
     }
 

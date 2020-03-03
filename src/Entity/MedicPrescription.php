@@ -204,15 +204,5 @@ class MedicPrescription
         return $this;
     }
 
-    public function getDocName(): ?doctor
-    {
-        return $this->docName;
-    }
 
-    public function setDocName(?doctor $docName): self
-    {
-        $this->docName = $docName;
-
-        return $this;
-    }
 }

@@ -44,16 +44,5 @@ class SecurityController extends AbstractController
 
 
     }
-    public function login1(ObjectManager $manager,UserPasswordEncoderInterface $passwordEncoder)
-    {
-        $users= new  User();
-       /* $users->setFirstName();
-        $users->setPassword($this->encoder->encodePassword($users,$users->getPlainPassword()));
-*/
-        $password = $passwordEncoder->encodePassword($users, $users->getPlainPassword());
-        $users->setPassword($password);
-        $manager->persist($users);
 
-        $manager->flush();
-    }
 }

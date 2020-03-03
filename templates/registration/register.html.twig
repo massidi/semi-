@@ -1,113 +1,16 @@
 
-{% block contenu %}
-    <html>
-    <head>
-        <link rel="icon" type="image/png" href="{{ asset('login/images/icons/favicon.ico') }} "/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/bootstrap/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('login/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/animate/animate.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/css-hamburgers/hamburgers.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/animsition/css/animsition.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/select2/select2.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/daterangepicker/daterangepicker.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('login/css/util.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('login/css/main.css') }}">
-    </head>
-    <body>
-    <div class="limiter">
-        <div class="container-login100" style="background-image: url('{{ asset("login/images/bg-01.jpg") }}');">
-            <div class="wrap-login100 p-t-30 p-b-50">
-				<span class="login100-form-title p-b-41">Sin Up</span>
-                <div class="row">
-                    <div class="col-md-10">
-                        <div class="card">
-                            {{ dump(registrationForm) }}
-
-                    <div class="wrap-input100 validate-input" data-validate = "Enter username">
-                        <div class="form-group row">
-                            {{ form_label(registrationForm.firstName, "FIRST NAME", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-                            <div class="col-sm-4">
-                                {{ form_widget(registrationForm.firstName, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="wrap-input100 validate-input" data-validate="Enter Last Name">
-                        <div class="form-group row">
-                            {{ form_label(registrationForm.lastName, "LAST NAME", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-                            <div class="col-sm-4">
-                                {{ form_widget(registrationForm.lastName, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                        </div>
-                    </div>
-                <div class="wrap-input100 validate-input" data-validate="Enter Email">
-                    <div class="form-group row">
-                        {{ form_label(registrationForm.email, "EMAIL", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-                        <div class="col-sm-4">
-                            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                </div>
-                <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <div class="form-group row">
-                        {{ form_label(registrationForm.plainPassword, "PASSWORD", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-                        <div class="col-sm-4">
-                            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                </div>
-                <div class="wrap-input100 validate-input" data-validate="Enter Age">
-                    <div class="form-group row">
-                        {{ form_label(registrationForm.age, "AGE", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-                        <div class="col-sm-4">
-                            {{ form_widget(registrationForm.age, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                </div>
-                <div class="wrap-input100 validate-input" data-validate="Enter Status">
-                    <div class="form-group row">
-                        {{ form_label(registrationForm.status, "", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-                        <div class="col-sm-4">
-                            {{ form_widget(registrationForm.status, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                </div>
-                            <div class="wrap-input100 validate-input" data-validate="Enter Status">
-                                <div class="form-group row">
-                                    {{ form_label(registrationForm.agreeTerms, "Agree Terme", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-                                    <div class="col-sm-4">
-                                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                            </div>
-
-                    <div class="container-login100-form-btn m-t-32">
-                        <button type="submit" class="login100-form-btn">Register</button>
-                    </div>
-
-                        </div>
-                    </div>
-
-                </div>
-                {{ form_end(registrationForm) }}
-
-            </div>
-        </div>
-    </div>
-    <div id="dropDownSelect1"></div>
-    </body>
-    </html>
-
 
     <h1>Register</h1>
     <div class="container mt-4">
+        {{ dump(registrationForm) }}
 
     {{ form_start(registrationForm) }}
     {{ form_row(registrationForm.firstName) }}
     {{ form_row(registrationForm.lastName) }}
     {{ form_row(registrationForm.email) }}
     {{ form_row(registrationForm.plainPassword) }}
+        {{ form_row(registrationForm.username) }}
+
 
     {{ form_row(registrationForm.age) }}
     {{ form_row(registrationForm.status) }}
@@ -117,7 +20,7 @@
     <button class="btn">Register</button>
     {{ form_end(registrationForm) }}
     </div>
-{% endblock %}
+
 
 
 

@@ -157,6 +157,23 @@ class User implements UserInterface, \ Serializable
 
         return $this;
     }
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        // TODO: Implement getUsername() method.
+        return $this->username;
+
+    }
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
 
     /**
      * Returns the roles granted to the user.
@@ -189,15 +206,7 @@ class User implements UserInterface, \ Serializable
         // TODO: Implement getSalt() method.
     }
 
-    /**
-     * Returns the username used to authenticate the user.
-     *
-     * @return string The username
-     */
-    public function getUsername()
-    {
-        // TODO: Implement getUsername() method.
-    }
+
 
     /**
      * Removes sensitive data from the user.
@@ -246,10 +255,10 @@ class User implements UserInterface, \ Serializable
         )=unserialize($serialized, ['Allowed_classes' =>false]) ;
     }
 
-    /**
+   /* /**
      * @return Collection|Prescription[]
      */
-    public function getPrescriptions(): Collection
+   /* public function getPrescriptions(): Collection
     {
         return $this->prescriptions;
     }
@@ -275,17 +284,12 @@ class User implements UserInterface, \ Serializable
         }
 
         return $this;
-    }
+    }*/
 
     public function getPlainPassword()
     {
         return $this->getPlainPassword();
     }
 
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
 
-        return $this;
-    }
 }
