@@ -56,14 +56,10 @@ class User implements UserInterface, \ Serializable
     private $status;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
-     *
-     */private $prescriptions;
+     * @ORM\Column(type="string", length=255)
+     */
+    private $username;
 
-    public function __construct()
-    {
-        $this->prescriptions = new ArrayCollection();
-    }
 
 
     public function getId(): ?int
@@ -277,6 +273,18 @@ class User implements UserInterface, \ Serializable
                 $prescription->setPatient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->getPlainPassword();
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }

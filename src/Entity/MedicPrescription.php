@@ -71,16 +71,6 @@ class MedicPrescription
      */
     private $health_regine;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Doctor", inversedBy="medicPrescriptions")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $docName;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getDateOfBirth(): ?\DateTimeInterface
     {

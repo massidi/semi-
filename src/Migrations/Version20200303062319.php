@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200301113618 extends AbstractMigration
+final class Version20200303062319 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,9 +22,9 @@ final class Version20200301113618 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE medic_prescription ADD doc_name_id INT NOT NULL');
-        $this->addSql('ALTER TABLE medic_prescription ADD CONSTRAINT FK_9720D6F8AEF51408 FOREIGN KEY (doc_name_id) REFERENCES doctor (id)');
-        $this->addSql('CREATE INDEX IDX_9720D6F8AEF51408 ON medic_prescription (doc_name_id)');
+        $this->addSql('DROP TABLE semi');
+        $this->addSql('ALTER TABLE medic_prescription DROP doc_name_id');
+        $this->addSql('ALTER TABLE user DROP prescriptions');
     }
 
     public function down(Schema $schema) : void
@@ -32,8 +32,8 @@ final class Version20200301113618 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE medic_prescription DROP FOREIGN KEY FK_9720D6F8AEF51408');
-        $this->addSql('DROP INDEX IDX_9720D6F8AEF51408 ON medic_prescription');
-        $this->addSql('ALTER TABLE medic_prescription DROP doc_name_id');
+        $this->addSql('CREATE TABLE semi (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci, lastname VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB COMMENT = \'\' ');
+        $this->addSql('ALTER TABLE medic_prescription ADD doc_name_id INT NOT NULL');
+        $this->addSql('ALTER TABLE user ADD prescriptions VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci');
     }
 }

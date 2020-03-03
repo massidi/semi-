@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200210053505 extends AbstractMigration
+final class Version20200303062343 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,9 @@ final class Version20200210053505 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE patient (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, age INT NOT NULL, weigth INT NOT NULL, address VARCHAR(255) NOT NULL, mobile VARCHAR(255) NOT NULL, pulse_rate INT NOT NULL, blood_pressure INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('DROP TABLE semi');
+        $this->addSql('ALTER TABLE medic_prescription DROP doc_name_id');
+        $this->addSql('ALTER TABLE user DROP prescriptions');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +32,8 @@ final class Version20200210053505 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE patient');
+        $this->addSql('CREATE TABLE semi (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci, lastname VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB COMMENT = \'\' ');
+        $this->addSql('ALTER TABLE medic_prescription ADD doc_name_id INT NOT NULL');
+        $this->addSql('ALTER TABLE user ADD prescriptions VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci');
     }
 }

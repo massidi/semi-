@@ -63,15 +63,7 @@ class Doctor
      */
     private $specialization;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MedicPrescription", mappedBy="docName")
-     */
-    private $medicPrescriptions;
 
-    public function __construct()
-    {
-        $this->medicPrescriptions = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
