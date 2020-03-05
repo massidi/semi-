@@ -5,13 +5,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
-
-
-
 //use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Persistence\ObjectManager;
-
-
+//use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -62,21 +57,21 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
-
+/*
     /**
-     * @Route("/login" ,name="login")
+     *
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
-    public function login( UserPasswordEncoderInterface $passwordEncoder)
+    /* public function login( UserPasswordEncoderInterface $passwordEncoder)
     {
         $users= new  User();
         /* $users->setFirstName();
          $users->setPassword($this->encoder->encodePassword($users,$users->getPlainPassword()));
- */
-        $password = $passwordEncoder->encodePassword($users, $users->getPlainPassword());
+        */
+       /* $password = $passwordEncoder->encodePassword($users, $users->getPlainPassword());
         $users->setPassword($password);
         $this->manager->persist($users);
 
         $this->manager->flush();
-    }
+    }*/
 }
