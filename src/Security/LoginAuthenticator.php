@@ -72,7 +72,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('Username could not be found.');
         }
 
         return $user;
@@ -98,7 +98,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->router->generate('doctor_new'));
+        return new RedirectResponse($this->router->generate('login'));
 
     }
     protected function getLoginUrl()
