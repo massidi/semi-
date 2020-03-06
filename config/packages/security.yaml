@@ -18,7 +18,7 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-              #target: /home
+                target: /
 
               #logout:
               #path: /logout

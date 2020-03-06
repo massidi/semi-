@@ -99,7 +99,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($this->urlGenerator->generate('pharmacist'));
         }
 
-        //return new RedirectResponse($this->urlGenerator->generate('doctor'));
+        //return new RedirectResponse($this->urlGenerator->generate('doctor_new'));
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
