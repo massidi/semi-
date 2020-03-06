@@ -2,50 +2,37 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
-
 
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/index", name="index")
+     * @Route("/login", name="login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
-    public function index()
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        return $this->render('security/index.html.twig', [
-            'controller_name' => 'SecurityController',
-        ]);
+        // if ($this->getUser()) {
+        //     return $this->redirectToRoute('target_path');
+        // }
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**
-     * @Route("/login", name="login")
-     * @param AuthenticationUtils $authenticationUtils
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/logout", name="app_logout")
      */
-    public function login(AuthenticationUtils $authenticationUtils,Request $request)
+    public function logout()
     {
-        $error= $authenticationUtils->getLastAuthenticationError();
-
-        $LastUsername=$authenticationUtils->getLastUsername();
-
-        return $this->render('security/login.htm.twig',[
-        'error'=>$error,
-            'username'=>$LastUsername
-
-        ]);
-
-
-
-
+        throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
-
-
 }

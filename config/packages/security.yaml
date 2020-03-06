@@ -12,17 +12,22 @@ security:
             security: false
         main:
             anonymous: lazy
+            guard:
+                authenticators:
+                    - App\Security\LoginAuthenticator
             logout:
-                path: /logout
-                target: /
+                path: app_logout
+                # where to redirect after logout
+              #target: /home
+
+              #logout:
+              #path: /logout
+          #target: /
 
             form_login:
                 login_path: login
                 check_path: login
-                provider: my_provider
-            guard:
-                authenticators:
-                    - App\Security\LoginAuthenticator
+            provider: my_provider
 
 
             # activate different ways to authenticate
@@ -34,12 +39,15 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-          - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-          - { path: ^/Admin/doctor_new, roles: ROLE_ADMIN }
-          #- { path: ^/profile, roles: ROLE_USER }
-          #- { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/Admin/doctor, roles: ROLE_ADMIN }
+        - { path: ^/Admin/pharmacist, roles: ROLE_ADMIN}
+        - { path: ^/patient, roles: ROLE_USER }
 
     encoders:
-      App\Entity\User:
-        algorithm: bcrypt
-        cost: 12
+        App\Entity\User:
+          algorithm: bcrypt
+          cost: 12
+
+
+

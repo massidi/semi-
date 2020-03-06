@@ -12,7 +12,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('login/css/util.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('login/css/main.css') }}">
 </head>
+{% block body %}
 <body>
+
     <div class="limiter">
         <div class="container-login100" style="background-image: url('{{ asset("home/images/hero_1") }}');">
             {% block imgbckg %}
@@ -29,11 +31,11 @@
 
 
                     <div class="wrap-input100 validate-input" data-validate = "Enter username">
-                        <input class="input100" type="text" id="firstName" name="_username"  value="{{username }}" placeholder="User name">
+                        <input class="input100" type="text" id="firstName" name="username"  value="{{last_username}}" placeholder="User name">
                         <span class="focus-input100" data-placeholder="&#xe82a;"></span>					</div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
-                        <input class="input100" type="password" id="password" name="_password" placeholder="Password">
+                        <input class="input100" type="password" id="password" name="password" placeholder="Password">
                         <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                     </div>
                     <input type="hidden" name="_csrf_token"
@@ -53,9 +55,11 @@
                 </form>
             </div>
 
-        {% endblock %}
+
         </div>
+        {% endblock %}
     </div>
     <div id="dropDownSelect1"></div>
 </body>
+{% endblock %}
 </html>

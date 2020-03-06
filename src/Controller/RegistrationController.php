@@ -47,7 +47,7 @@ class RegistrationController extends AbstractController
 
             $this->manager->persist($users);
             $this->manager->flush();
-
+            dd($form);
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('login');

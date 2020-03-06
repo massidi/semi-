@@ -19,10 +19,10 @@ class UserType extends AbstractType
             ->add('age')
             ->add('email')
             ->add('status',ChoiceType::class
-            ,['choice' =>[
+            ,['choices' =>[
                 'patient' => 'ROLE_USER',
                     'DOCTOR' => 'ROLE_ADMIN',
-                    'PHARMACIST' => 'ROLE_ADMIN2'
+                    'PHARMACIST' => 'ROLE_ADMIN'
     ],
                     'expanded' => true,
                     'multiple'=>true])
