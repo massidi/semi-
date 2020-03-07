@@ -1,75 +1,51 @@
 {% extends 'connection.htm.twig' %}
 {% block imgbckg %}
-<div class = "card border-primary mb-3" style = "max-width: 100rem;">
-    <div class="card">
-        {{ form_start(registrationForm) }}
-    <div class="card-body">
-        <div class="form-group row">
-            {{ form_label(registrationForm.firstName, "First Name", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-            <div class="col-sm-5">
-                {{ form_widget(registrationForm.firstName, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group row">
-            {{ form_label(registrationForm.lastName, "LastName", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-            <div class="col-sm-5">
-                {{ form_widget(registrationForm.lastName, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group row">
-            {{ form_label(registrationForm.username, "Username", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-            <div class="col-sm-5">
-                {{ form_widget(registrationForm.username, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group row">
-            {{ form_label(registrationForm.email, "Email", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-            <div class="col-sm-5">
-                {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group row">
-            {{ form_label(registrationForm.plainPassword, "Password", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-            <div class="col-sm-5">
-                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group row">
-            {{ form_label(registrationForm.age, "Age", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-            <div class="col-sm-5">
-                {{ form_widget(registrationForm.age, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group row">
+<div class="wrap-login100 p-t-30 p-b-50">
+    <span class="login100-form-title p-b-41">
+        Account Login
+    </span>
 
-            {{ form_label(registrationForm.status, "Status", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-            <select class="form-control">
-            <div class="col-sm-5">
-                {{ form_widget(registrationForm.status, {'attr': {'class': 'form-control'}}) }}
-            </div>
-            </select>
+    {{ form_start(registrationForm, {'attr': {'class': 'login100-form validate-form p-b-33 p-t-5'}}) }}
+        <div class="wrap-input100 validate-input">
+            {{ form_widget(registrationForm.firstName, {'attr': {'class': 'input100','placeholder':'firstName'}}) }}
+            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
         </div>
-        <div class="form-group row">
-            {{ form_label(registrationForm.agreeTerms, "agree Terms", {'label_attr': {'class': 'checkbox mb-3'}}) }}
-            <div class="col-sm-9">
-                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-control'}}) }}
-            </div>
+
+        <div class="wrap-input100 validate-input">
+            {{ form_widget(registrationForm.lastName, {'attr': {'class': 'input100','placeholder':'lastName'}}) }}
+            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
         </div>
-    </div>
+        <div class="wrap-input100 validate-input">
+            {{ form_widget(registrationForm.username, {'attr': {'class': 'input100','placeholder':'username'}}) }}
+            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+        </div>
+        <div class="wrap-input100 validate-input">
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'input100','placeholder':'email'}}) }}
+            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+        </div>
+        <div class="wrap-input100 validate-input">
+            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'input100','placeholder':'plainPassword'}}) }}
+            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+        </div>
+        <div class="wrap-input100 validate-input">
+            {{ form_widget(registrationForm.age, {'attr': {'class': 'input100','placeholder':'age'}}) }}
+            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+        </div>
+        <div class="wrap-input100 validate-input">
+            {{ form_widget(registrationForm.status, {'attr': {'class': 'input100','placeholder':'status'}}) }}
+            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+        </div>
+        <div class="wrap-input100 validate-input">
+            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': '','placeholder':'agreeTerms'}}) }}
+            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+        </div>
     <div class="border-top">
         <div class="card-body">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </div>
         {{ form_end(registrationForm) }}
-
-
-
-    </div>
 </div>
-
-
-
 
 {% endblock %}
 
