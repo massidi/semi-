@@ -35,7 +35,7 @@ class DoctorController extends AbstractController
 
 
     /**
-     * @Route("/doctor", name="doctor")
+     * @Route("/doctor", name="doctor_index")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */

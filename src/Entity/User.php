@@ -230,7 +230,7 @@ class User implements UserInterface, \ Serializable
         return serialize(
         [
             $this->id,
-            $this->first_name,
+            $this->username,
             $this->password
         ]
         );
@@ -250,7 +250,7 @@ class User implements UserInterface, \ Serializable
         list(
 
                 $this->id,
-                $this->first_name,
+                $this->username,
                 $this->password
         )=unserialize($serialized, ['Allowed_classes' =>false]) ;
     }

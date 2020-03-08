@@ -3,74 +3,76 @@
 {% block title %}TABLE OF PRESCRIPTION{% endblock %}
 
 {% block contenu %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Basic Datatable</h5>
+        <div class="table-responsive">
+            <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="zero_config_length">
+                            <label>Show <select name="zero_config_length" aria-controls="zero_config" class="form-control form-control-sm">
+                                    <option value="10">10</option><option value="25">25</option>
+                                    <option value="50">50</option><option value="100">100</option>
+                                </select> entries</label></div></div><div class="col-sm-12 col-md-6">
+                        <div id="zero_config_filter" class="dataTables_filter">
+                            <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="zero_config">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row"><div class="col-sm-12">
+                        <table id="zero_config" class="table table-striped table-bordered dataTable" role="grid" aria-describedby="zero_config_info">
+                            <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="zero_config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 55px;">ID</th>
+                                <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 72px;">DATE OF BIRTH</th>
+                                <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 50px;">DIAGNOSTIC</th>
+                                <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 25px;">Age</th>
+                                <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 58px;">BLOOD PRESSURE</th>
+                                <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 56px;"></th>ACTION</tr>
+                            </thead>
+                            <tbody>
+                            {% for medic_prescription in medic_prescriptions %}
+                                <tr role="row" class="odd">
+                                    <td>{{ medic_prescription.id }}</td>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <h1>TABLE OF PRESCRIPTION</h1>
+                                    <td>{{ medic_prescription.id }}</td>
+                                    <td>{{ medic_prescription.dateOfBirth ? medic_prescription.dateOfBirth|date('Y-m-d H:i:s') : '' }}</td>
+                                    <td>{{ medic_prescription.age }}</td>
+                                    <td>{{ medic_prescription.contact }}</td>
+                                    <td>{{ medic_prescription.diagnostic }}</td>
+                                    <td>{{ medic_prescription.bloodPressure }}</td>
+                                    <td>
+                                        <a href="{{ path('medic_prescription_edit', {'id': medic_prescription.id}) }}" class="btn btn-primary a-btn-slide-text">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                            <span><strong>Edit</strong></span>
+                                        </a>
 
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Doctor_Name</th>
-                        <th>id</th>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <a href="{{ path('medic_prescription_delete',{'id':medic_prescription.id}) }}" class="btn btn-primary a-btn-slide-text">
+                                                <span class="glyphicon glyphicon-remove AQ|s|z" aria-hidden="true"></span>
+                                                <span><strong>Delete</strong></span>
+                                            </a>
+                                        </div>
 
-                        <th>DateOfBirth</th>
-                        <th>Age</th>
-                        <th>Contact</th>
-                        <th>Diagnostic</th>
-                        <th>Blood_pressure</th>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="13">no records found</td>
+                                </tr>
+                            {% endfor %}
 
-                        <th>actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for medic_prescription in medic_prescriptions %}
-                        {{ dump(medic_prescription) }}
-                        <tr>
-                            <td>{{ medic_prescription.id }}</td>
-
-                            <td>{{ medic_prescription.id }}</td>
-                            <td>{{ medic_prescription.dateOfBirth ? medic_prescription.dateOfBirth|date('Y-m-d H:i:s') : '' }}</td>
-                            <td>{{ medic_prescription.age }}</td>
-                            <td>{{ medic_prescription.contact }}</td>
-                            <td>{{ medic_prescription.diagnostic }}</td>
-                            <td>{{ medic_prescription.bloodPressure }}</td>
-
-                            <td>
-                                <a href="{{ path('medic_prescription_edit', {'id': medic_prescription.id}) }}" class="btn btn-primary a-btn-slide-text">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                    <span><strong>Edit</strong></span>
-                                </a>
-
-                            </td>
-                            <td>
-                                <div class="row">
-                                    <a href="{{ path('medic_prescription_delete',{'id':medic_prescription.id}) }}" class="btn btn-primary a-btn-slide-text">
-                                        <span class="glyphicon glyphicon-remove AQ|s|z" aria-hidden="true"></span>
-                                        <span><strong>Delete</strong></span>
-                                    </a>
-                                </div>
-
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="13">no records found</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                <div class="col-sm-2">
-                    <span class="badge badge-pill badge-secondary">
-                <a href="{{ path('medic_prescription_new') }}">Create new</a>
-                </span>
-            </div>
-
-
-
+                        </table>
+                    </div>
+                </div>
             </div>
 
         </div>
     </div>
+</div>
+
 {% endblock %}
