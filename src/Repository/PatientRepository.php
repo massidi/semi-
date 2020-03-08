@@ -14,6 +14,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class PatientRepository extends ServiceEntityRepository
 {
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Patient::class);
@@ -35,16 +36,24 @@ class PatientRepository extends ServiceEntityRepository
         ;
     }
     */
-
-    /*
-    public function findOneBySomeField($value): ?Patient
+    public function findLatest()
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
+            ->setMaxResults(4)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
+
+
+        /*
+        public function findOneBySomeField($value): ?Patient
+        {
+            return $this->createQueryBuilder('p')
+                ->andWhere('p.exampleField = :val')
+                ->setParameter('val', $value)
+                ->getQuery()
+                ->getOneOrNullResult()
+            ;
+        }
+        */
 }

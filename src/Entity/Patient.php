@@ -46,20 +46,7 @@ class Patient
      */
     private $mobile;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $pulse_rate;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $blood_pressure;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getName(): ?string
     {
@@ -133,27 +120,5 @@ class Patient
         return $this;
     }
 
-    public function getPulseRate(): ?int
-    {
-        return $this->pulse_rate;
-    }
 
-    public function setPulseRate(int $pulse_rate): self
-    {
-        $this->pulse_rate = $pulse_rate;
-
-        return $this;
-    }
-
-    public function getBloodPressure(): ?int
-    {
-        return $this->blood_pressure;
-    }
-
-    public function setBloodPressure(int $blood_pressure): self
-    {
-        $this->blood_pressure = $blood_pressure;
-
-        return $this;
-    }
 }

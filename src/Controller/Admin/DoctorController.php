@@ -4,8 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\Doctor;
 use App\Entity\MedicPrescription;
+use App\Entity\Patient;
 use App\Form\DoctorType;
 use App\Repository\DoctorRepository;
+use App\Repository\PatientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,11 +28,16 @@ class DoctorController extends AbstractController
      * @var ObjectManager
      */
     private $manager;
+    /**
+     * @var PatientRepository
+     */
+    private $patientRepository;
 
-    public  function __construct(DoctorRepository $repository,EntityManagerInterface $manager)
+    public  function __construct(DoctorRepository $repository,EntityManagerInterface $manager,PatientRepository $patientRepository)
     {
         $this->repository = $repository;
         $this->manager = $manager;
+        $this->patientRepository = $patientRepository;
     }
 
 
@@ -130,5 +137,16 @@ class DoctorController extends AbstractController
 
     }
 
+    /**
+     * @Route("patientlatest",name="patient_latest")
+     */
 
+    public  function  patientLatest()
+    {
+        $patientRepository=$this->patientRepository->findLatest();
+
+        return $this->render('admin/doctor/seelatest.html.twig');
+
+
+    }
 }
