@@ -52,7 +52,7 @@
                                     </td>
                                     <td>
                                         <div class="row">
-                                            <a href="{{ path('medic_prescription_delete',{'id':medic_prescription.id}) }}" class="btn btn-primary a-btn-slide-text">
+                                            <a href="{{ include('admin/medic_prescription/_delete_form.html.twig', {'button_label': 'Update'}) }}" class="btn btn-primary a-btn-slide-text">
                                                 <span class="glyphicon glyphicon-remove AQ|s|z" aria-hidden="true"></span>
                                                 <span><strong>Delete</strong></span>
                                             </a>
