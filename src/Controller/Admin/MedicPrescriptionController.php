@@ -124,9 +124,10 @@ class MedicPrescriptionController extends AbstractController
      * @Route("/medic_prescription_delete/{id}", name="medic_prescription_delete", methods={"DELETE"})
      * @param Request $request
      * @param MedicPrescription $medicPrescription
+     * @param $id
      * @return Response
      */
-    public function delete(Request $request, MedicPrescription $medicPrescription): Response
+    public function delete(Request $request, MedicPrescription $medicPrescription,$id): Response
     {
         if ($this->isCsrfTokenValid('delete'.$medicPrescription->getId(), $request->request->get('_token'))) {
 
@@ -134,6 +135,15 @@ class MedicPrescriptionController extends AbstractController
             $this->manager->flush();
         }
 
+
         return $this->redirectToRoute('medic_prescription_index');
+    }
+    /**
+     * @Route("/calendar",name="calandare")
+     */
+    public function  Calendar()
+    {
+
+        return $this->render('admin/doctor/calendar.html.twig');
     }
 }

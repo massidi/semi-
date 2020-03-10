@@ -70,6 +70,10 @@ class MedicPrescription
      * @ORM\Column(type="string", length=255)
      */
     private $health_regine;
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
 
     public function getDateOfBirth(): ?\DateTimeInterface

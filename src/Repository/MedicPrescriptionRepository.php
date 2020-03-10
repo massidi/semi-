@@ -18,6 +18,14 @@ class MedicPrescriptionRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, MedicPrescription::class);
     }
+    public function findLatestprescript()
+    {
+        return $this->createQueryBuilder('p')
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
+    }
+
 
     // /**
     //  * @return MedicPrescription[] Returns an array of MedicPrescription objects
@@ -34,6 +42,7 @@ class MedicPrescriptionRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
     */
 
     /*

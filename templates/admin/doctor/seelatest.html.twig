@@ -9,31 +9,34 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title m-b-0">Recent Patient</h4>
+                        <h4 class="card-title m-b-0">Recent Patients</h4>
                     </div>
-                    {% for patient in  patient %}
-                    <div class="comment-widgets scrollable ps-container ps-theme-default" data-ps-id="6d011add-1a28-79b1-a0e8-adc2ef87e9a9">
+                    {% for patient in patient %}
+                    <div class="comment-widgets scrollable ps-container ps-theme-default" data-ps-id="2b2e2627-5dcb-dea3-4dc8-40a6bf763e8a">
                         <!-- Comment Row -->
-
-                        <div class="d-flex flex-row comment-row m-t-0">
-                            <div class="p-2"><img src="{{ asset('doctor/assets/images/users/1.jpg') }}" alt="user" width="50" class="rounded-circle"></div>
+                        <div class="d-flex flex-row comment-row">
+                            <div class="p-2"><img src="{{ asset('doctor/assets/images/users/3.jpg') }}" alt="user" width="50" class="rounded-circle"></div>
                             <div class="comment-text w-100">
-                                <h6 class="font-medium">J{{ patient.name }}/h6>
-                                <span class="m-b-15 d-block">{{ patient.type }} </span>
+                                <h6 class="font-medium">{{ patient.name}}</h6>
+                                <span class="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry. </span>
                                 <div class="comment-footer">
-                                    <span class="text-muted float-right">{{ patient.address }}</span>
+                                    <span class="text-muted float-right">August 1, 2016</span>
                                     <button type="button" class="btn btn-cyan btn-sm">Edit</button>
                                     <button type="button" class="btn btn-success btn-sm">Publish</button>
                                     <button type="button" class="btn btn-danger btn-sm">Delete</button>
                                 </div>
                             </div>
                         </div>
+                        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;">
+
+                            </div>
                         </div>
+                        <div class="ps-scrollbar-y-rail" style="top: 0px; right: 3px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 0px;">
+
+                            </div>
+                        </div>
+                    </div>
                     {% endfor %}
-
-
-
-                        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: 3px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
                 </div>
                 <!-- accoridan part -->
                 <div class="accordion" id="accordionExample">
@@ -118,87 +121,25 @@
                 <!-- card new -->
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title m-b-0">News Updates</h4>
+                        <h4 class="card-title m-b-0">Last Prescriptions</h4>
                     </div>
                     <ul class="list-style-none">
-                        <li class="d-flex no-block card-body">
-                            <i class="fa fa-check-circle w-30px m-t-5"></i>
-                            <div>
-                                <a href="#" class="m-b-0 font-medium p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-                                <span class="text-muted">dolor sit amet, consectetur adipiscing</span>
-                            </div>
-                            <div class="ml-auto">
-                                <div class="tetx-right">
-                                    <h5 class="text-muted m-b-0">20</h5>
-                                    <span class="text-muted font-16">Jan</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="d-flex no-block card-body border-top">
-                            <i class="fa fa-gift w-30px m-t-5"></i>
-                            <div>
-                                <a href="#" class="m-b-0 font-medium p-0">Congratulation Maruti, Happy Birthday</a>
-                                <span class="text-muted">many many happy returns of the day</span>
-                            </div>
-                            <div class="ml-auto">
-                                <div class="tetx-right">
-                                    <h5 class="text-muted m-b-0">11</h5>
-                                    <span class="text-muted font-16">Jan</span>
-                                </div>
-                            </div>
-                        </li>
+                        {% for prescription in prescription %}
+
                         <li class="d-flex no-block card-body border-top">
                             <i class="fa fa-plus w-30px m-t-5"></i>
                             <div>
-                                <a href="#" class="m-b-0 font-medium p-0">Maruti is a Responsive Admin theme</a>
-                                <span class="text-muted">But already everything was solved. It will ...</span>
+                                <h5 class="text-muted m-b-0">{{ prescription.examination }}</h5>                                <span class="text-muted">But already everything was solved. It will ...</span>
                             </div>
                             <div class="ml-auto">
                                 <div class="tetx-right">
-                                    <h5 class="text-muted m-b-0">19</h5>
+                                    <h5 class="text-muted m-b-0">{{ prescription.contact }}</h5>
                                     <span class="text-muted font-16">Jan</span>
                                 </div>
                             </div>
                         </li>
-                        <li class="d-flex no-block card-body border-top">
-                            <i class="fa fa-leaf w-30px m-t-5"></i>
-                            <div>
-                                <a href="#" class="m-b-0 font-medium p-0">Envato approved Maruti Admin template</a>
-                                <span class="text-muted">i am very happy to approved by TF</span>
-                            </div>
-                            <div class="ml-auto">
-                                <div class="tetx-right">
-                                    <h5 class="text-muted m-b-0">20</h5>
-                                    <span class="text-muted font-16">Jan</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="d-flex no-block card-body border-top">
-                            <i class="fa fa-question-circle w-30px m-t-5"></i>
-                            <div>
-                                <a href="#" class="m-b-0 font-medium p-0"> I am alwayse here if you have any question</a>
-                                <span class="text-muted">we glad that you choose our template</span>
-                            </div>
-                            <div class="ml-auto">
-                                <div class="tetx-right">
-                                    <h5 class="text-muted m-b-0">15</h5>
-                                    <span class="text-muted font-16">Jan</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="d-flex no-block card-body border-top">
-                            <i class="fa fa-plus w-30px m-t-5"></i>
-                            <div>
-                                <a href="#" class="m-b-0 font-medium p-0">Maruti is a Responsive Admin theme</a>
-                                <span class="text-muted">But already everything was solved. It will ...</span>
-                            </div>
-                            <div class="ml-auto">
-                                <div class="tetx-right">
-                                    <h5 class="text-muted m-b-0">19</h5>
-                                    <span class="text-muted font-16">Jan</span>
-                                </div>
-                            </div>
-                        </li>
+                        {% endfor %}
+
                     </ul>
                 </div>
             </div>
@@ -352,7 +293,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">To Do List</h4>
-                        <div class="todo-widget scrollable ps-container ps-theme-default ps-active-y" style="height:450px;" data-ps-id="2da2cfe0-796b-eee7-d667-7a1e11bfa180">
+                        <div class="todo-widget scrollable ps-container ps-theme-default ps-active-y" style="height:450px;" data-ps-id="64e62332-a906-1c94-dfcb-8fe61dd8c785">
                             <ul class="list-task todo-list list-group m-b-0" data-role="tasklist">
                                 <li class="list-group-item todo-item" data-role="task">
                                     <div class="custom-control custom-checkbox">
@@ -593,7 +534,6 @@
     </div>
 {% endblock %}
 
-{% block Body %}
 
-{% endblock %}
+
 

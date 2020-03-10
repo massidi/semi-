@@ -8,6 +8,7 @@ use App\Entity\Patient;
 use App\Form\DoctorType;
 use App\Repository\DoctorRepository;
 use App\Repository\PatientRepository;
+use App\Repository\MedicPrescriptionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ *
  * @Route("/Admin")
  */
 
@@ -32,12 +34,19 @@ class DoctorController extends AbstractController
      * @var PatientRepository
      */
     private $patientRepository;
+    /**
+     * @var MedicPrescriptionRepository
+     */
+    private $medicPrescriptionRepository;
 
-    public  function __construct(DoctorRepository $repository,EntityManagerInterface $manager,PatientRepository $patientRepository)
+    public  function __construct(DoctorRepository $repository,EntityManagerInterface $manager,PatientRepository $patientRepository
+    ,MedicPrescriptionRepository $medicPrescriptionRepository
+    )
     {
         $this->repository = $repository;
         $this->manager = $manager;
         $this->patientRepository = $patientRepository;
+        $this->medicPrescriptionRepository = $medicPrescriptionRepository;
     }
 
 
@@ -144,14 +153,34 @@ class DoctorController extends AbstractController
     public  function  patientLatest()
     {
         $patient=$this->patientRepository->findLatest();
+        $prescription=$this->medicPrescriptionRepository->findLatestprescript();
+
 
 
         return $this->render('admin/doctor/seelatest.html.twig',
             [
                 'patient'=>$patient,
+                'prescription'=>$prescription,
             ]);
 
 
     }
+    /**
+     * @Route("/prescriptlatest",name="prescript_latest")
+     *
+     */
+/*
+    public  function  prescriptLatest()
+    {
+        $prescription=$this->medicPrescriptionRepository->findLatestprescript();
+
+
+        return $this->render('admin/doctor/seelatest.html.twig',
+            [
+                'prescription'=>$prescription,
+            ]);
+
+
+    }*/
 
 }
