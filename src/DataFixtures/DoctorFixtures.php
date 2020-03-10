@@ -20,11 +20,10 @@ class DoctorFixtures extends Fixture
             $doctor
                 ->setDepartment($faker->address)
                 ->setName($faker->name)
-                ->setType($faker->words)
+                ->setType($faker->domainWord)
                 ->setMobile($faker->phoneNumber)
                 ->setEmail($faker->email)
                 ->setHospitalName($faker->company)
-
                 ->setSpecialization($faker->domainName);
 
             $manager->persist($doctor);

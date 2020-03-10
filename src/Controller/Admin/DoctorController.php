@@ -138,15 +138,20 @@ class DoctorController extends AbstractController
     }
 
     /**
-     * @Route("patientlatest",name="patient_latest")
+     * @Route("/patientlatest",name="patient_latest")
      */
 
     public  function  patientLatest()
     {
-        $patientRepository=$this->patientRepository->findLatest();
+        $patient=$this->patientRepository->findLatest();
 
-        return $this->render('admin/doctor/seelatest.html.twig');
+
+        return $this->render('admin/doctor/seelatest.html.twig',
+            [
+                'patient'=>$patient,
+            ]);
 
 
     }
+
 }

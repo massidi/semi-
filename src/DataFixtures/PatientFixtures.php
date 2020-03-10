@@ -1,7 +1,6 @@
 <?php
 
 namespace App\DataFixtures;
-
 use App\Entity\Patient;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -19,8 +18,8 @@ class PatientFixtures extends Fixture
             $patient
                 ->setAddress($faker->address)
                 ->setAge($faker->year($max = 'now') )
-                ->setName($faker-name($gender = null|'male'|'female'))
-                ->setType($faker-words($nb = 3, $asText = false) )
+                ->setName($faker->name)
+                ->setType($faker->domainName )
                 ->setMobile($faker->phoneNumber)
                 ->setWeigth($faker->biasedNumberBetween($min = 30, $max = 50, $function = 'sqrt')
                 );

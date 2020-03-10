@@ -35,9 +35,7 @@
                             <tbody>
                             {% for medic_prescription in medic_prescriptions %}
                                 <tr role="row" class="odd">
-                                    <td>{{ medic_prescription.id }}</td>
 
-                                    <td>{{ medic_prescription.id }}</td>
                                     <td>{{ medic_prescription.dateOfBirth ? medic_prescription.dateOfBirth|date('Y-m-d H:i:s') : '' }}</td>
                                     <td>{{ medic_prescription.age }}</td>
                                     <td>{{ medic_prescription.contact }}</td>
