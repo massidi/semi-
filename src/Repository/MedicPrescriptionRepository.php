@@ -21,6 +21,7 @@ class MedicPrescriptionRepository extends ServiceEntityRepository
     public function findLatestprescript()
     {
         return $this->createQueryBuilder('p')
+            ->orderBy("p.id","DESC")
             ->setMaxResults(4)
             ->getQuery()
             ->getResult();

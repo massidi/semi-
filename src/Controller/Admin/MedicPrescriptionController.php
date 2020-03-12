@@ -139,7 +139,7 @@ class MedicPrescriptionController extends AbstractController
         return $this->redirectToRoute('medic_prescription_index');
     }
     /**
-     * @Route("/calendar",name="calandare")
+     * @Route("/calendar",name="calendar")
      */
     public function  Calendar()
     {

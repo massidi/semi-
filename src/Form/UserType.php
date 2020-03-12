@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +18,7 @@ class UserType extends AbstractType
             ->add('last_name')
             ->add('password')
             ->add('age')
-            ->add('email')
+            ->add('email',EmailType::class)
             ->add('status',ChoiceType::class
             ,['choices' =>[
                 'patient' => 'ROLE_USER',

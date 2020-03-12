@@ -41,7 +41,7 @@ class Doctor
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Email(
+     * @Assert\email(
      *   message = "The email '{{ value }}' is not a valid email."
      * )
      */
