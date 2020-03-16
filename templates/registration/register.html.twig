@@ -31,10 +31,11 @@
             {{ form_widget(registrationForm.age, {'attr': {'class': 'input100','placeholder':'age'}}) }}
             <span class="focus-input100" data-placeholder="&#xe82a;"></span>
         </div>
-        <div class="wrap-input100 validate-input">
-            {{ form_widget(registrationForm.status, {'attr': {'class': 'input100','placeholder':'status'}}) }}
-            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-        </div>
+    <div class="wrap-input100 validate-input">
+        {{ form_widget(registrationForm.roles, {'attr': {'class': 'input100','placeholder':'roles'}}) }}
+        <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+    </div>
+
         <div class="wrap-input100 validate-input">
             {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'input100'}}) }}
             <span class="focus-input100" data-placeholder="&#xe82a;"></span>

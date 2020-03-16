@@ -85,21 +85,17 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        $users = new User();
-        if ($users->getStatus() == "patients")
-            {
-                return new RedirectResponse($this->urlGenerator->generate('patient'));
-            }
-        elseif ($users->getStatus() == "doctor")
-        {
-            return new RedirectResponse($this->urlGenerator->generate('doctor'));
-        }
-        elseif ($users->getStatus() == "patients")
-        {
+        $roles = $token->getRoleNames();
+        if (in_array("ROLE_DOCTOR", $roles)) {
+            return new RedirectResponse($this->urlGenerator->generate('doctor_index'));
+        }elseif (in_array("ROLE_PATIENT", $roles)){
+            return new RedirectResponse($this->urlGenerator->generate('patient'));
+        }elseif (in_array("ROLE_PHARMACIST", $roles)){
             return new RedirectResponse($this->urlGenerator->generate('pharmacist'));
+        }else{
+
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('doctor_index'));
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

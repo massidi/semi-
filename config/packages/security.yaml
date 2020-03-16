@@ -4,7 +4,12 @@ security:
       my_provider:
         entity:
           class: App\Entity\User
-          property: username
+          property: email
+      # used to reload user from session & other features (e.g. switch_user)
+      app_user_provider:
+          entity:
+              class: App\Entity\User
+              property: email
 
     firewalls:
         dev:
@@ -45,8 +50,8 @@ security:
 
     encoders:
         App\Entity\User:
-          algorithm: bcrypt
-          cost: 12
+          algorithm: auto
+
 
 
 
