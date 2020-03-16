@@ -3,9 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\MedicPrescription;
+use App\Event\MedicationEvent;
+use App\Event\UserRegisterEvent;
 use App\Form\MedicPrescriptionType;
 use App\Repository\MedicPrescriptionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,9 +51,10 @@ class MedicPrescriptionController extends AbstractController
     /**
      * @Route("/medic_prescription_new", name="medic_prescription_new", methods={"GET","POST"})
      * @param Request $request
+     * @param EventDispatcherInterface $eventDispatcher
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request,EventDispatcherInterface $eventDispatcher): Response
     {
         $medicPrescription = new MedicPrescription();
 
@@ -61,6 +66,8 @@ class MedicPrescriptionController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($medicPrescription);
             $entityManager->flush();
+            $medication=new MedicationEvent($medicPrescription);
+            $eventDispatcher->dispatch($medication,MedicationEvent::Name);
 
             return $this->redirectToRoute('medic_prescription_index');
         }

@@ -41,7 +41,7 @@ class Doctor
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\email(
+     * @Assert\Email(
      *   message = "The email '{{ value }}' is not a valid email."
      * )
      */
@@ -63,6 +63,16 @@ class Doctor
      */
     private $specialization;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MedicPrescription", mappedBy="medicPrescription")
+     *
+     */
+    private $medicPrescription;
+
+    public function __construct()
+    {
+        $this->medicPrescription = new ArrayCollection();
+    }
 
 
     public function getId(): ?int

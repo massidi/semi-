@@ -5,10 +5,11 @@ namespace App\DataFixtures;
 use App\Entity\MedicPrescription;
 use App\Entity\Patient;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
 
-class MedicPrescriptionFixtures extends Fixture
+class MedicPrescriptionFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -29,7 +30,11 @@ class MedicPrescriptionFixtures extends Fixture
                 ->setHealthRegine($faker->realText($maxNbChars = 200, $indexSize = 2))
                 ->setUnite($faker->numberBetween(2,4))
                 ->setPulseRate($faker->biasedNumberBetween($min = 30, $max = 50, $function = 'sqrt')
-                );
+                )
+//                ->setDoctorId($this->getReference('user.demo'));
+
+          ->setDoctorId($this->getReference(DoctorFixtures::DOCTOR_NAME));
+
             $manager->persist($prescription);
 
         }
@@ -38,5 +43,19 @@ class MedicPrescriptionFixtures extends Fixture
         // $manager->persist($product);
 
         $manager->flush();
+    }
+
+    /**
+     * This method must return an array of fixtures classes
+     * on which the implementing class depends on
+     *
+     * @return array
+     */
+    public function getDependencies()
+    {
+        return array(
+            DoctorFixtures::class,
+        );
+        // TODO: Implement getDependencies() method.
     }
 }

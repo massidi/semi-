@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -70,6 +72,13 @@ class MedicPrescription
      * @ORM\Column(type="string", length=255)
      */
     private $health_regine;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Doctor", inversedBy="doctor_id")
+     * @ORM\JoinColumn()
+     */
+    private $doctor_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -204,6 +213,41 @@ class MedicPrescription
     public function setHealthRegine(string $health_regine): self
     {
         $this->health_regine = $health_regine;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Doctor[]
+     */
+    public function getDoctorId(): Collection
+    {
+        return $this->doctor_id;
+    }
+    public function setDoctorId()
+    {
+        return $this->doctor_id;
+    }
+
+    public function addDoctorId(Doctor $doctorId): self
+    {
+        if (!$this->doctor_id->contains($doctorId)) {
+            $this->doctor_id[] = $doctorId;
+            $doctorId->setMedicPrescription($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDoctorId(Doctor $doctorId): self
+    {
+        if ($this->doctor_id->contains($doctorId)) {
+            $this->doctor_id->removeElement($doctorId);
+            // set the owning side to null (unless already changed)
+            if ($doctorId->getMedicPrescription() === $this) {
+                $doctorId->setMedicPrescription(null);
+            }
+        }
 
         return $this;
     }

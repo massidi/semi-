@@ -4,10 +4,12 @@
 namespace App\Event;
 
 
+use App\Entity\MedicPrescription;
 use App\Entity\User;
-use Symfony\Component\EventDispatcher\EventDispatcher ;
+use Symfony\Contracts\EventDispatcher\Event;
 
-class UserRegisterEvent extends EventDispatcher
+
+class UserRegisterEvent extends Event
 {
     const  Name = 'user.register';
     /**
@@ -18,6 +20,7 @@ class UserRegisterEvent extends EventDispatcher
     public function __construct(User $registerUser)
    {
        $this->registerUser = $registerUser;
+
    }
 
     /**
@@ -27,6 +30,14 @@ class UserRegisterEvent extends EventDispatcher
     {
         return $this->registerUser;
     }
+
+//    /**
+//     * @return MedicPrescription
+//     */
+//    public  function  getMedication():MedicPrescription
+//    {
+//        return $this->medicprescription;
+//    }
 
 
 }
