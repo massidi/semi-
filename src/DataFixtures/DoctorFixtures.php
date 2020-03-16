@@ -17,7 +17,6 @@ class DoctorFixtures extends Fixture
         $faker = Factory::create();
         for ($i = 0; $i < 50; $i++) {
             $doctor = new Doctor();
-
             $doctor
                 ->setDepartment($faker->address)
                 ->setName($faker->name)
