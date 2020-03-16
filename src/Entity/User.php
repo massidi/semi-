@@ -47,6 +47,7 @@ class User implements UserInterface, \ Serializable
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      */
     private $email;
 
@@ -129,8 +130,8 @@ class User implements UserInterface, \ Serializable
         return $this;
     }
     /**
-     * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email."
+     * @Assert\Email(message = "The email '{{ value }}' is not a valid email.")
+     *
      * )
      */
 
@@ -230,7 +231,8 @@ class User implements UserInterface, \ Serializable
         return serialize(
         [
             $this->id,
-            $this->first_name,
+            $this->username,
+            $this->email,
             $this->password
         ]
         );
@@ -250,7 +252,8 @@ class User implements UserInterface, \ Serializable
         list(
 
                 $this->id,
-                $this->first_name,
+                $this->username,
+                $this->email,
                 $this->password
         )=unserialize($serialized, ['Allowed_classes' =>false]) ;
     }

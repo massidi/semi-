@@ -63,6 +63,16 @@ class Doctor
      */
     private $specialization;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MedicPrescription", mappedBy="medicPrescription")
+     *
+     */
+    private $medicPrescription;
+
+    public function __construct()
+    {
+        $this->medicPrescription = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -154,34 +164,5 @@ class Doctor
         return $this;
     }
 
-    /**
-     * @return Collection|MedicPrescription[]
-     */
-    public function getMedicPrescriptions(): Collection
-    {
-        return $this->medicPrescriptions;
-    }
 
-    public function addMedicPrescription(MedicPrescription $medicPrescription): self
-    {
-        if (!$this->medicPrescriptions->contains($medicPrescription)) {
-            $this->medicPrescriptions[] = $medicPrescription;
-            $medicPrescription->setDocName($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMedicPrescription(MedicPrescription $medicPrescription): self
-    {
-        if ($this->medicPrescriptions->contains($medicPrescription)) {
-            $this->medicPrescriptions->removeElement($medicPrescription);
-            // set the owning side to null (unless already changed)
-            if ($medicPrescription->getDocName() === $this) {
-                $medicPrescription->setDocName(null);
-            }
-        }
-
-        return $this;
-    }
 }

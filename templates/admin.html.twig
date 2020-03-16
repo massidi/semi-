@@ -13,6 +13,10 @@
     <link href="{{ asset('doctor/assets/libs/flot/css/float-chart.css') }}" rel="stylesheet">
     <link href="{{ asset('doctor/dist/css/style.min.css') }}" rel="stylesheet">
         <!-- ============================================================== -->
+        <!-- calendar -->
+        <link href="{{ asset('doctor/assets/libs/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('doctor/assets/extra-libs/calendar/calendar.css') }}" rel="stylesheet" />
+        <link href="{{ asset('doctor/dist/css/style.min.css') }}" rel="stylesheet">
         <!-- Custom CSS for form-->
         <link rel="stylesheet" type="text/css" href="{{ asset('doctor/assets/libs/select2/dist/css/select2.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('doctor/assets/libs/jquery-minicolors/jquery.minicolors.css') }}">
@@ -336,8 +340,10 @@
                 <div class="col-md-6 col-lg-2 col-xlg-3">
                     <div class="card card-hover">
                         <div class="box bg-info text-center">
+                            <a href="{{ path('patient_latest') }}">
                             <h1 class="font-light text-white"><i class="mdi mdi-arrow-all"></i></h1>
                             <h6 class="text-white">Full Width</h6>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -359,7 +365,9 @@
                     <div class="card card-hover">
                         <div class="box bg-success text-center">
                             <h1 class="font-light text-white"><i class="mdi mdi-calendar-check"></i></h1>
-                            <h6 class="text-white">Calnedar</h6>
+                            <a href="{{ path('calendar') }}">
+                            <h6 class="text-white">Calendar</h6>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -477,7 +485,13 @@
     <script src="{{ asset('doctor/assets/libs/jquery-minicolors/jquery.minicolors.min.js') }}"></script>
     <script src="{{ asset('doctor/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('doctor/assets/libs/quill/dist/quill.min.js') }}"></script>
+    <!-- calendar -->
+    <script src="{{ asset('doctor/assets/libs/moment/min/moment.min.js') }}"></script>
+    <script src="{{ asset('doctor/assets/libs/fullcalendar/dist/fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('doctor/dist/js/pages/calendar/cal-init.js') }}"></script>
     <script>
+
+
         //***********************************//
         // For select 2
         //***********************************//

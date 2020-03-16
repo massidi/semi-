@@ -7,5 +7,8 @@ login:
 
 logout:
   path: /logout
-  methods: GET
+Delete:
+  path: medic_prescription_delete
+  controller: App\Controller\MedicPrescriptionController::delete
+  methods: delete
 

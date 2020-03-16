@@ -16,7 +16,7 @@ security:
                 authenticators:
                     - App\Security\LoginAuthenticator
             logout:
-                path: app_logout
+                path: /logout
                 # where to redirect after logout
                 target: /
 
@@ -39,10 +39,9 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/Admin/doctor, roles: ROLE_ADMIN }
-        - { path: ^/Admin/pharmacist, roles: ROLE_ADMIN}
-        - { path: ^/patient, roles: ROLE_USER }
+      #- { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      #- { path: ^/Admin/, roles: ROLE_ADMIN }
+  #- { path: ^/patient, roles: ROLE_USER }
 
     encoders:
         App\Entity\User:

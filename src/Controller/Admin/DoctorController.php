@@ -4,8 +4,11 @@ namespace App\Controller\Admin;
 
 use App\Entity\Doctor;
 use App\Entity\MedicPrescription;
+use App\Entity\Patient;
 use App\Form\DoctorType;
 use App\Repository\DoctorRepository;
+use App\Repository\PatientRepository;
+use App\Repository\MedicPrescriptionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ *
  * @Route("/Admin")
  */
 
@@ -26,16 +30,28 @@ class DoctorController extends AbstractController
      * @var ObjectManager
      */
     private $manager;
+    /**
+     * @var PatientRepository
+     */
+    private $patientRepository;
+    /**
+     * @var MedicPrescriptionRepository
+     */
+    private $medicPrescriptionRepository;
 
-    public  function __construct(DoctorRepository $repository,EntityManagerInterface $manager)
+    public  function __construct(DoctorRepository $repository,EntityManagerInterface $manager,PatientRepository $patientRepository
+    ,MedicPrescriptionRepository $medicPrescriptionRepository
+    )
     {
         $this->repository = $repository;
         $this->manager = $manager;
+        $this->patientRepository = $patientRepository;
+        $this->medicPrescriptionRepository = $medicPrescriptionRepository;
     }
 
 
     /**
-     * @Route("/doctor", name="doctor")
+     * @Route("/doctor", name="doctor_index")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -130,5 +146,41 @@ class DoctorController extends AbstractController
 
     }
 
+    /**
+     * @Route("/patientlatest",name="patient_latest")
+     */
+
+    public  function  patientLatest()
+    {
+        $patient=$this->patientRepository->findLatest();
+        $prescription=$this->medicPrescriptionRepository->findLatestprescript();
+
+
+
+        return $this->render('admin/doctor/seelatest.html.twig',
+            [
+                'patient'=>$patient,
+                'prescription'=>$prescription,
+            ]);
+
+
+    }
+    /**
+     * @Route("/prescriptlatest",name="prescript_latest")
+     *
+     */
+/*
+    public  function  prescriptLatest()
+    {
+        $prescription=$this->medicPrescriptionRepository->findLatestprescript();
+
+
+        return $this->render('admin/doctor/seelatest.html.twig',
+            [
+                'prescription'=>$prescription,
+            ]);
+
+
+    }*/
 
 }
