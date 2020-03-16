@@ -184,7 +184,6 @@
           <root url="file://$MODULE_DIR$/vendor/symfony/http-kernel" />
           <root url="file://$MODULE_DIR$/vendor/symfony/inflector" />
           <root url="file://$MODULE_DIR$/vendor/symfony/intl" />
-          <root url="file://$MODULE_DIR$/vendor/symfony/mailer" />
           <root url="file://$MODULE_DIR$/vendor/symfony/maker-bundle" />
           <root url="file://$MODULE_DIR$/vendor/symfony/mime" />
           <root url="file://$MODULE_DIR$/vendor/symfony/monolog-bridge" />
@@ -294,7 +293,6 @@
           <root url="file://$MODULE_DIR$/vendor/symfony/http-kernel" />
           <root url="file://$MODULE_DIR$/vendor/symfony/inflector" />
           <root url="file://$MODULE_DIR$/vendor/symfony/intl" />
-          <root url="file://$MODULE_DIR$/vendor/symfony/mailer" />
           <root url="file://$MODULE_DIR$/vendor/symfony/maker-bundle" />
           <root url="file://$MODULE_DIR$/vendor/symfony/mime" />
           <root url="file://$MODULE_DIR$/vendor/symfony/monolog-bridge" />

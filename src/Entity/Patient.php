@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,6 +47,21 @@ class Patient
      * @ORM\Column(type="string", length=255)
      */
     private $mobile;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\MedicPrescription", inversedBy="patient")
+     */
+    private $medicPrescription;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Doctor", mappedBy="patient")
+     */
+    private $doctors;
+
+    public function __construct()
+    {
+        $this->doctors = new ArrayCollection();
+    }
 
 
 
@@ -116,6 +133,46 @@ class Patient
     public function setMobile(string $mobile): self
     {
         $this->mobile = $mobile;
+
+        return $this;
+    }
+
+    public function getMedicPrescription(): ?MedicPrescription
+    {
+        return $this->medicPrescription;
+    }
+
+    public function setMedicPrescription(?MedicPrescription $medicPrescription): self
+    {
+        $this->medicPrescription = $medicPrescription;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Doctor[]
+     */
+    public function getDoctors(): Collection
+    {
+        return $this->doctors;
+    }
+
+    public function addDoctor(Doctor $doctor): self
+    {
+        if (!$this->doctors->contains($doctor)) {
+            $this->doctors[] = $doctor;
+            $doctor->addPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDoctor(Doctor $doctor): self
+    {
+        if ($this->doctors->contains($doctor)) {
+            $this->doctors->removeElement($doctor);
+            $doctor->removePatient($this);
+        }
 
         return $this;
     }

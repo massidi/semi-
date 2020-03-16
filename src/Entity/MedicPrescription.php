@@ -74,10 +74,20 @@ class MedicPrescription
     private $health_regine;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Doctor", inversedBy="doctor_id")
-     * @ORM\JoinColumn()
+     * @ORM\ManyToOne(targetEntity="App\Entity\Doctor", inversedBy="prescriptions")
      */
-    private $doctor_id;
+    private $doctor;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Patient", mappedBy="medicPrescription")
+     */
+    private $patient;
+
+    public function __construct()
+    {
+        $this->patient = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -217,35 +227,43 @@ class MedicPrescription
         return $this;
     }
 
-    /**
-     * @return Collection|Doctor[]
-     */
-    public function getDoctorId(): Collection
+    public function getDoctor(): ?Doctor
     {
-        return $this->doctor_id;
-    }
-    public function setDoctorId()
-    {
-        return $this->doctor_id;
+        return $this->doctor;
     }
 
-    public function addDoctorId(Doctor $doctorId): self
+    public function setDoctor(?Doctor $doctor): self
     {
-        if (!$this->doctor_id->contains($doctorId)) {
-            $this->doctor_id[] = $doctorId;
-            $doctorId->setMedicPrescription($this);
+        $this->doctor = $doctor;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Patient[]
+     */
+    public function getPatient(): Collection
+    {
+        return $this->patient;
+    }
+
+    public function addPatient(Patient $patient): self
+    {
+        if (!$this->patient->contains($patient)) {
+            $this->patient[] = $patient;
+            $patient->setMedicPrescription($this);
         }
 
         return $this;
     }
 
-    public function removeDoctorId(Doctor $doctorId): self
+    public function removePatient(Patient $patient): self
     {
-        if ($this->doctor_id->contains($doctorId)) {
-            $this->doctor_id->removeElement($doctorId);
+        if ($this->patient->contains($patient)) {
+            $this->patient->removeElement($patient);
             // set the owning side to null (unless already changed)
-            if ($doctorId->getMedicPrescription() === $this) {
-                $doctorId->setMedicPrescription(null);
+            if ($patient->getMedicPrescription() === $this) {
+                $patient->setMedicPrescription(null);
             }
         }
 

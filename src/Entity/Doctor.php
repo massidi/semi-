@@ -64,15 +64,22 @@ class Doctor
     private $specialization;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MedicPrescription", mappedBy="medicPrescription")
-     *
+     * @ORM\OneToMany(targetEntity="App\Entity\MedicPrescription", mappedBy="doctor")
      */
-    private $medicPrescription;
+    private $prescriptions;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Patient", inversedBy="doctors")
+     */
+    private $patient;
 
     public function __construct()
     {
-        $this->medicPrescription = new ArrayCollection();
+        $this->prescriptions = new ArrayCollection();
+        $this->patient = new ArrayCollection();
     }
+
+
 
 
     public function getId(): ?int
@@ -160,6 +167,63 @@ class Doctor
     public function setSpecialization(string $specialization): self
     {
         $this->specialization = $specialization;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MedicPrescription[]
+     */
+    public function getPrescriptions(): Collection
+    {
+        return $this->prescriptions;
+    }
+
+    public function addPrescription(MedicPrescription $prescription): self
+    {
+        if (!$this->prescriptions->contains($prescription)) {
+            $this->prescriptions[] = $prescription;
+            $prescription->setDoctor($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrescription(MedicPrescription $prescription): self
+    {
+        if ($this->prescriptions->contains($prescription)) {
+            $this->prescriptions->removeElement($prescription);
+            // set the owning side to null (unless already changed)
+            if ($prescription->getDoctor() === $this) {
+                $prescription->setDoctor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Patient[]
+     */
+    public function getPatient(): Collection
+    {
+        return $this->patient;
+    }
+
+    public function addPatient(Patient $patient): self
+    {
+        if (!$this->patient->contains($patient)) {
+            $this->patient[] = $patient;
+        }
+
+        return $this;
+    }
+
+    public function removePatient(Patient $patient): self
+    {
+        if ($this->patient->contains($patient)) {
+            $this->patient->removeElement($patient);
+        }
 
         return $this;
     }
