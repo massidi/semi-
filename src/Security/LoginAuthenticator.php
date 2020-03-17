@@ -84,7 +84,6 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-
         $roles = $token->getRoleNames();
         if (in_array("ROLE_DOCTOR", $roles)) {
             return new RedirectResponse($this->urlGenerator->generate('doctor_index'));
@@ -95,7 +94,6 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         }else{
 
         }
-
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

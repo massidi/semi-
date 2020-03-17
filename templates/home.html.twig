@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('home/fonts/icomoon/style.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/bootstrap.min.css') }}" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ asset('home/css/font-awesome.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('home/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/jquery-ui.css') }}">
@@ -56,8 +56,8 @@
 
                                 </ul>
                             </li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="{{ path('about') }}">About</a></li>
+                            <li><a href="{{ path('contact') }}">Contact</a></li>
 
                             <!-- <div class="incons"> -->
                             <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
@@ -196,7 +196,7 @@
                     <div class="col-lg-7 mx-auto order-lg-2 align-self-center">
                         <div class="site-block-cover-content text-center">
                             <h2 class="sub-title">TRUST OUR SECURITY SERVICES</h2>
-                            <h1>Welcome To DPP System</h1>
+                            <h1>{% block title_slider %} Welcome To DPP System {% endblock %}</h1>
                         </div>
                     </div>
                 </div>
@@ -205,6 +205,7 @@
         </div>
         <div class="site-section">
             <div class="container">
+                {% block content %}
                 <div class="row">
                     <div class="title-section text-center col-12">
                         <h2 class="text-uppercase">Popular Products</h2>
@@ -255,7 +256,7 @@
                         </div>
                     </div>
                 </div>
-
+                {% endblock %}
 
             </div>
 
@@ -308,10 +309,13 @@
 
                     </div>
                 </div>
+                
             </footer>
-
-            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-            <script src="{{ asset('home/js/popper.min.js') }}" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-            <script src="{{ asset('home/js/bootstrap.min.js') }}" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+            <script src="{{ asset('home/js/jquery-3.4.1.slim.min.js') }}"></script>
+            <script src="{{ asset('home/js/popper.min.js') }}"></script>
+            <script src="{{ asset('home/js/bootstrap.min.js') }}"></script>
+        </div>
+    </div>
+</div>
 </body>
 </html>
