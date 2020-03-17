@@ -42,8 +42,9 @@ class UserSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
+            ContactEvent::Name => 'onNotification',
             UserRegisterEvent::Name => 'onUserRegister',
-            MedicationEvent::Name => 'onMedicate'
+            MedicationEvent::Name => 'onMedicate',
         ];
     }
 
@@ -79,6 +80,26 @@ class UserSubscriber implements EventSubscriberInterface
         catch (\Exception $e)
         {
             echo ($e);
+        }
+    }
+    public function onNotification(ContactEvent $event)
+    {
+        try{
+            $body= $this->twig->render('email/notification.html.twig',[
+               'notification'=> $event->getContact()
+            ]);
+            $message= (new \Swift_Message())
+                ->setSubject('Notification')
+                ->setFrom('semi@gmil.com')
+                ->setTo('Admin@gmial.com')
+                ->setBody($body,'text/html');
+            $this->mailer->send($message);
+
+        }
+        catch (\Exception $exception)
+        {
+            echo ($exception);
+
         }
     }
 }

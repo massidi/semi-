@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Event\ContactEvent;
 use App\Form\ContactType;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,7 +27,7 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function index(Request $request)
+    public function index(Request $request,EventDispatcherInterface $eventDispatcher)
     {
         $contacts= new Contact();
         $form=$this->createForm(ContactType::class ,$contacts);
@@ -33,10 +36,17 @@ class ContactController extends AbstractController
         {
             $this->manager->persist($contacts);
             $this->manager->flush();
+            $this->addFlash('success','Email sent thank you');
+
+            //////sending a notification///////
+
+            $notification= new ContactEvent($contacts);
+            $eventDispatcher->dispatch($notification,ContactEvent::Name);
+            return $this->redirectToRoute('home');
+
 
         }
         return $this->render('contact/index.html.twig', [
-            'controller_name' => 'ContactController',
             'form'=>$form->createView(),
         ]);
     }
