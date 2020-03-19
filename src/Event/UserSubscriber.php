@@ -88,8 +88,7 @@ class UserSubscriber implements EventSubscriberInterface
             $body= $this->twig->render('email/notification.html.twig',[
                'notification'=> $event->getContact()
             ]);
-            $message= (new \Swift_Message())
-                ->setSubject('Notification')
+            $message= (new \Swift_Message('Hello '))
                 ->setFrom('semi@gmil.com')
                 ->setTo('Admin@gmial.com')
                 ->setBody($body,'text/html');
