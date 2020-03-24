@@ -18,14 +18,14 @@ class UserType extends AbstractType
             ->add('last_name')
             ->add('password')
             ->add('age')
-            ->add('roles',ChoiceType::class)
-//            ->add('roles',ChoiceType::class,
-//                ['choices' => [
-//        'Doctor' => 'ROLE_DOCTOR',
-//        'Patient' => "ROLE_PATIENT",
-//        'Pharmacist' => 'ROLE_PHARMACIST',
-//    ],
-//                'multiple' => true,])
+//            ->add('roles',ChoiceType::class)
+            ->add('roles',ChoiceType::class,
+                ['choices' => [
+        'Doctor' => 'ROLE_DOCTOR',
+        'Patient' => "ROLE_PATIENT",
+        'Pharmacist' => 'ROLE_PHARMACIST',
+    ],
+                'multiple' => true,])
 
             ->add('email',EmailType::class);
     }

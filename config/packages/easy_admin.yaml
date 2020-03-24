@@ -28,9 +28,31 @@ easy_admin:
 
         - {label: "settings"}
         - {entity: Users,  icon: "user"}
+        - {entity: AboutUs}
 
     site_name: 'DPP_Admin.'
     entities:
+        AboutUs:
+          class: App\Entity\AboutUs
+          form:
+            fields:
+                - { property: 'imageFile', type: 'file' }
+                - { property: 'title'}
+                - { property: 'content'}
+          list:
+            actions:
+                - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-secondary' }
+                - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger' }
+            fields:
+                - { property: 'title'}
+                - { property: 'content'}
+                - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
+
+
+          show:
+            fields:
+                - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
+
         Doctor:
           class: App\Entity\Doctor
           form:
@@ -84,7 +106,7 @@ easy_admin:
                 -  property: 'roles'
                    type: choice
                    type_options:
-                        mapped: false
+                        mapped: true
                         expanded: true
                         multiple: true
                         choices: { 'doctor': 'ROLE_DOCTOR', 'pharmacist': 'ROLE_PHARMACIST', 'Patient': 'ROLE_PATIENT' }
