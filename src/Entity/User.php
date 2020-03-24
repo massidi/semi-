@@ -72,16 +72,12 @@ class User implements UserInterface
      */
     private $username;
 
-
     /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
+     * @ORM\Column(type="boolean",nullable=true)
      */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
-    }
+    private $enabled;
+
+
 
 
 
@@ -189,6 +185,23 @@ class User implements UserInterface
         $this->age = $age;
         return $this;
     }
+//    /**
+//     * @return mixed
+//     */
+//    public function getUsername()
+//    {
+//        return $this->username;
+//    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
 
     /**
      * @param mixed $username
@@ -198,5 +211,25 @@ class User implements UserInterface
         $this->username = $username;
     }
 
+    public function getEnabled(): ?bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): self
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function __toString():string
+    {
+        return $this->username;
+    }
 
 }

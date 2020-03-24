@@ -1,0 +1,107 @@
+#easy_admin:
+#    entities:
+#        # List the entity class name you want to manage
+#        - App\Entity\Product
+#        - App\Entity\Category
+#        - App\Entity\User
+easy_admin:
+
+    design:
+      brand_color: 'rgba(26, 188, 156, 0.85)'
+
+      menu:
+        - {label: "Entities"}
+        - label: "Doctor"
+          children:
+            - {entity: Doctor, label: "Doctor list", icon: "th-list"}
+            - {entity: Doctor, label: "Add Doctor", icon: "plus", params: {action: 'new'}}
+
+        - label: "Pharmacist"
+          children:
+            - {entity: Pharmacist, label: "Pharmacist list", icon: "th-list"}
+            - {entity: Doctor, label: "Add Pharmacist", icon: "plus", params: {action: 'new'}}
+
+        - label: "Patient"
+          children:
+            - {entity: Patients, label: "Patient list", icon: "th-list"}
+            - {entity: Patients, label: "Add Patient", icon: "plus", params: {action: 'new'}}
+
+        - {label: "settings"}
+        - {entity: Users,  icon: "user"}
+
+    site_name: 'DPP_Admin.'
+    entities:
+        Doctor:
+          class: App\Entity\Doctor
+          form:
+            fields:
+                - {type: "group", icon: "pencil", label: "Basic information", css_class: "col-lg-7"}
+                - name
+                - type
+                - specialization
+                - department
+                - hospital_name
+
+                - {type: "group", icon: "pencil", label: "Other information",css_class: "col-lg-5"}
+                - email
+                - mobile
+                - patient
+                - prescriptions
+
+
+          list:
+            filters: ['id', 'name']
+
+
+        Pharmacist:
+          class: App\Entity\Pharmacist
+        Users:
+          class: App\Entity\User
+
+#            fields:
+#                - first_name
+#                - last_name
+#                - username
+#                - email
+#                - age
+
+          list:
+            actions:
+              - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-secondary' }
+              - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger' }
+
+
+          form:
+            fields:
+
+                - { property: 'first_name'}
+                - { property: 'last_name'}
+                - { property: 'username'}
+                - { property: 'email',type: 'email'}
+                - { property: 'age'}
+                - { property: 'password'}
+                - { property: 'enabled'}
+                -  property: 'roles'
+                   type: choice
+                   type_options:
+                        mapped: false
+                        expanded: true
+                        multiple: true
+                        choices: { 'doctor': 'ROLE_DOCTOR', 'pharmacist': 'ROLE_PHARMACIST', 'Patient': 'ROLE_PATIENT' }
+
+
+
+
+
+
+        Patients:
+          class: App\Entity\Patient
+
+#        brand_color: '#1ABC9C'
+#
+#      # the value of this option can be any valid CSS color
+#        brand_color: 'red'
+#        brand_color: 'rgba(26, 188, 156, 0.85)'
+#
+#      # if the color includes a '%', you must double it to escape it in the YAML file
+##        brand_color: 'hsl(0, 100%%, 50%%);'

@@ -56,7 +56,7 @@ class UserSubscriber implements EventSubscriberInterface
         ]);
         $massage = (new \Swift_Message())
             ->setSubject('welcome to DMP application')
-            ->setFormat('dph@gmail.com')
+            ->setFrom('dph@gmail.com')
             ->setTo($event->getRegisterUser()->getEmail())
             ->setBody($body, 'text/html');
 
@@ -89,7 +89,7 @@ class UserSubscriber implements EventSubscriberInterface
                'notification'=> $event->getContact()
             ]);
             $message= (new \Swift_Message('Hello '))
-                ->setFrom('semi@gmil.com')
+                ->setFrom($event->getContact()->getEmail())
                 ->setTo('Admin@gmial.com')
                 ->setBody($body,'text/html');
             $this->mailer->send($message);

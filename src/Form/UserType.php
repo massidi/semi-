@@ -18,17 +18,16 @@ class UserType extends AbstractType
             ->add('last_name')
             ->add('password')
             ->add('age')
-            ->add('email',EmailType::class)
-            ->add('status',ChoiceType::class
-            ,['choices' =>[
-                'patient' => 'ROLE_USER',
-                    'DOCTOR' => 'ROLE_ADMIN',
-                    'PHARMACIST' => 'ROLE_ADMIN'
-    ],
-                    'expanded' => true,
-                    'multiple'=>true])
-            ->add('username')
-        ;
+            ->add('roles',ChoiceType::class)
+//            ->add('roles',ChoiceType::class,
+//                ['choices' => [
+//        'Doctor' => 'ROLE_DOCTOR',
+//        'Patient' => "ROLE_PATIENT",
+//        'Pharmacist' => 'ROLE_PHARMACIST',
+//    ],
+//                'multiple' => true,])
+
+            ->add('email',EmailType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
