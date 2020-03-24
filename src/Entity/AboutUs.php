@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Entity\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -26,7 +27,8 @@ class AboutUs
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="image", type="string", length=255, )
+     * @var string
      */
     private $image;
 
@@ -36,7 +38,7 @@ class AboutUs
     private $content;
 
     /**
-     * @Vich\UploadableField(mapping="AboutUs_image", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="about_images", fileNameProperty="image")
      * @var File
      */
     private $imageFile;
@@ -45,10 +47,16 @@ class AboutUs
      * @ORM\Column(type="datetime")
      */
     private $updateAt;
-    /**
-     * @var \DateTime
-     */
-    private $updatedAt;
+//    /**
+//     * @var DateTime
+//     */
+//    private $updatedAt;
+
+    public function __construct()
+    {
+        $this->updateAt = new DateTime();
+
+    }
 
     public function getId(): ?int
     {
@@ -72,7 +80,7 @@ class AboutUs
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 
@@ -95,7 +103,7 @@ class AboutUs
     {
         $this->imageFile = $image;
         if ($image) {
-            $this->updatedAt = new \DateTime('now');
+            $this->updateAt = new DateTime('now');
         }
     }
 
