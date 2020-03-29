@@ -1,6 +1,6 @@
 {% extends 'admin.html.twig' %}
 {% block contenu %}
-    <h1>ADD INFOS</h1>
-    {{ include('admin/doctor/_form.html.twig') }}
+    <h1>New Prescription</h1>
+    {{ include('admin/doctor/prescription/_form.html.twig') }}
     <a href="{{ path('doctor_index') }}">back</a>
 {% endblock %}

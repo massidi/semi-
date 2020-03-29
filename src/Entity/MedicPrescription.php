@@ -83,6 +83,11 @@ class MedicPrescription
      */
     private $patient;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="prescription")
+     */
+    private $medicName;
+
     public function __construct()
     {
         $this->patient = new ArrayCollection();
@@ -269,6 +274,27 @@ class MedicPrescription
 
         return $this;
     }
+
+    public function getMedicName(): ?User
+    {
+        return $this->medicName;
+    }
+
+    public function setMedicName(?User $medicName): self
+    {
+        $this->medicName = $medicName;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function __toString()
+    {
+        return $this->age;
+    }
+
 
 
 }

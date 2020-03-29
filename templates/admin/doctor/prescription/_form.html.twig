@@ -1,0 +1,93 @@
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+            <div class="card-body">
+                <h4 class="card-title">Prescription</h4>
+                <div class="form-group row">
+                    {{ form_label(form.dateOfBirth, "DATE OF BIRTH", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
+                    <div class="col-sm-4">
+                        {{ form_widget(form.dateOfBirth, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    {{ form_label(form.age, "AGE", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
+                    <div class="col-sm-3">
+                        {{ form_widget(form.age, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {{ form_label(form.contact, "CONTACT", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
+                    <div class="col-sm-3">
+                        {{ form_widget(form.contact, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    {{ form_label(form.diagnostic, "DIAGNOSRIC", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
+                    <div class="col-sm-9">
+                        {{ form_widget(form.diagnostic, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+
+                </div>
+
+
+                <div class="form-group row">
+                    {{ form_label(form.blood_pressure, "BLOOD PRESSURE", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
+                    <div class="col-sm-2">
+                        {{ form_widget(form.blood_pressure, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {{ form_label(form.pulse_rate, "PULSE RATE", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
+                    <div class="col-sm-2">
+                        {{ form_widget(form.pulse_rate, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+
+                </div>
+
+                <div class="form-group row">
+                    {{ form_label(form.drug, "Drug", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
+                    <div class="col-sm-2">
+                        {{ form_widget(form.drug, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {{ form_label(form.dosage, "Dosage", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
+                    <div class="col-sm-2">
+                        {{ form_widget(form.dosage, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {{ form_label(form.unite, "Unite", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
+                    <div class="col-sm-2">
+                        {{ form_widget(form.unite, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="form-group row">
+
+                </div>
+                <div class="form-group row">
+
+                </div>
+                <div class="form-group row">
+                    {{ form_label(form.examination, "Examination", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
+                    <div class="col-sm-9">
+                        {{ form_widget(form.examination, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    {{ form_label(form.health_regine, "Health regime", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
+                    <div class="col-sm-9">
+                        {{ form_widget(form.health_regine, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="border-top">
+                <div class="card-body">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+</div>

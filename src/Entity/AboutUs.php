@@ -4,13 +4,15 @@ namespace App\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Vich\UploaderBundle\Entity\File;
+//use Symfony\Component\HttpFoundation\File\File;
+//use Symfony\Component\HttpFoundation\File\File
+use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EboutUsRepository")
- * @Vich\Uploadable
+ * @Vich\Uploadable()
  */
 class AboutUs
 {
@@ -27,7 +29,7 @@ class AboutUs
     private $title;
 
     /**
-     * @ORM\Column(name="image", type="string", length=255, )
+     * @ORM\Column( type="string", length=255, )
      * @var string
      */
     private $image;
@@ -99,12 +101,18 @@ class AboutUs
         return $this;
     }
 
+    /**
+     * @param File|null $image
+     * @return $this
+     * @throws \Exception
+     */
     public function getImageFile(File $image = null)
     {
         $this->imageFile = $image;
         if ($image) {
             $this->updateAt = new DateTime('now');
         }
+        return $this;
     }
 
     public function setImageFile(?string $imageFile): self

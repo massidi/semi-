@@ -5,6 +5,8 @@
 #        - App\Entity\Category
 #        - App\Entity\User
 easy_admin:
+#imports:
+#    - { resource: easy_admin/ }
 
     design:
       brand_color: 'rgba(26, 188, 156, 0.85)'
@@ -29,8 +31,10 @@ easy_admin:
         - {label: "settings"}
         - {entity: Users,  icon: "user"}
         - {entity: AboutUs}
+#        - {entity : MedicPrecription}
 
     site_name: 'DPP_Admin.'
+
     entities:
         AboutUs:
           class: App\Entity\AboutUs
@@ -44,16 +48,17 @@ easy_admin:
             actions:
                 - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-secondary' }
                 - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger' }
+                - {name: 'show'}
             fields:
                 - { property: 'title'}
                 - { property: 'content'}
 #                - { property: 'update_at'}
-                - { property: 'image', type: 'image', base_path: '%uploads_file%' }
+                - { property: 'image', type: 'image',template: 'profiles/about/index.html.twig' , base_path: '%uploads_file%' }
 
 
           show:
             fields:
-                - { property: 'image', type: 'image', base_path: '%uploads_file%' }
+                - { property: 'image', type: 'image',template: 'profiles/about/index.html.twig', base_path: '%uploads_file%' }
 
         Doctor:
           class: App\Entity\Doctor
@@ -79,17 +84,21 @@ easy_admin:
 
         Pharmacist:
           class: App\Entity\Pharmacist
+#        medic:
+#          class: App\Entity\MedicPrecription
+
         Users:
           class: App\Entity\User
 
-#            fields:
-#                - first_name
-#                - last_name
-#                - username
-#                - email
-#                - age
+          fields:
+              - first_name
+              - last_name
+              - username
+              - email
+#              - age
 
           list:
+            filters: ['id', 'username']
             actions:
               - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-secondary' }
               - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger' }
@@ -98,13 +107,21 @@ easy_admin:
           form:
             fields:
 
+                - {type: "group", icon: "pencil", label: "Basic information", css_class: "col-sm-12"}
                 - { property: 'first_name'}
                 - { property: 'last_name'}
                 - { property: 'username'}
-                - { property: 'email',type: 'email'}
                 - { property: 'age'}
+                - {property: 'prescription'}
+                - {type: "group", icon: "envelope-o", label: "Important information", css_class: "col-lg-7"}
+
+                - { property: 'email',type: 'email'}
                 - { property: 'password'}
                 - { property: 'enabled'}
+
+                - {type: "group", icon: "briefcase", label: "Basic roles", css_class: "col-sm-5"}
+
+#                - {property: 'prescription'}
                 -  property: 'roles'
                    type: choice
                    type_options:
@@ -116,10 +133,19 @@ easy_admin:
 
 
 
+#          edit:
+#            fields:
+#                - { property: 'first_name'}
+#                - { property: 'last_name'}
+#                - { property: 'username'}
+#                - { property: 'email',type: 'email'}
+#                - { property: 'age'}
+
 
 
         Patients:
           class: App\Entity\Patient
+
 
 #        brand_color: '#1ABC9C'
 #

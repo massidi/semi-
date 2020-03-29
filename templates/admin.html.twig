@@ -12,6 +12,8 @@
     <link rel="icon" type="doctor/image/png" sizes="16x16" href="{{ asset('doctor/assets/images/favicon.png') }}">
     <link href="{{ asset('doctor/assets/libs/flot/css/float-chart.css') }}" rel="stylesheet">
     <link href="{{ asset('doctor/dist/css/style.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('doctor/bootstrap.css') }}" rel="stylesheet">
+
         <!-- ============================================================== -->
         <!-- calendar -->
         <link href="{{ asset('doctor/assets/libs/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet" />
@@ -250,8 +252,10 @@
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="grid.html" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Full Width</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Prescription </span></a>
                         <ul aria-expanded="false" class="collapse  first-level">
-                            <li class="sidebar-item"><a href="{{ path('medic_prescription_new') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu">New Prescription </span></a></li>
-                            <li class="sidebar-item"><a href="{{ path('medic_prescription_index') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Edit Prescription </span></a></li>
+                            {% if is_granted('ROLE_DOCTOR') %}
+                            <li class="sidebar-item"><a href="{{ path('doctor_new') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu">New Prescription </span></a></li>
+                            <li class="sidebar-item"><a href="{{ path('doctor_edit') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Edit Prescription </span></a></li>
+                            {% endif %}
                         </ul>
 
                     <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Addons </span></a>
@@ -336,7 +340,7 @@
                 <div class="col-md-6 col-lg-2 col-xlg-3">
                     <div class="card card-hover">
                         <div class="box bg-danger text-center">
-                            <a href="{{ path('medic_prescription_index') }}">
+                            <a href="{{ path('doctor_index') }}">
                             <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
                             <h6 class="text-white">Prescription Tables</h6>
                             </a>
@@ -347,7 +351,7 @@
                 <div class="col-md-6 col-lg-2 col-xlg-3">
                     <div class="card card-hover">
                         <div class="box bg-info text-center">
-                            <a href="{{ path('patient_latest') }}">
+{#                            <a href="{{ path('patient_latest') }}">#}
                             <h1 class="font-light text-white"><i class="mdi mdi-arrow-all"></i></h1>
                             <h6 class="text-white">Full Width</h6>
                             </a>
@@ -359,7 +363,7 @@
                 <div class="col-md-6 col-lg-4 col-xlg-3">
                     <div class="card card-hover">
                         <div class="box bg-danger text-center">
-                            <a href="{{ path('medic_prescription_new') }}">
+                            <a href="{{ path('doctor_new') }}">
                             <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
                             <h6 class="text-white">Prescription</h6>
                             </a>

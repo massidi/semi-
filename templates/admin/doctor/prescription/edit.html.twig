@@ -1,0 +1,14 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Edit Prescription{% endblock %}
+
+{% block contenu %}
+    <h1>Prescription</h1>
+
+    {{ include('admin/doctor/prescription/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('doctor_index') }}">back to list</a>
+
+    <a href=" {{ include('admin/doctor/prescription/_delete_form.html.twig') }}">delete</a>
+
+{% endblock %}

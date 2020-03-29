@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\profiles;
 
 use App\Entity\Contact;
 use App\Event\ContactEvent;
@@ -26,6 +26,9 @@ class ContactController extends AbstractController
 
     /**
      * @Route("/contact", name="contact")
+     * @param Request $request
+     * @param EventDispatcherInterface $eventDispatcher
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request,EventDispatcherInterface $eventDispatcher)
     {

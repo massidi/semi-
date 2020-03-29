@@ -20,6 +20,7 @@
 </head>
 
 <body>
+{% block body %}
 <div class="site-wrap">
 
 
@@ -112,7 +113,7 @@
 
                                 </div>
 
-                            </div>sssss
+                            </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
@@ -187,7 +188,7 @@
                 </div>
             </div>
         </div>
-
+{% endblock  %}
 
         <div class="site-blocks-cover" style="background-image: url({{ asset('home/images/hero_1.jpg') }});">
            {% block contenu %}
@@ -259,6 +260,7 @@
                 {% endblock %}
 
             </div>
+
 
             <footer class="site-footer">
                 <div class="container">
