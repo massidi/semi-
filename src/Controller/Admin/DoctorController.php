@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-
 /**
  *
  * @Route("/Admin")
@@ -23,7 +22,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class DoctorController extends AbstractController
 {
-
 
     /**
      *
