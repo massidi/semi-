@@ -31,9 +31,9 @@
     <![endif]-->
     {% endblock %}
 </head>
-
-<body>
 {% block body %}
+<body>
+
 <!-- ============================================================== -->
 <!-- Preloader - style you can find in spinners.css -->
 <!-- ============================================================== -->
@@ -245,7 +245,7 @@
                 <ul id="sidebarnav" class="p-t-30">
 
 
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('doctor_index') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('doctor_dashboard') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Charts</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="widgets.html" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Widgets</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Tables</span></a></li>
@@ -254,7 +254,7 @@
                         <ul aria-expanded="false" class="collapse  first-level">
                             {% if is_granted('ROLE_DOCTOR') %}
                             <li class="sidebar-item"><a href="{{ path('doctor_new') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu">New Prescription </span></a></li>
-                            <li class="sidebar-item"><a href="{{ path('doctor_edit') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Edit Prescription </span></a></li>
+{#                            <li class="sidebar-item"><a href="{{ path('doctor_edit') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Edit Prescription </span></a></li>#}
                             {% endif %}
                         </ul>
 
@@ -290,7 +290,7 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-12 d-flex no-block align-items-center">
-                    <h4 class="page-title">Dashboard</h4>
+                    <h4 class="page-title"></h4>
                     <div class="ml-auto text-right">
 
                     </div>
@@ -545,7 +545,16 @@
         });
 
     </script>
+    <script>
+        $(document).ready(function() {
+            // you may need to change this code if you are not using Bootstrap Datepicker
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
     <!-- ============================================================== -->
-{% endblock %}
+
 </body>
+{% endblock %}
 </html>

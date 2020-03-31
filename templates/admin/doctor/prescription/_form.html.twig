@@ -5,12 +5,12 @@
             {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
             <div class="card-body">
                 <h4 class="card-title">Prescription</h4>
-                <div class="form-group row">
-                    {{ form_label(form.dateOfBirth, "DATE OF BIRTH", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-                    <div class="col-sm-4">
-                        {{ form_widget(form.dateOfBirth, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                </div>
+{#                <div class="form-group row">#}
+{#                    {{ form_label(form.dateOfBirth, "DATE OF BIRTH", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}#}
+{#                    <div class="col-sm-4">#}
+{#                        {{ form_widget(form.dateOfBirth, {'attr': {'class': 'form-control'}}) }}#}
+{#                    </div>#}
+{#                </div>#}
                 <div class="form-group row">
                     {{ form_label(form.age, "AGE", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
                     <div class="col-sm-3">
@@ -21,12 +21,7 @@
                         {{ form_widget(form.contact, {'attr': {'class': 'form-control'}}) }}
                     </div>
                 </div>
-                <div class="form-group row">
-                    {{ form_label(form.diagnostic, "DIAGNOSRIC", {'label_attr': {'class': 'col-sm-3 text-right control-label col-form-label'}}) }}
-                    <div class="col-sm-9">
-                        {{ form_widget(form.diagnostic, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                </div>
+
 
                 <div class="form-group row">
 
@@ -64,6 +59,12 @@
                 </div>
                 <div class="form-group row">
 
+                </div>
+                <div class="form-group row">
+                    {{ form_label(form.diagnostic, "DIAGNOSRIC", {'label_attr': {'class': 'col-sm-3 text-editor control-label col-form-label'}}) }}
+                    <div class="col-sm-9">
+                        {{ form_widget(form.diagnostic, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
                 <div class="form-group row">
 

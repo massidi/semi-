@@ -5,7 +5,7 @@
 {% block contenu %}
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">My prescriptions</h5>
+            <h5 class="card-title">PRESCRIPTIONS LIST</h5>
             <div class="table-responsive">
                 <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                     <div class="row">
@@ -26,39 +26,42 @@
                                 <thead>
                                 <tr role="row">
                                     <th class="sorting_asc" tabindex="0" aria-controls="zero_config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 55px;">ID</th>
-                                    <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 72px;">DATE OF BIRTH</th>
+{#                                    <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 72px;">DATE OF BIRTH</th>#}
                                     <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 50px;">DIAGNOSTIC</th>
                                     <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 25px;">Age</th>
                                     <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 58px;">CONTACT</th>
-                                    <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="2" colspan="2" aria-label="Salary: activate to sort column ascending" style="width: 15px;">ACTION</th>
+                                    <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="3" colspan="3" aria-label="Salary: activate to sort column ascending" style="width: 58px;">ACTION</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {% for prescriptions in prescriptions %}
-                                    {{ dump() }}
+
                                     <tr role="row" class="odd">
                                         <td>{{ prescriptions.id }}</td>
-                                        <td>{{ prescriptions.dateOfBirth ? prescriptions.dateOfBirth|date('Y-m-d H:i:s') : '' }}</td>
                                         <td>{{ prescriptions.diagnostic }}</td>
                                         <td>{{ prescriptions.age }}</td>
                                         <td>{{ prescriptions.contact }}</td>
 
 
                                         <td>
-                                            <a href="{{ path('doctor_edit', {'id': prescriptions.id}) }}" class="btn btn-secondary " >Edit
+                                            <a href="{{ path('doctor_edit', {'id': prescriptions.id}) }}" class="btn btn-primary " >Edit
 
+                                            </a>
+                                            <a href="{{ path('show_doctor',{'id': prescriptions.id}) }}" ><span class="btn btn-warning">show</span></a>
+                                            <a href="{{ path('print_prescription',{'id': prescriptions.id}) }}">
+                                                <button class="btn btn-success" type="submit">print </button>
                                             </a>
 
 
                                         </td>
                                         <td>
+{#                                            <form method="post" action="{{ path('prescription_delete', {'id': prescriptions.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">#}
+{#                                                <input type="hidden" name="_method" value="DELETE">#}
+{#                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ prescriptions.id) }}">#}
+{#                                                <button class="btn btn-danger">Delete</button>#}
 
-                                            <form method="post" action="{{ path('doctor_delete', {'id': prescriptions.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ prescriptions.id) }}">
-                                                <button class="btn btn-danger">Delete</button>
-
-                                            </form>
+{#                                            </form>#}
+                                            {{ include('admin/doctor/prescription/_delete_form.html.twig') }}
 
 
                                         </td>

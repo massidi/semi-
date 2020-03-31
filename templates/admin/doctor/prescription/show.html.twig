@@ -1,66 +1,124 @@
-
+{% extends 'admin.html.twig' %}
 
 {% block title %}MedicPrescription{% endblock %}
 
-{% block body %}
-    <h1>MedicPrescription</h1>
+{% block contenu %}
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-body printableArea">
+                <h3><b>PRESCRIPTION ID:</b> <span class="pull-right">{{ prescription.id }}</span></h3>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-left">
+                            <address>
+                                <h3> &nbsp;<b class="text-danger">Dr. {{ prescription.medicName }}</b></h3>
+                                <p class="text-muted m-l-5">{{ prescription.medicName.lastNaME }}
+                                    <br> {{ prescription.medicName.firstName }},
+                                    <br> Tel:{{ prescription.contact }},
+                                    <br> {{ prescription.medicName.email}}</p>
+                            </address>
+                        </div>
+                        <div class="pull-right text-right">
+                            <address>
+                                <h3>To,</h3>
+                                <h4 class="font-bold">Gaala &amp; Sons,</h4>
+                                <p class="text-muted m-l-30">E 104, Dharti-2,
+                                    <br> Nr' Viswakarma Temple,
+                                    <br> Talaja Road,
+                                    <br> Tel:{{ prescription.contact }}</p>
+                                <p class="m-t-30"><b>Due Date :</b> <i class="fa fa-calendar"></i> {{ prescription.createdAt |date }}</p>
+{#                                <p><b>Due Date :</b> <i class="fa fa-calendar"></i> 25th Jan 2018</p>#}
+                            </address>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="table-responsive m-t-40" style="clear: both;">
+                                                            <table class="table table-hover">
+{#                            <table class="table">#}
+                                <tbody>
 
-    <table class="table">
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ prescription.id }}</td>
-        </tr>
-        <tr>
-            <th>DateOfBirth</th>
-            <td>{{ prescription.dateOfBirth ? prescription.dateOfBirth|date('Y-m-d H:i:s') : '' }}</td>
-        </tr>
-        <tr>
-            <th>Age</th>
-            <td>{{ prescription.age }}</td>
-        </tr>
-        <tr>
-            <th>Contact</th>
-            <td>{{ prescription.contact }}</td>
-        </tr>
-        <tr>
-            <th>Diagnostic</th>
-            <td>{{ prescription.diagnostic }}</td>
-        </tr>
-        <tr>
-            <th>Blood_pressure</th>
-            <td>{{ prescription.bloodPressure }}</td>
-        </tr>
-        <tr>
-            <th>Pulse_rate</th>
-            <td>{{ prescription.pulseRate }}</td>
-        </tr>
-        <tr>
-            <th>Drug</th>
-            <td>{{ prescription.drug }}</td>
-        </tr>
-        <tr>
-            <th>Unite</th>
-            <td>{{ prescription.unite }}</td>
-        </tr>
-        <tr>
-            <th>Dosage</th>
-            <td>{{ prescription.dosage }}</td>
-        </tr>
-        <tr>
-            <th>Examination</th>
-            <td>{{ prescription.examination }}</td>
-        </tr>
-        <tr>
-            <th>Health_regine</th>
-            <td>{{ prescription.healthRegine }}</td>
-        </tr>
-        </tbody>
-    </table>
+                                <tr>
+                                    <th>Age</th>
+                                    <td>{{ prescription.age }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Contact</th>
+                                    <td>{{ prescription.contact }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Diagnostic</th>
+                                    <td>{{ prescription.diagnostic }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Blood_pressure</th>
+                                    <td>{{ prescription.bloodPressure }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Pulse_rate</th>
+                                    <td>{{ prescription.pulseRate }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Drug</th>
+                                    <td>{{ prescription.drug }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Unite</th>
+                                    <td>{{ prescription.unite }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Dosage</th>
+                                    <td>{{ prescription.dosage }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Examination</th>
+                                    <td>{{ prescription.examination }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Health_regine</th>
+                                    <td>{{ prescription.healthRegine }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
 
-    <a href="{{ path('doctor_index') }}">back to list</a>
 
-    <a href="{{ path('doctor_edit', {'id': medic_prescription.id}) }}">edit</a>
 
-    {{ include('profiles/appointment/_delete_form.html.twig') }}
+                        </div>
+                        <div class="col-md-12">
+
+                                                        <div class="pull-right m-t-30 text-right">
+{#                                <p>Sub - Total amount: $13,848</p>#}
+{#                                <p>vat (10%) : $138 </p>#}<h2><b>Thanks :</b></h2>
+                                <hr>
+                                <h3> Your health is Our Priority</h3>
+                            </div>
+                            <div class="clearfix"></div>
+                            <hr>
+                            <div class="text-right">
+                                <a href="{{ path('print_prescription',{'id': prescription.id}) }}">
+                                    <button class="btn btn-success" type="submit">print </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
+    </div>
+</div>
 {% endblock %}

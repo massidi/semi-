@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MedicPrescriptionRepository")
  */
-class MedicPrescription
+class MedicPrescription extends \App\Repository\MedicPrescriptionRepository
 {
     /**
      * @ORM\Id()
@@ -21,7 +21,7 @@ class MedicPrescription
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateOfBirth;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -88,9 +88,13 @@ class MedicPrescription
      */
     private $medicName;
 
+
+
     public function __construct()
     {
         $this->patient = new ArrayCollection();
+        $this->createdAt= new \DateTime('now');
+
     }
 
 
@@ -100,14 +104,15 @@ class MedicPrescription
     }
 
 
-    public function getDateOfBirth(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->dateOfBirth;
+        return $this->createdAt;
     }
 
-    public function setDateOfBirth(\DateTimeInterface $dateOfBirth): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->dateOfBirth = $dateOfBirth;
+        $this->createdAt= new \DateTime('now');
+
 
         return $this;
     }
@@ -294,6 +299,7 @@ class MedicPrescription
     {
         return $this->age;
     }
+
 
 
 

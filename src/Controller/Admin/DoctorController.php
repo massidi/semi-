@@ -8,6 +8,8 @@ use App\Event\MedicationEvent;
 use App\Form\MedicPrescriptionType;
 use App\Repository\MedicPrescriptionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,14 +47,28 @@ class DoctorController extends AbstractController
      * @param EntityManagerInterface $manager
      * @param MedicPrescriptionRepository $medicPrescriptionRepository
      */
-    public  function __construct(EntityManagerInterface $manager
-    , MedicPrescriptionRepository $medicPrescriptionRepository
+    public function __construct(EntityManagerInterface $manager
+        , MedicPrescriptionRepository $medicPrescriptionRepository
     )
     {
         $this->manager = $manager;
         $this->medicPrescriptionRepository = $medicPrescriptionRepository;
     }
 
+    /**
+     * @Route("/dashboard",name="doctor_dashboard",requirements={"page"="\d+"},defaults={"page"=1})
+     * @param $page
+     * @return Response
+     */
+
+    public function dashboard($page)
+    {
+        if ($page < 1) {
+            throw $this->createNotFoundException('page."' . $page . '" does not exit');
+        }
+        return $this->render('admin/doctor/prescription/dashboard.html.twig');
+
+    }
 
     /**
      * @Route("/doctor", name="doctor_index")
@@ -65,18 +81,13 @@ class DoctorController extends AbstractController
 //        {
 //        $hasAccess = $this->isGranted('ROLE_DOCTOR');
 
-
         $currentUser= $this->getUser();
 
-            $prescriptions= $this->medicPrescriptionRepository->findAllByUsers($currentUser);
+            $prescriptions= $this->medicPrescriptionRepository->findByMedicName($currentUser
+                   );
 
             return $this->render('Admin/doctor/prescription/index.html.twig',[
                 'prescriptions'=>$prescriptions]);
-
-
-//        }
-//        throw new \RuntimeException('I don\'t have a token');
-
 
     }
 
@@ -89,11 +100,16 @@ class DoctorController extends AbstractController
     public function new1(Request $request,EventDispatcherInterface $eventDispatcher)
     {
 //        $doctor= $this->tokenStorage->getToken();
+//        here are getting the current doctor who is connected
         $doctor= $this->getUser();
 
-
+  $date= new \DateTime('now');
         $doctorPrescription = new MedicPrescription();
+        $doctorPrescription->getCreatedAt($date);
+
         $doctorPrescription->setMedicName($doctor);
+
+
 
         $form = $this->createForm(MedicPrescriptionType::class, $doctorPrescription );
         $form->handleRequest($request);
@@ -102,7 +118,7 @@ class DoctorController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($doctorPrescription);
             $entityManager->flush();
-            $medication=new MedicationEvent($doctorPrescription);
+            $medication = new MedicationEvent($doctorPrescription);
             $eventDispatcher->dispatch($medication,MedicationEvent::Name);
 
             return $this->redirectToRoute('doctor_index');
@@ -121,10 +137,13 @@ class DoctorController extends AbstractController
      */
     public function show($id)
     {
-       $doctors=$this->medicPrescriptionRepository->find($id);
-       return $this->render("Admin/doctor/prescription/show.html.twig",[
-           'doctor'=>$doctors
-       ]);
+
+        $prescription=$this->medicPrescriptionRepository->find($id);
+        return $this->render("Admin/doctor/prescription/show.html.twig",[
+            'prescription'=>$prescription]);
+
+
+
     }
 
     /**
@@ -154,7 +173,7 @@ class DoctorController extends AbstractController
     }
 
     /**
-     * @Route("delete/{id}",name="doctor_delete")
+     * @Route("delete/{id}",name="prescription_delete")
      * @param Request $request
      * @param MedicPrescription $medicPrescription
      * @param $id
@@ -170,6 +189,45 @@ class DoctorController extends AbstractController
 
 
         return $this->redirectToRoute('doctor_index');
+    }
+
+    /**
+     * @Route("/print/{id}",name="print_prescription")
+     * @param $id
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function  printPres($id,EventDispatcherInterface $eventDispatcher)
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        $prescription = $this->medicPrescriptionRepository->find($id);
+
+        ///////here we are sending prescription to patient Email//////////
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('Admin/doctor/prescription/print.html.twig',[
+            'prescription'=>$prescription
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("my prescription.pdf", [
+            "Attachment" => false
+        ]);
+        $medication = new MedicationEvent($prescription);
+        $eventDispatcher->dispatch($medication,MedicationEvent::Name);
     }
 
 

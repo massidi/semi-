@@ -63,19 +63,24 @@ class UserSubscriber implements EventSubscriberInterface
         $this->mailer->send($massage);
     }
 
+    /**
+     * @param MedicationEvent $event
+     * @param $id
+     */
     public function onMedicate(MedicationEvent $event)
     {
 
         try {
             $body = $this->twig->render('email/medication.html.twig', [
-                'medication' => $event->getMedicPrescription(),
+                'prescription' => $event->getMedicPrescription(),
             ]);
             $massage = (new \Swift_Message())
                 ->setSubject('welcome to DMP application')
-                ->setFormat('dph@gmail.com')
+                ->setFrom('reddy@.com')
                 ->setTo('semireddy@yahoo.fr')
                 ->setBody($body, 'text/html');
             $this->mailer->send($massage);
+
         }
         catch (\Exception $e)
         {
