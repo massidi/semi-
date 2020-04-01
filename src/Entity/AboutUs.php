@@ -40,13 +40,14 @@ class AboutUs
     private $content;
 
     /**
-     * @Vich\UploadableField(mapping="about_images", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="product_images", fileNameProperty="image")
      * @var File
      */
     private $imageFile;
 
     /**
      * @ORM\Column(type="datetime")
+     * @var \DateTime
      */
     private $updateAt;
 //    /**
@@ -101,26 +102,24 @@ class AboutUs
         return $this;
     }
 
-    /**
-     * @param File|null $image
-     * @return $this
-     * @throws \Exception
-     */
-    public function getImageFile(File $image = null)
+
+
+    public function setImageFile(File $image = null): self
     {
         $this->imageFile = $image;
         if ($image) {
             $this->updateAt = new DateTime('now');
         }
+
         return $this;
     }
-
-    public function setImageFile(?string $imageFile): self
+    public function getImageFile()
     {
-        $this->imageFile = $imageFile;
+        return $this->imageFile;
 
-        return $this;
+
     }
+
 
     public function getUpdateAt(): ?\DateTimeInterface
     {

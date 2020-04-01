@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+//use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 
 /**
@@ -36,10 +36,6 @@ class DoctorController extends AbstractController
      * @var MedicPrescriptionRepository
      */
     private $medicPrescriptionRepository;
-    /**
-     * @var TokenStorageInterface
-     */
-    private $tokenStorage;
 
 
     /**
@@ -96,6 +92,7 @@ class DoctorController extends AbstractController
      * @param Request $request
      * @param EventDispatcherInterface $eventDispatcher
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function new1(Request $request,EventDispatcherInterface $eventDispatcher)
     {
@@ -105,7 +102,7 @@ class DoctorController extends AbstractController
 
   $date= new \DateTime('now');
         $doctorPrescription = new MedicPrescription();
-        $doctorPrescription->getCreatedAt($date);
+        $doctorPrescription->setCreatedAt($date);
 
         $doctorPrescription->setMedicName($doctor);
 

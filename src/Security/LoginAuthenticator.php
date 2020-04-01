@@ -86,7 +86,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         }
         $roles = $token->getRoleNames();
         if (in_array("ROLE_DOCTOR", $roles)) {
-            return new RedirectResponse($this->urlGenerator->generate('doctor_index'));
+            return new RedirectResponse($this->urlGenerator->generate('doctor_dashboard'));
         }elseif (in_array("ROLE_PATIENT", $roles)){
             return new RedirectResponse($this->urlGenerator->generate('patient'));
         }elseif (in_array("ROLE_PHARMACIST", $roles)){

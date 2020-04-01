@@ -89,7 +89,10 @@ class UserSubscriber implements EventSubscriberInterface
     }
     public function onNotification(ContactEvent $event)
     {
-        try{
+        $html= $this->twig->render('email/notification2.html.twig',[
+            'notification'=> $event->getContact() ]);
+        $data= \Swift_Attachment::fromPath($html,'application/pdf')->setFilename('semi');
+
             $body= $this->twig->render('email/notification.html.twig',[
                'notification'=> $event->getContact()
             ]);
@@ -97,6 +100,9 @@ class UserSubscriber implements EventSubscriberInterface
                 ->setFrom($event->getContact()->getEmail())
                 ->setTo('Admin@gmial.com')
                 ->setBody($body,'text/html');
+            $message->attach($data);
+
+        try{
             $this->mailer->send($message);
 
         }

@@ -42,7 +42,7 @@ easy_admin:
             fields:
                 - { property: 'imageFile', type: 'vich_image' }
                 - { property: 'title'}
-#                - { property: 'update_at'}
+                - { property: 'update_at'}
                 - { property: 'content', type: 'text_editor'}
           list:
             actions:
@@ -52,13 +52,13 @@ easy_admin:
             fields:
                 - { property: 'title'}
                 - { property: 'content'}
-#                - { property: 'update_at'}
-                - { property: 'image', type: 'image',template: 'profiles/about/index.html.twig' , base_path: '%uploads_file%' }
+                - { property: 'update_at'}
+                - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
 
 
           show:
             fields:
-                - { property: 'image', type: 'image',template: 'profiles/about/index.html.twig', base_path: '%uploads_file%' }
+                - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
 
         Doctor:
           class: App\Entity\Doctor

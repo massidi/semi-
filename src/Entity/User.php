@@ -13,7 +13,7 @@ use Traversable;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface, \Doctrine\Common\Collections\Collection
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -520,5 +520,21 @@ class User implements UserInterface, \Doctrine\Common\Collections\Collection
     public function count()
     {
         // TODO: Implement count() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function valid()
+    {
+        // TODO: Implement valid() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function rewind()
+    {
+        // TODO: Implement rewind() method.
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\MedicPrescription;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Svg\Tag\Text;
 use Symfony\Component\DomCrawler\Field\TextareaFormField;
 use Symfony\Component\Form\AbstractType;
@@ -33,10 +34,7 @@ class MedicPrescriptionType extends AbstractType
             ->add('drug')
             ->add('unite')
             ->add('dosage')
-            ->add('examination',TextareaType::class,
-                [
-                    'row_attr' => ['class' => 'text-editor', 'id' => '...'],
-                ])
+            ->add('examination',CKEditorType::class)
             ->add('health_regine')
         ;
     }

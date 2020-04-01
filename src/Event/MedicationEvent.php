@@ -5,7 +5,7 @@ namespace App\Event;
 
 
 use App\Entity\MedicPrescription;
-use App\Repository\MedicPrescriptionRepository;
+//use App\Repository\MedicPrescriptionRepository;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class MedicationEvent extends  Event
@@ -16,7 +16,7 @@ class MedicationEvent extends  Event
      */
     private $medicPrescription;
 
-    public function __construct(MedicPrescriptionRepository $medicPrescription)
+    public function __construct(MedicPrescription $medicPrescription)
 {
     $this->medicPrescription = $medicPrescription;
 }
