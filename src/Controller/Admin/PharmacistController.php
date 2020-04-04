@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("Admin/pharmacist")
+ * @Route("Admin/")
  * Class PharmacistController
  * @package App\Controller\Admin
  */
