@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  *
- * @Route("/Admin")
+ * @Route("/Admin/doctor")
  */
 
 class DoctorController extends AbstractController
