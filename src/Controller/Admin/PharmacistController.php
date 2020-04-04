@@ -36,7 +36,7 @@ class PharmacistController extends AbstractController
     }
 
     /**
-     * @Route("/dashboard", name="pharmacist_dashboard" ,requirements={"page"="\d+"},defaults={"page"=1})
+     * @Route("/pharmacist_dashboard", name="pharmacist_dashboard" ,requirements={"page"="\d+"},defaults={"page"=1})
      * @param $page
      * @return \Symfony\Component\HttpFoundation\Response
      */
