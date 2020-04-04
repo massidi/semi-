@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("Admin/")
+ * @Route("Admin/pharmacist")
  * Class PharmacistController
  * @package App\Controller\Admin
  */
@@ -76,11 +76,11 @@ class PharmacistController extends AbstractController
 
         if ($request->isMethod("POST"))
         {
+
             $id = $request->request->get('id');
             $search= $this->manager->getRepository($this->medicPrescriptionRepository->find($id));
             return $this->render('admin/pharmacist/prescription/search.html.twig',['search'=>$search]);
         }
         return $this->render('admin/pharmacist/prescription/search.html.twig',['search'=>null]);
-
     }
 }
