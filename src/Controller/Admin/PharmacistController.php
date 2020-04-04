@@ -79,7 +79,7 @@ class PharmacistController extends AbstractController
         {
             $prescription= $request->get('prescription');
             $search= $this->manager->getRepository($this->medicPrescriptionRepository->findBy(['prescription'=>$prescription]));
-            return $this->redirectToRoute('show_doctor');
+//            return $this->redirectToRoute('show_doctor');
 
         }
 //        // set up the config
@@ -103,7 +103,7 @@ class PharmacistController extends AbstractController
 
         // ... now do something with $data or $meta
 
-        return $this->render('admin/pharmacist/prescription/search.html.twig',['search'=>$search]);
+        return $this->render('admin/pharmacist/prescription/search.html.twig');
 
 
     }
