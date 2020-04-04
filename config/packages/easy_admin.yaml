@@ -31,7 +31,7 @@ easy_admin:
         - {label: "settings"}
         - {entity: Users,  icon: "user"}
         - {entity: AboutUs}
-#        - {entity : MedicPrecription}
+        - {entity: MedicPrescription}
 
     site_name: 'DPP_Admin.'
 
@@ -42,7 +42,7 @@ easy_admin:
             fields:
                 - { property: 'imageFile', type: 'vich_image' }
                 - { property: 'title'}
-                - { property: 'update_at'}
+#                - { property: 'update_at'}
                 - { property: 'content', type: 'text_editor'}
           list:
             actions:
@@ -58,6 +58,9 @@ easy_admin:
 
           show:
             fields:
+                - { property: 'title'}
+                - { property: 'content'}
+                - { property: 'update_at'}
                 - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
 
         Doctor:
@@ -84,8 +87,8 @@ easy_admin:
 
         Pharmacist:
           class: App\Entity\Pharmacist
-#        medic:
-#          class: App\Entity\MedicPrecription
+        MedicPrescription:
+          class: App\Entity\MedicPrescription
 
         Users:
           class: App\Entity\User

@@ -1,4 +1,7 @@
 {
+    "artprima/query-filter-bundle": {
+        "version": "1.2.0"
+    },
     "behat/transliterator": {
         "version": "v1.3.0"
     },

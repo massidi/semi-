@@ -4,8 +4,7 @@ namespace App\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-//use Symfony\Component\HttpFoundation\File\File;
-//use Symfony\Component\HttpFoundation\File\File
+
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -57,7 +56,7 @@ class AboutUs
 
     public function __construct()
     {
-        $this->updateAt = new DateTime();
+        $this->updateAt = new \DateTime();
 
     }
 
@@ -78,11 +77,18 @@ class AboutUs
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getImage(): ?string
     {
         return $this->image;
     }
 
+    /**
+     * @param string|null $image
+     * @return $this
+     */
     public function setImage(?string $image): self
     {
         $this->image = $image;
@@ -103,12 +109,16 @@ class AboutUs
     }
 
 
-
+    /**
+     * @param File|null $image
+     * @return $this
+     * @throws \Exception
+     */
     public function setImageFile(File $image = null): self
     {
         $this->imageFile = $image;
         if ($image) {
-            $this->updateAt = new DateTime('now');
+            $this->updateAt = new DateTime();
         }
 
         return $this;
@@ -132,4 +142,8 @@ class AboutUs
 
         return $this;
     }
+     public function __toString()
+     {
+        return $this->image;
+     }
 }

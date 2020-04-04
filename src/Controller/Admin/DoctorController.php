@@ -8,6 +8,8 @@ use App\Event\MedicationEvent;
 use App\Form\MedicPrescriptionType;
 use App\Repository\MedicPrescriptionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\OrderBy;
+use Doctrine\ORM\Tools\Pagination\LimitSubqueryOutputWalker;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -78,7 +80,8 @@ class DoctorController extends AbstractController
         $currentUser= $this->getUser();
 
             $prescriptions= $this->medicPrescriptionRepository->findByMedicName($currentUser
-                   );
+
+            );
 
             return $this->render('Admin/doctor/prescription/index.html.twig',[
                 'prescriptions'=>$prescriptions]);

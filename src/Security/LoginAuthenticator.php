@@ -90,11 +90,15 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         }elseif (in_array("ROLE_PATIENT", $roles)){
             return new RedirectResponse($this->urlGenerator->generate('patient'));
         }elseif (in_array("ROLE_PHARMACIST", $roles)){
-            return new RedirectResponse($this->urlGenerator->generate('pharmacist'));
-        }else{
-
+            return new RedirectResponse($this->urlGenerator->generate('pharmacist_dashboard'));
         }
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        elseif (in_array("ROLE_ADMIN", $roles)){
+            return new RedirectResponse($this->urlGenerator->generate('easyadmin'));
+        }
+        else{
+            throw new CustomUserMessageAuthenticationException('page not find.');
+        }
+
     }
 
     protected function getLoginUrl()
