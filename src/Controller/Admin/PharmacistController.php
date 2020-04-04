@@ -78,7 +78,7 @@ class PharmacistController extends AbstractController
         {
 
             $id = $request->request->get('id');
-            $search= $this->manager->getRepository($this->medicPrescriptionRepository->find($id));
+            $search= $this->medicPrescriptionRepository->find($id);
             return $this->render('admin/pharmacist/prescription/search.html.twig',['search'=>$search]);
         }
         return $this->render('admin/pharmacist/prescription/search.html.twig',['search'=>null]);
