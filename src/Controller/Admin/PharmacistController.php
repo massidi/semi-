@@ -36,7 +36,7 @@ class PharmacistController extends AbstractController
     }
 
     /**
-     * @Route("/pharmacist_dashboard", name="pharmacist_dashboard" ,requirements={"page"="\d+"},defaults={"page"=1})
+     * @Route("pharmacist_dashboard", name="pharmacist_dashboard" ,requirements={"page"="\d+"},defaults={"page"=1})
      * @param $page
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -51,7 +51,7 @@ class PharmacistController extends AbstractController
 
 
     /**
-     * @Route("/see_prescriptions", name="see_prescriptions")
+     * @Route("see_prescriptions", name="see_prescriptions")
      */
     public function index()
     {
@@ -66,45 +66,21 @@ class PharmacistController extends AbstractController
     }
 
     /**
-     * @Route("/search_prescription",name="search_prescription")
+     * @Route("search_prescription",name="search_prescription")
      * @param Request $request
      * @param $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public  function  searchPrescription(Request $request, $id)
+    public  function  searchPrescription(Request $request)
     {
 
-        $search= $this->manager->getRepository($this->medicPrescriptionRepository->find($id));
         if ($request->isMethod("POST"))
         {
-            $prescription= $request->get('prescription');
-            $search= $this->manager->getRepository($this->medicPrescriptionRepository->findBy(['prescription'=>$prescription]));
-            return $this->redirectToRoute('show_doctor');
-
+            $id = $request->request->get('id');
+            $search= $this->manager->getRepository($this->medicPrescriptionRepository->find($id));
+            return $this->render('admin/pharmacist/prescription/search.html.twig',['search'=>$search]);
         }
-//        // set up the config
-//        $config = new BaseConfig();
-//        $config->setSearchAllowedCols(['t.name']);
-//        $config->setAllowedLimits([10, 25, 50, 100]);
-//        $config->setDefaultLimit(1);
-//        $config->setSortCols(['t.id'], ['t.id' => 'asc']);
-//        $config->setRequest(new Request($request));
-//
-//        // here we provide a repository callback that will be used internally in the QueryFilter
-//        // The signature of the method must be as follows: function functionName(QueryFilterArgs $args): QueryResult;
-//        $config->setRepositoryCallback([$prescription, 'findByOrderBy']);
-//
-//        // Response must implement Artprima\QueryFilterBundle\Response\ResponseInterface
-//        $queryFilter = new QueryFilter(Response::class);
-//        /** @var Response $data the type of the variable is defined by the class in the first argument of QueryFilter's constructor */
-//        $response = $queryFilter->getData($config);
-//        $data = $response->getData();
-//        $meta = $response->getMeta();
-
-        // ... now do something with $data or $meta
-
-        return $this->render('admin/pharmacist/prescription/search.html.twig',['search'=>$search]);
-
+        return $this->render('admin/pharmacist/prescription/search.html.twig',['search'=>null]);
 
     }
 }
