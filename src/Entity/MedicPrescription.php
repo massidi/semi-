@@ -53,15 +53,6 @@ class MedicPrescription extends \App\Repository\MedicPrescriptionRepository
      */
     private $drug;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $unite;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $dosage;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -74,26 +65,21 @@ class MedicPrescription extends \App\Repository\MedicPrescriptionRepository
     private $health_regine;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Doctor", inversedBy="prescriptions")
-     */
-    private $doctor;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Patient", mappedBy="medicPrescription")
-     */
-    private $patient;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="prescription")
      */
     private $medicName;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="patient_prescription")
+     */
+    private $patientName;
 
 
 
     public function __construct()
     {
-        $this->patient = new ArrayCollection();
-        $this->createdAt= new \DateTime('now');
+
+        $this->createdAt= new \DateTime();
 
     }
 
@@ -189,30 +175,6 @@ class MedicPrescription extends \App\Repository\MedicPrescriptionRepository
         return $this;
     }
 
-    public function getUnite(): ?string
-    {
-        return $this->unite;
-    }
-
-    public function setUnite(string $unite): self
-    {
-        $this->unite = $unite;
-
-        return $this;
-    }
-
-    public function getDosage(): ?string
-    {
-        return $this->dosage;
-    }
-
-    public function setDosage(string $dosage): self
-    {
-        $this->dosage = $dosage;
-
-        return $this;
-    }
-
     public function getExamination(): ?string
     {
         return $this->examination;
@@ -237,48 +199,6 @@ class MedicPrescription extends \App\Repository\MedicPrescriptionRepository
         return $this;
     }
 
-    public function getDoctor(): ?Doctor
-    {
-        return $this->doctor;
-    }
-
-    public function setDoctor(?Doctor $doctor): self
-    {
-        $this->doctor = $doctor;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Patient[]
-     */
-    public function getPatient(): Collection
-    {
-        return $this->patient;
-    }
-
-    public function addPatient(Patient $patient): self
-    {
-        if (!$this->patient->contains($patient)) {
-            $this->patient[] = $patient;
-            $patient->setMedicPrescription($this);
-        }
-
-        return $this;
-    }
-
-    public function removePatient(Patient $patient): self
-    {
-        if ($this->patient->contains($patient)) {
-            $this->patient->removeElement($patient);
-            // set the owning side to null (unless already changed)
-            if ($patient->getMedicPrescription() === $this) {
-                $patient->setMedicPrescription(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getMedicName(): ?User
     {
@@ -292,6 +212,19 @@ class MedicPrescription extends \App\Repository\MedicPrescriptionRepository
         return $this;
     }
 
+
+
+    public function getPatientName(): ?User
+    {
+        return $this->patientName;
+    }
+
+    public function setPatientName(?User $patientName): self
+    {
+        $this->patientName = $patientName;
+
+        return $this;
+    }
     /**
      * @return mixed
      */

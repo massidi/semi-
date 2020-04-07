@@ -17,13 +17,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
 //use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  *
  * @Route("/Admin/doctor")
  */
-
 class DoctorController extends AbstractController
 {
 
@@ -77,14 +77,15 @@ class DoctorController extends AbstractController
 //        {
 //        $hasAccess = $this->isGranted('ROLE_DOCTOR');
 
-        $currentUser= $this->getUser();
+        $currentUser = $this->getUser();
 
-            $prescriptions= $this->medicPrescriptionRepository->findByMedicName($currentUser
 
-            );
+        $prescriptions = $this->medicPrescriptionRepository->findByMedicName($currentUser
 
-            return $this->render('Admin/doctor/prescription/index.html.twig',[
-                'prescriptions'=>$prescriptions]);
+        );
+
+        return $this->render('Admin/doctor/prescription/index.html.twig', [
+            'prescriptions' => $prescriptions]);
 
     }
 
@@ -95,21 +96,20 @@ class DoctorController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function new1(Request $request,EventDispatcherInterface $eventDispatcher)
+    public function new1(Request $request, EventDispatcherInterface $eventDispatcher)
     {
 //        $doctor= $this->tokenStorage->getToken();
 //        here are getting the current doctor who is connected
-        $doctor= $this->getUser();
+        $doctor = $this->getUser();
 
-  $date= new \DateTime('now');
+        $date = new \DateTime('now');
         $doctorPrescription = new MedicPrescription();
         $doctorPrescription->setCreatedAt($date);
 
         $doctorPrescription->setMedicName($doctor);
 
 
-
-        $form = $this->createForm(MedicPrescriptionType::class, $doctorPrescription );
+        $form = $this->createForm(MedicPrescriptionType::class, $doctorPrescription);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -117,15 +117,15 @@ class DoctorController extends AbstractController
             $entityManager->persist($doctorPrescription);
             $entityManager->flush();
             $medication = new MedicationEvent($doctorPrescription);
-            $eventDispatcher->dispatch($medication,MedicationEvent::Name);
+            $eventDispatcher->dispatch($medication, MedicationEvent::Name);
 
             return $this->redirectToRoute('doctor_index');
 
         }
 
-        return $this->render('Admin/doctor/prescription/new.html.twig',['form'=>$form->createView(),
-            'doctorPrescription'=>$doctorPrescription,]);
-        }
+        return $this->render('Admin/doctor/prescription/new.html.twig', ['form' => $form->createView(),
+            'doctorPrescription' => $doctorPrescription,]);
+    }
 
 
     /**
@@ -136,10 +136,9 @@ class DoctorController extends AbstractController
     public function show($id)
     {
 
-        $prescription=$this->medicPrescriptionRepository->find($id);
-        return $this->render("Admin/doctor/prescription/show.html.twig",[
-            'prescription'=>$prescription]);
-
+        $prescription = $this->medicPrescriptionRepository->find($id);
+        return $this->render("Admin/doctor/prescription/show.html.twig", [
+            'prescription' => $prescription]);
 
 
     }
@@ -150,14 +149,14 @@ class DoctorController extends AbstractController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function edit($id,Request $request)
+    public function edit($id, Request $request)
     {
-        $medicPrescription=$this->medicPrescriptionRepository->find($id);
+        $medicPrescription = $this->medicPrescriptionRepository->find($id);
         $form = $this->createForm(MedicPrescriptionType::class, $medicPrescription);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-                $this->manager->flush();
+            $this->manager->flush();
 
             return $this->redirectToRoute('doctor_index');
         }
@@ -177,9 +176,9 @@ class DoctorController extends AbstractController
      * @param $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete(Request $request, MedicPrescription $medicPrescription,$id): Response
+    public function delete(Request $request, MedicPrescription $medicPrescription, $id): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$medicPrescription->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $medicPrescription->getId(), $request->request->get('_token'))) {
 
             $this->manager->remove($medicPrescription);
             $this->manager->flush();
@@ -194,7 +193,7 @@ class DoctorController extends AbstractController
      * @param $id
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function  printPres($id,EventDispatcherInterface $eventDispatcher)
+    public function printPres($id, EventDispatcherInterface $eventDispatcher)
     {
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
@@ -207,8 +206,8 @@ class DoctorController extends AbstractController
         $dompdf = new Dompdf($pdfOptions);
 
         // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('Admin/doctor/prescription/print.html.twig',[
-            'prescription'=>$prescription
+        $html = $this->renderView('Admin/doctor/prescription/print.html.twig', [
+            'prescription' => $prescription
         ]);
 
         // Load HTML to Dompdf
@@ -225,45 +224,55 @@ class DoctorController extends AbstractController
             "Attachment" => false
         ]);
         $medication = new MedicationEvent($prescription);
-        $eventDispatcher->dispatch($medication,MedicationEvent::Name);
+        $eventDispatcher->dispatch($medication, MedicationEvent::Name);
     }
 
 
-//    /**
-//     * @Route("/patientlatest",name="patient_latest")
-//     */
-//
-//    public  function  patientLatest()
-//    {
-//        $patient=$this->patientRepository->findLatest();
-//        $prescription=$this->medicPrescriptionRepository->findLatestprescript();
-//
-//
-//
-//        return $this->render('admin/doctor/seelatest.html.twig',
-//            [
-//                'patient'=>$patient,
-//                'prescription'=>$prescription,
-//            ]);
-//
-//
-//    }
-//    /**
-//     * @Route("/prescriptlatest",name="prescript_latest")
-//     *
-//     */
-/*
-    public  function  prescriptLatest()
+    /**
+     * @Route("/latestrecord",name="latestrecord")
+     */
+
+    public function recordLatest()
     {
-        $prescription=$this->medicPrescriptionRepository->findLatestprescript();
+
+        $user = $this->getUser();
+
+        $patient = $this->medicPrescriptionRepository->findByMedicName($user, ['id' => 'DESC'], 4, 0);
 
 
         return $this->render('admin/doctor/seelatest.html.twig',
             [
-                'prescription'=>$prescription,
+                'patient' => $patient,
+
             ]);
 
 
-    }*/
+    }
+
+    /**
+     * @Route("/userprofile",name="userprofile")
+     * @return Response
+     */
+    public  function userprofile()
+    {
+        return $this->render('admin/doctor/profile.html.twig');
+    }
+//    /**
+//     * @Route("/prescriptlatest",name="prescript_latest")
+//     *
+//     */
+    /*
+        public  function  prescriptLatest()
+        {
+            $prescription=$this->medicPrescriptionRepository->findLatestprescript();
+
+
+            return $this->render('admin/doctor/seelatest.html.twig',
+                [
+                    'prescription'=>$prescription,
+                ]);
+
+
+        }*/
 
 }

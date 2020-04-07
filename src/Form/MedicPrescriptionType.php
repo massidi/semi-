@@ -4,10 +4,13 @@ namespace App\Form;
 
 use App\Entity\MedicPrescription;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use phpDocumentor\Reflection\Types\Context;
 use Svg\Tag\Text;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DomCrawler\Field\TextareaFormField;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,11 +34,10 @@ class MedicPrescriptionType extends AbstractType
             ->add('diagnostic')
             ->add('blood_pressure')
             ->add('pulse_rate')
-            ->add('drug')
-            ->add('unite')
-            ->add('dosage')
-            ->add('examination',CKEditorType::class)
-            ->add('health_regine')
+            ->add('drug',CKEditorType::class)
+            ->add('examination',TextareaType::class)
+            ->add('health_regine',TextareaType::class)
+            ->add('patientName')
         ;
     }
 

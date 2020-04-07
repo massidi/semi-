@@ -11,21 +11,24 @@
                     <div class="card-body">
                         <h4 class="card-title m-b-0">Recent Patients</h4>
                     </div>
-                    {% for patient in patient %}
+                    {% for patient  in patient%}
+
                     <div class="comment-widgets scrollable ps-container ps-theme-default" data-ps-id="2b2e2627-5dcb-dea3-4dc8-40a6bf763e8a">
                         <!-- Comment Row -->
                         <div class="d-flex flex-row comment-row">
+                            <ul><li>
                             <div class="p-2"><img src="{{ asset('doctor/assets/images/users/3.jpg') }}" alt="user" width="50" class="rounded-circle"></div>
                             <div class="comment-text w-100">
-                                <h6 class="font-medium">{{ patient.name}}</h6>
+                                <h6 class="font-medium">{{ patient.patientName}}</h6>
                                 <span class="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry. </span>
                                 <div class="comment-footer">
-                                    <span class="text-muted float-right">August 1, 2016</span>
+{#                                    <span class="text-muted float-right">{{patient.createdAt}}</span>#}
                                     <button type="button" class="btn btn-cyan btn-sm">Edit</button>
                                     <button type="button" class="btn btn-success btn-sm">Publish</button>
                                     <button type="button" class="btn btn-danger btn-sm">Delete</button>
                                 </div>
                             </div>
+                                </li></ul>
                         </div>
                         <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;">
 
@@ -124,21 +127,21 @@
                         <h4 class="card-title m-b-0">Last Prescriptions</h4>
                     </div>
                     <ul class="list-style-none">
-                        {% for prescription in prescription %}
+{#                        {% for prescription in prescription %}#}
 
-                        <li class="d-flex no-block card-body border-top">
-                            <i class="fa fa-plus w-30px m-t-5"></i>
-                            <div>
-                                <h5 class="text-muted m-b-0">{{ prescription.examination }}</h5>                                <span class="text-muted">But already everything was solved. It will ...</span>
-                            </div>
-                            <div class="ml-auto">
-                                <div class="tetx-right">
-                                    <h5 class="text-muted m-b-0">{{ prescription.contact }}</h5>
-                                    <span class="text-muted font-16">Jan</span>
-                                </div>
-                            </div>
-                        </li>
-                        {% endfor %}
+{#                        <li class="d-flex no-block card-body border-top">#}
+{#                            <i class="fa fa-plus w-30px m-t-5"></i>#}
+{#                            <div>#}
+{#                                <h5 class="text-muted m-b-0">{{ prescription.examination }}</h5>                                <span class="text-muted">But already everything was solved. It will ...</span>#}
+{#                            </div>#}
+{#                            <div class="ml-auto">#}
+{#                                <div class="tetx-right">#}
+{#                                    <h5 class="text-muted m-b-0">{{ prescription.contact }}</h5>#}
+{#                                    <span class="text-muted font-16">Jan</span>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </li>#}
+{#                        {% endfor %}#}
 
                     </ul>
                 </div>
@@ -407,120 +410,7 @@
                 </div>
             </div>
         </div>
-        <!-- row -->
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title m-b-0">Browesr statistics</h5>
-                    </div>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Browser</th>
-                            <th scope="col">Visits</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Chrome</td>
-                            <td>8850</td>
-                        </tr>
-                        <tr>
-                            <td>Firefox</td>
-                            <td>1200</td>
-                        </tr>
-                        <tr>
-                            <td>Internet Explorer</td>
-                            <td>1540</td>
-                        </tr>
-                        <tr>
-                            <td>Opera</td>
-                            <td>1230</td>
-                        </tr>
-                        <tr>
-                            <td>Safari</td>
-                            <td>1590</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title m-b-0">Website statistics</h5>
-                    </div>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Site</th>
-                            <th scope="col">Visits</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><a href="#" class="link">Themeforest.com</a></td>
-                            <td>1240</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" class="link">Themedesigner.in</a></td>
-                            <td>1200</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" class="link">Themedesigner.in</a></td>
-                            <td>1542</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" class="link">Themedesigner.in</a></td>
-                            <td>1230</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" class="link">Themedesigner.in</a></td>
-                            <td>1542</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title m-b-0">Visited Pages</h5>
-                    </div>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Page</th>
-                            <th scope="col">Visits</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><a href="#" class="link">Freebies</a></td>
-                            <td>1240</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" class="link">Blog</a></td>
-                            <td>1200</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" class="link">Work</a></td>
-                            <td>1542</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" class="link">Site Template</a></td>
-                            <td>1230</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" class="link">All categories</a></td>
-                            <td>1542</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+
         <!-- ============================================================== -->
         <!-- End PAge Content -->
         <!-- ============================================================== -->

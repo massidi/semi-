@@ -31,7 +31,7 @@ class MedicPrescriptionFixtures extends Fixture implements DependentFixtureInter
                 ->setUnite($faker->numberBetween(2,4))
                 ->setPulseRate($faker->biasedNumberBetween($min = 30, $max = 50, $function = 'sqrt')
                 )
-//                ->setDoctorId($this->getReference('user.demo'));
+//                ->setDoctorId($this->getReference('userProfile.demo'));
 
           ->setDoctorId($this->getReference(DoctorFixtures::DOCTOR_NAME));
 

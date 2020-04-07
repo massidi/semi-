@@ -69,7 +69,7 @@ class PharmacistController extends AbstractController
      * @Route("search_prescription",name="search_prescription")
      * @param Request $request
      * @param $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response 
      */
     public  function  searchPrescription(Request $request)
     {

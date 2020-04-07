@@ -11,7 +11,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class UserRegisterEvent extends Event
 {
-    const  Name = 'user.register';
+    const  Name = 'userProfile.register';
     /**
      * @var User
      */

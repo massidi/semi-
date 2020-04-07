@@ -5,11 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DoctorRepository")
+ *  @Vich\Uploadable()
  */
 class Doctor
 {
@@ -20,10 +23,6 @@ class Doctor
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -39,13 +38,7 @@ class Doctor
      */
     private $department;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Email(
-     *   message = "The email '{{ value }}' is not a valid email."
-     * )
-     */
-    private $email;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -63,20 +56,36 @@ class Doctor
      */
     private $specialization;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MedicPrescription", mappedBy="doctor")
-     */
-    private $prescriptions;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Patient", inversedBy="doctors")
+     * @ORM\Column( type="string", length=255, )
+     * @var string
      */
-    private $patient;
+    private $image;
+
+
+    /**
+     * @Vich\UploadableField(mapping="product_images", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="infoDoctor", cascade={"persist", "remove"})
+     */
+    private $user;
+
 
     public function __construct()
     {
-        $this->prescriptions = new ArrayCollection();
-        $this->patient = new ArrayCollection();
+        $this->updatedAt = new \DateTime();
+
     }
 
 
@@ -87,17 +96,7 @@ class Doctor
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     public function getType(): ?string
     {
@@ -119,18 +118,6 @@ class Doctor
     public function setDepartment(string $department): self
     {
         $this->department = $department;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
 
         return $this;
     }
@@ -172,57 +159,70 @@ class Doctor
     }
 
     /**
-     * @return Collection|MedicPrescription[]
+     * @param File|null $imageFile
+     * @throws \Exception
      */
-    public function getPrescriptions(): Collection
+    public function setImageFile(?File $imageFile = null)
     {
-        return $this->prescriptions;
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
     }
 
-    public function addPrescription(MedicPrescription $prescription): self
+    public function getImageFile(): ?File
     {
-        if (!$this->prescriptions->contains($prescription)) {
-            $this->prescriptions[] = $prescription;
-            $prescription->setDoctor($this);
-        }
-
-        return $this;
+        return $this->imageFile;
     }
-
-    public function removePrescription(MedicPrescription $prescription): self
+    /**
+     * @return string|null
+     */
+    public function getImage(): ?string
     {
-        if ($this->prescriptions->contains($prescription)) {
-            $this->prescriptions->removeElement($prescription);
-            // set the owning side to null (unless already changed)
-            if ($prescription->getDoctor() === $this) {
-                $prescription->setDoctor(null);
-            }
-        }
-
-        return $this;
+        return $this->image;
     }
 
     /**
-     * @return Collection|Patient[]
+     * @param string|null $image
+     * @return $this
      */
-    public function getPatient(): Collection
+    public function setImage(?string $image): self
     {
-        return $this->patient;
+        $this->image = $image;
+
+        return $this;
+    }
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
     }
 
-    public function addPatient(Patient $patient): self
+    public function setUpdateAt(\DateTimeInterface $updatedAt): self
     {
-        if (!$this->patient->contains($patient)) {
-            $this->patient[] = $patient;
-        }
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    public function removePatient(Patient $patient): self
+
+
+
+    public function getUser(): ?User
     {
-        if ($this->patient->contains($patient)) {
-            $this->patient->removeElement($patient);
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newInfoDoctor = null === $user ? null : $this;
+        if ($user->getInfoDoctor() !== $newInfoDoctor) {
+            $user->setInfoDoctor($newInfoDoctor);
         }
 
         return $this;
@@ -230,7 +230,7 @@ class Doctor
 
     public function __toString()
     {
-        return $this->name;
+        return $this->hospital_name;
     }
 
 

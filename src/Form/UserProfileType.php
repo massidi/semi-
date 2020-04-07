@@ -2,32 +2,32 @@
 
 namespace App\Form;
 
-use App\Entity\Doctor;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DoctorType extends AbstractType
+class UserProfileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type')
-            ->add('department')
-            ->add('mobile')
-            ->add('hospital_name')
-            ->add('specialization')
-            ->add('image')
-
-            ->add('updatedAt')
-            ->add('doctorUser')
+            ->add('email')
+            ->add('first_name')
+            ->add('last_name')
+            ->add('age')
+            ->add('roles')
+            ->add('password')
+            ->add('username')
+            ->add('enabled')
+            ->add('infoDoctor')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Doctor::class,
+            'data_class' => User::class,
         ]);
     }
 }

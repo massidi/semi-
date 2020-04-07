@@ -1,125 +1,102 @@
-{#<h1>This is my medical prescription</h1>#}
-{#<p>#}
-{#    your examination is {{ medication.examination}} !<br>#}
-{#    your blood pressure is {{ medication.bloodPressure}} !<br>#}
-{#    your diagnostic is {{ medication.diagnostic}} !<br>#}
-{#    your contact is {{ medication.contact}} !<br>#}
-{#</p>#}
-
-{#To login,go to <a href="{{ url('login') }}">my app</a>#}
-
-     <div class="container-fluid">
-         <!-- ============================================================== -->
-         <!-- Start Page Content -->
-         <!-- ============================================================== -->
-         <div class="row">
-             <div class="col-md-12">
-                 <div class="card card-body printableArea">
-                     <h3><b>PRESCRIPTION ID:</b> <span class="pull-right">{{ prescription.id }}</span></h3>
-                     <hr>
-                     <div class="row">
-                         <div class="col-md-12">
-                             <div class="pull-left">
-                                 <address>
-                                     <h3> &nbsp;<b class="text-danger">Dr. {{ prescription.medicName }}</b></h3>
-                                     <p class="text-muted m-l-5">{{ prescription.medicName.lastNaME }}
-                                         <br> {{ prescription.medicName.firstName }},
-                                         <br> Tel:{{ prescription.contact }},
-                                         <br> {{ prescription.medicName.email}}</p>
-                                 </address>
-                             </div>
-                             <div style="text-align: right"  >
-
-                                 <address >
-                                     <h3>To,</h3>.
-                                     <h4 class="font-bold">Gaala &amp; Sons,</h4>
-                                     <p class="text-muted m-l-30">E 104, Dharti-2,
-                                         <br> Nr' Viswakarma Temple,
-                                         <br> Talaja Road,
-                                         <br> Tel:{{ prescription.contact }}</p>
-                                     <p class="m-t-30"style="text-align: left" ><b>Due Date :</b> <i class="fa fa-calendar"></i> {{ prescription.createdAt |date }}</p>
-                                     {#                                <p><b>Due Date :</b> <i class="fa fa-calendar"></i> 25th Jan 2018</p>#}
-                                 </address>
-                                 <hr>
-                             </div>
-                         </div>
-                         <div class="col-md-12">
-                             <div class="table-responsive m-t-40" style="clear: both;">
-                                 <table class="table table-hover">
-                                     {#                            <table class="table">#}
-                                     <tbody>
-
-                                     <tr>
-                                         <th>Age</th>
-                                         <td>{{ prescription.age }}</td>
-                                     </tr>
-
-                                     <tr>
-                                         <th>Diagnostic</th>
-                                         <td>{{ prescription.diagnostic }}</td>
-                                     </tr>
-                                     <tr>
-                                         <th>Blood_pressure</th>
-                                         <td>{{ prescription.bloodPressure }}</td>
-                                     </tr>
-                                     <tr>
-                                         <th>Pulse_rate</th>
-                                         <td>{{ prescription.pulseRate }}</td>
-                                     </tr>
-                                     <tr>
-                                         <th>Drug</th>
-                                         <td>{{ prescription.drug }}</td>
-                                     </tr>
-                                     <tr>
-                                         <th>Unite</th>
-                                         <td>{{ prescription.unite }}</td>
-                                     </tr>
-                                     <tr>
-                                         <th>Dosage</th>
-                                         <td>{{ prescription.dosage }}</td>
-                                     </tr>
-                                     <tr>
-                                         <th>Examination</th>
-                                         <td>{{ prescription.examination }}</td>
-                                     </tr>
-                                     <tr>
-                                         <th>Health_regime</th>
-                                         <td>{{ prescription.healthRegine }}</td>
-                                     </tr>
-                                     </tbody>
-                                 </table>
+{% block body %}
 
 
 
-                             </div>
-                             <div class="col-md-12" style="text-align: right">
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-body printableArea">
+                    <h3><b>PRESCRIPTION ID:</b> <span class="pull-right" style="text-emphasis-color:red">{{ prescription.id }}</span></h3>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-left">
+                                <address>
+                                    <h3> &nbsp;<b class="text-danger">Dr. {{ prescription.medicName }}</b></h3>
+                                    <p class="text-muted m-l-5">{{ prescription.medicName.lastNaME }}
+                                        <br> {{ prescription.medicName.firstName }},
+                                        <br> Tel:{{ prescription.contact }},
+                                        <br> {{ prescription.medicName.email}}</p>
+                                </address>
+                            </div>
+                            <div style="text-align: right"  >
+                                <address>
+                                    <h3>To,</h3>
+                                    <h4 class="font-bold">{{ prescription.patientName.firstName}}</h4>
+                                    <p class="text-muted m-l-30">
+                                        <br> {{ prescription.patientName.lastName}}
+                                        <br> {{ prescription.patientName.username}},
+                                        <br> {{ prescription.patientName.email}}</p>
+                                    <p class="m-t-30"><b>Due Date :</b> <i class="fa fa-calendar"></i> {{ prescription.createdAt |date }}</p>
+                                    {#                                <p><b>Due Date :</b> <i class="fa fa-calendar"></i> 25th Jan 2018</p>#}
+                                </address>
 
-                                 <div class="pull-right m-t-30 text-right">
-                                     {#                                <p>Sub - Total amount: $13,848</p>#}
-                                     {#                                <p>vat (10%) : $138 </p>#}<h2><b>Thanks </b></h2>
-                                     <hr>
-                                     <h3> Your health is Our Priority</h3>
-                                 </div>
-                                 <div class="clearfix"></div>
-                                 <hr>
-
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-
-             <!-- ============================================================== -->
-             <!-- End PAge Content -->
-             <!-- ============================================================== -->
-             <!-- ============================================================== -->
-             <!-- Right sidebar -->
-             <!-- ============================================================== -->
-             <!-- .right-sidebar -->
-             <!-- ============================================================== -->
-             <!-- End Right sidebar -->
-             <!-- ============================================================== -->
-         </div>
-     </div>
 
 
+                            </div>
+                            <p> <b> AGE:</b>{{ prescription.age }} &nbsp; &nbsp; &nbsp;<b>BLOOD PRESSURE:</b>{{ prescription.bloodPressure }} &nbsp;&nbsp;&nbsp; <b>PULSE RATE:</b>{{ prescription.pulseRate }}</p>
+                            <hr>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="table-responsive m-t-40" style="clear: both;">
+                                {#                                <table class="table table-hover>#}
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <th>Diagnostic</th>
+                                        <td>{{ prescription.diagnostic }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Drug</th>
+                                        <td>{{ prescription.drug|raw }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Examination</th>
+                                        <td>{{ prescription.examination |raw}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Health_regime</th>
+                                        <td>{{ prescription.healthRegine }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+
+
+                            </div>
+                            <div class="col-md-12" style="text-align: right">
+
+                                <div class="pull-right m-t-30 text-right">
+                                    {#                                <p>Sub - Total amount: $13,848</p>#}
+                                    {#                                <p>vat (10%) : $138 </p>#}<h2><b>Thanks </b></h2>
+                                    <hr>
+                                    <h3> Your health is Our Priority</h3>
+                                </div>
+                                <div class="clearfix"></div>
+                                <hr>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End PAge Content -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Right sidebar -->
+            <!-- ============================================================== -->
+            <!-- .right-sidebar -->
+            <!-- ============================================================== -->
+            <!-- End Right sidebar -->
+            <!-- ============================================================== -->
+        </div>
+    </div>
+
+{% endblock %}

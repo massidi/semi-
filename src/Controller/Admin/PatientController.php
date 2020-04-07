@@ -43,13 +43,17 @@ class PatientController extends AbstractController
         $this->appointmentRepository = $appointmentRepository;
     }
 
+
     /**
-     * @Route("/patient", name="patient_index")
+     * @Route("/", name="patient_index")
      */
     public function index()
     {
+        $patient= $this->getUser();
+        $PatientPrescription=$this->prescriptionRepository->finByPatientName($patient);
+
         return $this->render('Admin/patient/prescription/index.html.twig', [
-            'controller_name' => 'PatientController',
+            'PatientPrescription' => '$PatientPrescription',
         ]);
     }
 
@@ -66,52 +70,6 @@ class PatientController extends AbstractController
             'patientPrescription' => $patientPrescription
         ]);
 
-    }
-
-    /**
-     * @Route("/new_appointment",name="create_appoitment")
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function new(Request $request)
-    {
-       $appointment = new Appointment();
-        $form= $this->createForm(AppointmentType::class,$appointment);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($appointment);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('patient_index');
-        }
-
-
-
-        return $this->render('admin/patient/appointment/createApp.html.twig', []);
-    }
-
-    /**
-     * @Route("/edit_app/{id}",name="edit_appoitment")
-     * @param $id
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function edit($id,Request $request)
-    {
-        $appointment= $this->appointmentRepository->find($id);
-        $form= $this->createForm(AppointmentType::class,$appointment);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($appointment);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('patient_index');
-        }
-
-        return $this->render('admin/patient/appointment/editApp.html.twig', []);
     }
 
     /**

@@ -87,9 +87,21 @@ class User implements UserInterface
      */
     private $prescription;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MedicPrescription", mappedBy="patientName")
+     */
+    private $patient_prescription;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Doctor", inversedBy="user", cascade={"persist", "remove"})
+     */
+    private $infoDoctor;
+
+
     public function __construct()
     {
         $this->prescription = new ArrayCollection();
+        $this->patient_prescription = new ArrayCollection();
     }
 
 
@@ -102,7 +114,7 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
+        // guarantee every userProfile at least has ROLE_USER
         //$roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -147,7 +159,7 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
+        // If you store any temporary, sensitive data on the userProfile, clear it here
         // $this->plainPassword = null;
     }
 
@@ -213,13 +225,13 @@ class User implements UserInterface
 //    }
 
     /**
-     * A visual identifier that represents this user.
+     * A visual identifier that represents this userProfile.
      *
      * @see UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
     }
 
     /**
@@ -243,13 +255,6 @@ class User implements UserInterface
     }
 
 
-    /**
-     * @return mixed
-     */
-    public function __toString():string
-    {
-        return $this->username;
-    }
 
     /**
      * @return Collection|MedicPrescription[]
@@ -280,6 +285,14 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function __toString():string
+    {
+        return $this->username;
     }
 
     /**
@@ -537,4 +550,51 @@ class User implements UserInterface
     {
         // TODO: Implement rewind() method.
     }
+
+    /**
+     * @return Collection|MedicPrescription[]
+     */
+    public function getPatientPrescription(): Collection
+    {
+        return $this->patient_prescription;
+    }
+
+    public function addPatientPrescription(MedicPrescription $patientPrescription): self
+    {
+        if (!$this->patient_prescription->contains($patientPrescription)) {
+            $this->patient_prescription[] = $patientPrescription;
+            $patientPrescription->setPatientName($this);
+        }
+
+        return $this;
+    }
+
+    public function removePatientPrescription(MedicPrescription $patientPrescription): self
+    {
+        if ($this->patient_prescription->contains($patientPrescription)) {
+            $this->patient_prescription->removeElement($patientPrescription);
+            // set the owning side to null (unless already changed)
+            if ($patientPrescription->getPatientName() === $this) {
+                $patientPrescription->setPatientName(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getInfoDoctor(): ?Doctor
+    {
+        return $this->infoDoctor;
+    }
+
+    public function setInfoDoctor(?Doctor $infoDoctor): self
+    {
+        $this->infoDoctor = $infoDoctor;
+
+        return $this;
+    }
+
+
+
+
 }

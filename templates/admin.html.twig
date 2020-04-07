@@ -5,10 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
-    {% block css %}
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    {% block css %}
     <link rel="icon" type="doctor/image/png" sizes="16x16" href="{{ asset('doctor/assets/images/favicon.png') }}">
     <link href="{{ asset('doctor/assets/libs/flot/css/float-chart.css') }}" rel="stylesheet">
     <link href="{{ asset('doctor/dist/css/style.min.css') }}" rel="stylesheet">
@@ -214,7 +215,13 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ path('logout')}}"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                             <div class="dropdown-divider"></div>
-                            <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                            {% if is_granted('ROLE_DOCTOR') %}
+                            <div class="p-l-30 p-10"><a href="{{path('user_index')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                        {% endif %}
+                            {% if is_granted('ROLE_PHARMACIST') %}
+                            <div class="p-l-30 p-10"><a href="{{path('userprofile')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                            {% endif %}
+
                         </div>
                     </li>
                     <!-- ============================================================== -->
@@ -245,11 +252,12 @@
 
                     {% endif %}
 
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('doctor_dashboard') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Charts</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="widgets.html" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Widgets</span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Tables</span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="grid.html" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Doctor Record</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('doctor_index') }}" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Prescription tables</span></a></li>
+                    {% if is_granted('ROLE_DOCTOR') %}
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{path('latestrecord')}}" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Doctor Record</span></a></li>
+                    {% endif %}
                     <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Prescription </span></a>
                         <ul aria-expanded="false" class="collapse  first-level">
                             {% if is_granted('ROLE_DOCTOR') %}
@@ -260,24 +268,11 @@
                                 <li class="sidebar-item"><a href="{{ path('search_prescription') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu">Show Prescription </span></a></li>
                                 {#                            <li class="sidebar-item"><a href="{{ path('doctor_edit') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Edit Prescription </span></a></li>#}
                             {% endif %}
-
-                        </ul>
-
-                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Addons </span></a>
-                        <ul aria-expanded="false" class="collapse  first-level">
-                            <li class="sidebar-item"><a href="pages-calendar.html" class="sidebar-link"><i class="mdi mdi-calendar-check"></i><span class="hide-menu"> Calendar </span></a></li>
-
                         </ul>
                     </li>
-                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Authentication </span></a>
-                        <ul aria-expanded="false" class="collapse  first-level">
-                            <li class="sidebar-item"><a href="{{ path('login') }}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Login </span></a></li>
-                            <li class="sidebar-item"><a href="{{ path('doctor_new') }}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Add Information </span></a></li>
-                        </ul>
-                    </li>
-
                 </ul>
             </nav>
+
             <!-- End Sidebar navigation -->
         </div>
         <!-- End Sidebar scroll-->
@@ -360,12 +355,15 @@
 {#                            <a href="{{ path('patient_latest') }}">#}
                             <h1 class="font-light text-white"><i class="mdi mdi-arrow-all"></i></h1>
                             {% if is_granted('ROLE_DOCTOR') %}
+                            <a href="{{ path('latestrecord') }}">
                             <h6 class="text-white">Doctor Record</h6>
+                            </a>
                             {% endif %}
                             {% if is_granted('ROLE_PHARMACIST') %}
+{#                                <a href="{{ path('patient_latest') }}">#}
                                 <h6 class="text-white">Pharmacist Records</h6>
                             {% endif %}
-                            </a>
+{#                            </a>#}
                         </div>
                     </div>
                 </div>
