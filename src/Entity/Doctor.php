@@ -14,7 +14,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass="App\Repository\DoctorRepository")
  *  @Vich\Uploadable()
  */
-class Doctor
+class Doctor implements \Serializable
 {
     /**
      * @ORM\Id()
@@ -233,6 +233,30 @@ class Doctor
         }
 
         return $this;
+    }
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->image,
+        ));
+    }
+
+    /**
+     * Constructs the object
+     * @link https://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->image,
+            ) = unserialize($serialized, array('allowed_classes' => false));
     }
 
     /**
