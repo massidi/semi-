@@ -7,14 +7,14 @@
 {% endblock %}
 
 {% block contenu %}
-
+{% if is_granted('ROLE_DOCTOR') %}
 
     <div class="container emp-profile">
         <form method="post">
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                        <img src="{{ vich_uploader_asset(product, 'image') }}" alt="{{ product.name }}" />
                         <div class="file btn btn-lg btn-primary">
                             Change Photo
                             <input type="file" name="file"/>
@@ -24,12 +24,12 @@
                 <div class="col-md-6">
                     <div class="profile-head">
                         <h5>
-                            {{users.firstName}} {{ users.lastName }}
+                           {{users.firstName}} {{ users.lastName }}
                         </h5>
                         <h6>
-                            Web Developer and Designer
+                            {{users.infoDoctor.specialization}}
                         </h6>
-                        <p class="proile-rating">EMAIL: <span>{{users.email}}</span></p>
+                        <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -75,7 +75,7 @@
                                     <label>Name</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>{{users.firstName}}i</p>
+                                    <p>{{users.firstName}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -90,112 +90,73 @@
                                 <div class="col-md-6">
                                     <label>Phone</label>
                                 </div>
-                                {% if is_granted('ROLE_DOCTOR') %}
                                 <div class="col-md-6">
-                                    {% if users.infoDoctor is empty %}
+                                            <p>{{users.infoDoctor.mobile}}</p>
 
-                                    <p>Empty</p>
-                                        {% elseif users.infoDoctor  %}
-                                            <p>{{users.infoDoctor.departement}}</p>
-                                    {% endif %}
                                 </div>
-
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>Profession</label>
+                                    <label>Specialization</label>
                                 </div>
-                                {% if users.infoDoctor is empty %}
-
                                 <div class="col-md-6">
-                                    <p>Empty</p>
-                                    {% elseif users.infoDoctor  %}
-                                        <p>{{users.infoDoctor.specialization}}</p>
-                                    {% endif %}
+                                    <p>{{users.infoDoctor.specialization}}</p>
                                 </div>
                             </div>
-                            {% endif %}
-{#                            {% if users.infoDoctor is empty %}#}
-
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="row">
                                 <div class="col-md-6">
-
-                                    <label>TYPE</label>
+                                    <label>Department</label>
                                 </div>
-                                {% if users.infoDoctor is empty %}
-
                                 <div class="col-md-6">
-                                    <p>Empty</p>
-                                    {% elseif users.infoDoctor  %}
-                                        <p>{{users.infoDoctor.specialization}}</p>
-                                    {% endif %}
+                                    <p>{{users.infoDoctor.department}}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>DEPARTMENT</label>
+                                    <label>Hospital Name</label>
                                 </div>
-                                {% if users.infoDoctor is empty %}
-
                                 <div class="col-md-6">
-                                    <p>Empty</p>
-                                    {% elseif users.infoDoctor  %}
-                                        <p>{{users.infoDoctor.specialization}}</p>
-                                    {% endif %}
+                                    <p>{{users.infoDoctor.hospitalName}}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>HOSPITAL NAME</label>
+                                    <label>Doctor Type</label>
                                 </div>
-                                {% if users.infoDoctor is empty %}
-
                                 <div class="col-md-6">
-                                    <p>Empty</p>
-                                    {% elseif users.infoDoctor  %}
-                                        <p>{{users.infoDoctor.specialization}}</p>
-                                    {% endif %}
+                                    <p>{{users.infoDoctor.type}}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>SPECIALIZATION</label>
+                                    <label>Username</label>
                                 </div>
-                                {% if users.infoDoctor is empty %}
-
                                 <div class="col-md-6">
-                                    <p>Empty</p>
-                                    {% elseif users.infoDoctor  %}
-                                        <p>{{users.infoDoctor.specialization}}</p>
-                                    {% endif %}
+                                    <p>{{users.username}}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Availability</label>
                                 </div>
-                                {% if users.infoDoctor is empty %}
-
                                 <div class="col-md-6">
-                                    <p>Empty</p>
-                                    {% elseif users.infoDoctor  %}
-                                        <p>{{users.infoDoctor.specialization}}</p>
-                                    {% endif %}
+                                    <p>6 months</p>
                                 </div>
                             </div>
-
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Your Bio</label><br/>
+                                    <p>Your detail description</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-
-{% endblock %}
-
-{% block title %}
-
+{% endif %}
 {% endblock %}
 

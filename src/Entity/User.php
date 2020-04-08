@@ -93,7 +93,7 @@ class User implements UserInterface
     private $patient_prescription;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Doctor", inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Doctor", inversedBy="doctorUser", cascade={"persist", "remove"})
      */
     private $infoDoctor;
 
@@ -593,6 +593,7 @@ class User implements UserInterface
 
         return $this;
     }
+  
 
 
 

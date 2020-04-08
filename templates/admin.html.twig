@@ -204,6 +204,7 @@
                     <!-- ============================================================== -->
                     <!-- User profile and search -->
                     <!-- ============================================================== -->
+                    {% block profile %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle" width="31"></a>
                         <div class="dropdown-menu dropdown-menu-right user-dd animated">
@@ -215,15 +216,20 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ path('logout')}}"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                             <div class="dropdown-divider"></div>
+
                             {% if is_granted('ROLE_DOCTOR') %}
-                            <div class="p-l-30 p-10"><a href="{{path('user_index')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
-                        {% endif %}
+                            <div class="p-l-30 p-10"><a href="{{path('profile_index')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                            <div class="p-l-30 p-10"><a href="{{path('new_profile')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                                {% endif %}
+
                             {% if is_granted('ROLE_PHARMACIST') %}
                             <div class="p-l-30 p-10"><a href="{{path('userprofile')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
                             {% endif %}
 
-                        </div>
+
+                         </div>
                     </li>
+                    {% endblock %}
                     <!-- ============================================================== -->
                     <!-- User profile and search -->
                     <!-- ============================================================== -->

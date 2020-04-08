@@ -79,7 +79,7 @@ class Doctor
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="infoDoctor", cascade={"persist", "remove"})
      */
-    private $user;
+    private $doctorUser;
 
 
     public function __construct()
@@ -210,28 +210,65 @@ class Doctor
 
 
 
-    public function getUser(): ?User
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        return $this->user;
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 
-    public function setUser(?User $user): self
+    public function getDoctorUser(): ?User
     {
-        $this->user = $user;
+        return $this->doctorUser;
+    }
+
+    public function setDoctorUser(?User $doctorUser): self
+    {
+        $this->doctorUser = $doctorUser;
 
         // set (or unset) the owning side of the relation if necessary
-        $newInfoDoctor = null === $user ? null : $this;
-        if ($user->getInfoDoctor() !== $newInfoDoctor) {
-            $user->setInfoDoctor($newInfoDoctor);
+        $newInfoDoctor = null === $doctorUser ? null : $this;
+        if ($doctorUser->getInfoDoctor() !== $newInfoDoctor) {
+            $doctorUser->setInfoDoctor($newInfoDoctor);
         }
 
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function __toString()
     {
         return $this->hospital_name;
     }
 
 
+//    /**
+//     * @inheritDoc
+//     */
+//    public function serialize()
+//    {
+//
+//        return serialize([
+//            $this->id,
+//            $this->image,
+//
+//
+//
+//        ]);
+//    }
+//
+//    /**
+//     * @inheritDoc
+//     */
+//    public function unserialize($serialized)
+//    {
+//
+//        list(
+//
+//            $this->id,
+//            $this->image
+//            ) =unserialize($serialized, ['Allowed_classes' =>false]);
+//    }
 }

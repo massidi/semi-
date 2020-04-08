@@ -1,12 +1,10 @@
-{#{% extends 'base.html.twig' %}#}
+{% extends 'admin.html.twig' %}
+{% block contenu %}
+    <div class="container">
+        {{ include('admin/userProfile/_form.html.twig') }}
 
-{#{% block title %}New User{% endblock %}#}
+    </div>
 
-{#{% block body %}#}
-{#    <h1>Create new User</h1>#}
+{% endblock %}
 
-{#    {{ include('userProfile/_form.html.twig') }}#}
 
-{#    <a href="{{ path('user_index') }}">back to list</a>#}
-{#{% endblock %}#}
-{{ dump(doctors) }}

@@ -6,6 +6,7 @@ use App\Entity\Doctor;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class DoctorType extends AbstractType
 {
@@ -17,10 +18,11 @@ class DoctorType extends AbstractType
             ->add('mobile')
             ->add('hospital_name')
             ->add('specialization')
-            ->add('image')
+            ->add('imageFile',VichFileType::class, [
+                'download_label' => 'download_profile',])
 
             ->add('updatedAt')
-            ->add('doctorUser')
+//            ->add('doctorUser')
         ;
     }
 
