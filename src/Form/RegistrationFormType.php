@@ -38,6 +38,8 @@ class RegistrationFormType extends AbstractType
                     'Pharmacist' => 'ROLE_PHARMACIST',
                 ],
                 'multiple' => true,
+
+                'placeholder' => 'Choose an option',
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,

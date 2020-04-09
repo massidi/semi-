@@ -4,6 +4,7 @@
 namespace App\Event;
 
 
+use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Twig\Environment;
 use Twig\Error\LoaderError;
@@ -69,17 +70,24 @@ class UserSubscriber implements EventSubscriberInterface
      */
     public function onMedicate(MedicationEvent $event)
     {
+        $html= $this->twig->render('admin/doctor/prescription/print.html.twig',[
+            'prescription'=> $event->getMedicPrescription() ]);
+        $data= new\Swift_Attachment($html,'medic prescription.pdf','application/pdf');
+//        ->setFilename('medic prescription');
 
-        try {
+
+
             $body = $this->twig->render('email/medication.html.twig', [
                 'prescription' => $event->getMedicPrescription(),
             ]);
-            $massage = (new \Swift_Message())
+            $message = (new \Swift_Message())
                 ->setSubject('welcome to DMP application')
-                ->setFrom('reddy@.com')
-                ->setTo('semireddy@yahoo.fr')
+                ->setFrom('reddy@yahoo.com')
+                ->setTo($event->getMedicPrescription()->getPatientName()->getEmail())
                 ->setBody($body, 'text/html');
-            $this->mailer->send($massage);
+        $message->attach($data);
+        try {
+            $this->mailer->send($message);
 
         }
         catch (\Exception $e)

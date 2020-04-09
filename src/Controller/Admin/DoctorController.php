@@ -6,7 +6,9 @@ use App\Entity\MedicPrescription;
 use App\Entity\User;
 use App\Event\MedicationEvent;
 use App\Form\MedicPrescriptionType;
+use App\Repository\DoctorRepository;
 use App\Repository\MedicPrescriptionRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\OrderBy;
 use Doctrine\ORM\Tools\Pagination\LimitSubqueryOutputWalker;
@@ -36,19 +38,31 @@ class DoctorController extends AbstractController
      * @var MedicPrescriptionRepository
      */
     private $medicPrescriptionRepository;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+    /**
+     * @var DoctorRepository
+     */
+    private $doctorRepository;
 
 
     /**
      * DoctorController constructor.
      * @param EntityManagerInterface $manager
      * @param MedicPrescriptionRepository $medicPrescriptionRepository
+     * @param UserRepository $userRepository
+     * @param DoctorRepository $doctorRepository
      */
     public function __construct(EntityManagerInterface $manager
-        , MedicPrescriptionRepository $medicPrescriptionRepository
+        , MedicPrescriptionRepository $medicPrescriptionRepository,UserRepository $userRepository,DoctorRepository $doctorRepository
     )
     {
         $this->manager = $manager;
         $this->medicPrescriptionRepository = $medicPrescriptionRepository;
+        $this->userRepository = $userRepository;
+        $this->doctorRepository = $doctorRepository;
     }
 
     /**
@@ -59,9 +73,12 @@ class DoctorController extends AbstractController
 
     public function dashboard($page)
     {
+
         if ($page < 1) {
             throw $this->createNotFoundException('page."' . $page . '" does not exit');
         }
+//        $users=$this->getUser();
+//        $doctor= $this->doctorRepository->findByDoctorUser($users);
         return $this->render('admin/doctor/prescription/dashboard.html.twig');
 
     }

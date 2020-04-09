@@ -19,11 +19,12 @@ class DoctorType extends AbstractType
             ->add('mobile')
             ->add('hospital_name')
             ->add('specialization')
-            ->add('imageFile',VichImageType::class, [
-                'required' => false,
-                'download_link' => false,
-                'image_uri' => false])
-
+//            ->add('imageFile',VichImageType::class, [
+////                'required' => false,
+////                'download_link' => false,
+////                'image_uri' => false])
+///
+->add('image')
             ->add('updatedAt')
 //            ->add('doctorUser')
         ;

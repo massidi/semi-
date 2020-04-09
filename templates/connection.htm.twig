@@ -1,5 +1,13 @@
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {% block css %}
     <link rel="icon" type="image/png" href="{{ asset('login/images/icons/favicon.ico') }} "/>
     <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('login/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
@@ -11,12 +19,43 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('login/css/util.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('login/css/main.css') }}">
+    {% endblock %}
 </head>
 {% block body %}
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{path('contact')}}">contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{path('about')}}">About</a>
+            </li>
+        </ul>
+        <a  class="navbar-brand"  href="{{ path('app_register') }}">Sign Up</a>
+        &nbsp;&nbsp;&nbsp;
+        <a  class="navbar-brand"  href="{{ path('login') }}">Sign In</a>
+
+
+
+    </div>
+</nav>
 
     <div class="limiter">
-        <div class="container-login100" style="background-image: url({{ asset('login/images/bg-01.jpg') }});" >
+        <div class="container-login100" style="background-image: url({{ asset('home/images/hero_1.jpg') }});" >
             {% block imgbckg %}
             <div class="wrap-login100 p-t-30 p-b-50">
 				<span class="login100-form-title p-b-41">
@@ -52,7 +91,14 @@
         </div>
         {% endblock %}
     </div>
-    <div id="dropDownSelect1"></div>
+{#    <div id="dropDownSelect1"></div>#}
+   {% block js %}
+       <script>
+           $('select').select2();
+       </script>
+{% endblock %}
+
 </body>
+
 {% endblock %}
 </html>

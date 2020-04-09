@@ -11,6 +11,7 @@ use App\Repository\DoctorRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,7 +43,12 @@ class UserProfileController extends AbstractController
     public function index(UserRepository $userRepository, DoctorRepository $doctorRepository): Response
 
     {
+        if (empty($doctorRepository))
+        {
+            return  $this->redirectToRoute('new_profile');
+        }
         $user = $this->getUser();
+
         return $this->render('admin/userProfile/index.html.twig', [
             'users' => $userRepository->find($user)
         ]);
@@ -82,13 +88,14 @@ class UserProfileController extends AbstractController
         $doctors->setDoctorUser($users);
 
 
+
         $form = $this->createForm(DoctorType::class, $doctors);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($doctors);
-            $entityManager->flush();
+//            $entityManager = $this->getDoctrine()->getManager();
+            $this->manager->persist($doctors);
+            $this->manager->flush();
 
             return $this->redirectToRoute('doctor_index');
 

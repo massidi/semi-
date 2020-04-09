@@ -1,51 +1,69 @@
 {% extends 'connection.htm.twig' %}
+{% block css %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css">
+{% endblock %}
 {% block imgbckg %}
+
 <div class="wrap-login100 p-t-30 p-b-50">
     <span class="login100-form-title p-b-41">
         Sign Up
     </span>
+    <div class="wrapper">
+<div class="container mt-4">
+    <div class="card"   >
+        <div class="card-body">
+    {{ form_start(registrationForm) }}
 
-    {{ form_start(registrationForm, {'attr': {'class': 'login100-form validate-form p-b-33 p-t-5'}}) }}
-        <div class="wrap-input100 validate-input">
-            {{ form_widget(registrationForm.firstName, {'attr': {'class': 'input100','placeholder':'firstName'}}) }}
-            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-        </div>
+    <div class="row">
 
-        <div class="wrap-input100 validate-input">
-            {{ form_widget(registrationForm.lastName, {'attr': {'class': 'input100','placeholder':'lastName'}}) }}
-            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-        </div>
-        <div class="wrap-input100 validate-input">
-            {{ form_widget(registrationForm.username, {'attr': {'class': 'input100','placeholder':'username'}}) }}
-            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-        </div>
-        <div class="wrap-input100 validate-input">
-            {{ form_widget(registrationForm.email, {'attr': {'class': 'input100','placeholder':'email'}}) }}
-            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-        </div>
-        <div class="wrap-input100 validate-input">
-            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'input100','placeholder':'plainPassword'}}) }}
-            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-        </div>
-        <div class="wrap-input100 validate-input">
-            {{ form_widget(registrationForm.age, {'attr': {'class': 'input100','placeholder':'age'}}) }}
-            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-        </div>
-    <div class="wrap-input100 validate-input">
-        {{ form_widget(registrationForm.roles, {'attr': {'class': 'input100','placeholder':'roles'}}) }}
-        <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+        <div class="col-md-6">{{ form_row(registrationForm.firstName) }}</div>
+
+        <div class="col-md-6">{{ form_row(registrationForm.lastName) }}</div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6">{{ form_row(registrationForm.username) }}</div>
+
+        <div class="col-md-6">{{ form_row(registrationForm.email) }}</div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6">{{ form_row(registrationForm.plainPassword) }}</div>
+
+        <div class="col-md-6">{{ form_row(registrationForm.age) }}</div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6">{{ form_row(registrationForm.roles) }}</div>
+
     </div>
 
-        <div class="wrap-input100 validate-input">
-            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'input100'}}) }}
-            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-        </div>
 
-        <div class="container-login100-form-btn m-t-32">
-            <button type="submit" class="login100-form-btn">REGISTER</button>
-        </div>
+
+        <div class="col-md-2">{{ form_row(registrationForm.agreeTerms) }}</div>
+
+    {{ form_end(registrationForm) }}
+    <button type="submit" class="login100-form-btn">REGISTER</button>
         {{ form_end(registrationForm) }}
 </div>
+</div>
+</div>
+</div>
+</div>
+
+{% block js %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/selectize.min.js"></script>
+    <script>
+        $('select').select2();
+    </script>
+{% endblock %}
+
 
 {% endblock %}
 

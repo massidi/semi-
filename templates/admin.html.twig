@@ -218,13 +218,16 @@
                             <div class="dropdown-divider"></div>
 
                             {% if is_granted('ROLE_DOCTOR') %}
-                            <div class="p-l-30 p-10"><a href="{{path('profile_index')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
-                            <div class="p-l-30 p-10"><a href="{{path('new_profile')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
-                                {% endif %}
-
-                            {% if is_granted('ROLE_PHARMACIST') %}
-                            <div class="p-l-30 p-10"><a href="{{path('userprofile')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+{#                            {% if users is not null %}#}
+                                <div class="p-l-30 p-10"><a href="{{path('profile_index')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+{#                            {% elseif users is null %}#}
+{#                                <div class="p-l-30 p-10"><a href="{{path('new_profile')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>#}
+{#                                {% endif %}#}
                             {% endif %}
+
+{#                            {% if is_granted('ROLE_PHARMACIST') %}#}
+{#                            <div class="p-l-30 p-10"><a href="{{path('userprofile')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>#}
+{#                            {% endif %}#}
 
 
                          </div>
