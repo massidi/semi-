@@ -97,6 +97,11 @@ class User implements UserInterface
      */
     private $infoDoctor;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Pharmacist", inversedBy="pharmacistUser", cascade={"persist", "remove"})
+     */
+    private $infoPharmacist;
+
 
     public function __construct()
     {
@@ -287,13 +292,7 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function __toString():string
-    {
-        return $this->username;
-    }
+
 
     /**
      * @inheritDoc
@@ -594,7 +593,25 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getInfoPharmacist(): ?Pharmacist
+    {
+        return $this->infoPharmacist;
+    }
 
+    public function setInfoPharmacist(?Pharmacist $infoPharmacist): self
+    {
+        $this->infoPharmacist = $infoPharmacist;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function __toString():string
+    {
+        return $this->username;
+    }
 
 
 

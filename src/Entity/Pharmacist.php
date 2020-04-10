@@ -20,11 +20,6 @@ class Pharmacist
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $certificate;
 
     /**
@@ -42,22 +37,31 @@ class Pharmacist
      */
     private $address;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="infoPharmacist", cascade={"persist", "remove"})
+     */
+    private $pharmacistUser;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $mobile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     public function getCertificate(): ?string
     {
@@ -103,6 +107,68 @@ class Pharmacist
     public function setAddress(string $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getPharmacistUser(): ?User
+    {
+        return $this->pharmacistUser;
+    }
+
+    public function setPharmacistUser(?User $pharmacistUser): self
+    {
+        $this->pharmacistUser = $pharmacistUser;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newInfoPharmacist = null === $pharmacistUser ? null : $this;
+        if ($pharmacistUser->getInfoPharmacist() !== $newInfoPharmacist) {
+            $pharmacistUser->setInfoPharmacist($newInfoPharmacist);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function __toString()
+    {
+        return $this->pharmacy_name;
+    }
+
+    public function getMobile(): ?string
+    {
+        return $this->mobile;
+    }
+
+    public function setMobile(string $mobile): self
+    {
+        $this->mobile = $mobile;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

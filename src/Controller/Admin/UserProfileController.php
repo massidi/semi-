@@ -43,11 +43,14 @@ class UserProfileController extends AbstractController
     public function index(UserRepository $userRepository, DoctorRepository $doctorRepository): Response
 
     {
-        if (empty($doctorRepository))
+        $user = $this->getUser();
+//        $users= $doctorRepository->find($user);
+        $doctor= $userRepository->find($user);
+//        $doctor->getInfoDoctor();
+        if (empty( $doctor->getInfoDoctor()))
         {
             return  $this->redirectToRoute('new_profile');
         }
-        $user = $this->getUser();
 
         return $this->render('admin/userProfile/index.html.twig', [
             'users' => $userRepository->find($user)
@@ -116,26 +119,12 @@ class UserProfileController extends AbstractController
     {
         $user = $userRepository->find($id);
 
-
-        $originaldoc = new ArrayCollection();
-
-        // Create an ArrayCollection of the current Tag objects in the database
-        foreach ($user->getInfoDoctor() as $doctor) {
-            $originaldoc->add($doctor);
-        }
         $form = $this->createForm(UserProfileType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            foreach ($originaldoc as $doctor) {
-                if (false === $user->getInfoDoctor()->contains($doctor)) {
-                    // remove the Task from the Tag
-                    $doctor->getUser()->removeElement($doctor);
-                    $this->manager->persist($doctor);
-
                     $this->manager->flush();
-                    dd($doctor);
 
                     return $this->redirectToRoute('user_show');
                 }
@@ -144,10 +133,10 @@ class UserProfileController extends AbstractController
                     'user' => $user,
                     'form' => $form->createView(),
                 ]);
-            }
+
         }
     }
-}
+
 
 //    /**
 //     * @Route("/{id}", name="user_delete", methods={"DELETE"})
