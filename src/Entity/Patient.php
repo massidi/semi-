@@ -48,6 +48,11 @@ class Patient
      */
     private $mobile;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="infoPatient", cascade={"persist", "remove"})
+     */
+    private $patientUser;
+
 
     public function __construct()
     {
@@ -130,6 +135,24 @@ class Patient
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getPatientUser(): ?User
+    {
+        return $this->patientUser;
+    }
+
+    public function setPatientUser(?User $patientUser): self
+    {
+        $this->patientUser = $patientUser;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newInfoPatient = null === $patientUser ? null : $this;
+        if ($patientUser->getInfoPatient() !== $newInfoPatient) {
+            $patientUser->setInfoPatient($newInfoPatient);
+        }
+
+        return $this;
     }
 
 

@@ -2,11 +2,12 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Appointment;
-use App\Form\AppointmentType;
-use App\Repository\AppointmentRepository;
+
+use App\Entity\MedicPrescription;
+
+;
+
 use App\Repository\MedicPrescriptionRepository;
-use App\Repository\PatientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,11 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class PatientController
- * @Route("/Admin/patient1")
+ * @Route("/Admin/patient")
  * @package App\Controller\Admin
  *
  */
-
 class PatientController extends AbstractController
 {
 
@@ -30,79 +30,86 @@ class PatientController extends AbstractController
      * @var MedicPrescriptionRepository
      */
     private $prescriptionRepository;
-    /**
-     * @var AppointmentRepository
-     */
-    private $appointmentRepository;
 
-    public function __construct(AppointmentRepository $appointmentRepository, MedicPrescriptionRepository $prescriptionRepository, EntityManagerInterface $manager)
+    public function __construct(MedicPrescriptionRepository $prescriptionRepository, EntityManagerInterface $manager)
     {
 
         $this->manager = $manager;
         $this->prescriptionRepository = $prescriptionRepository;
-        $this->appointmentRepository = $appointmentRepository;
     }
 
 
     /**
      * @Route("/", name="patient_index")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index()
     {
-        $patient= $this->getUser();
-        $PatientPrescription=$this->prescriptionRepository->finByPatientName($patient);
+        ///////////////////here the patient will see all his medical prescriptions written by the doctor/////////
+        /// ///////////////by calling the function getPatientName using the relation one to many from the inverse side/////
+        /// ////////////// from the owning side(User entity) we have a private variable patientPrescription///////////
+        $patient = $this->getUser();
+        $PatientPrescription = $this->prescriptionRepository->findByPatientName($patient);
+
+        dd($PatientPrescription);
 
         return $this->render('Admin/patient/prescription/index.html.twig', [
-            'PatientPrescription' => '$PatientPrescription',
+            'PatientPrescription' => $PatientPrescription,
         ]);
     }
 
 
     /**
-     * @Route("/patient_prescrip/{id}",name="patient_prescription")
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function prescription($id)
-    {
-        $patientPrescription = $this->prescriptionRepository->find($id);
-        return $this->render('admin/patient/prescription/patientPrescrip.html.twig', [
-            'patientPrescription' => $patientPrescription
-        ]);
-
-    }
-
-    /**
-     * @Route("/show_app",name="show_appoitment")
+     * @Route("/show",name="show_prescription")
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function show($id)
     {
-        $appointment= $this->appointmentRepository->find($id);
+        /////////////////over her the patient will display one prescription at the time with ///////////
+        /// ///////////// all the details//////////////////////////////////////////////////////////////
+        $patientPrescription = $this->prescriptionRepository->find($id);
 
-        return $this->render('admin/patient/appointment/createApp.html.twig',[
-            'appointment'=>$appointment,
+        return $this->render('admin/patient/prescription/show.html.twig', [
+            'patientPrescription' => $patientPrescription,
         ]);
     }
 
     /**
-     * @Route("/new_app",name="create_appoitment")
+     * @Route("/seelastprescription",name="fourLastPrescription")
+     */
+    public function seeLastPrescription()
+    {
+        ///////////////////here we patient gonna see the early last four prescriptions////////
+        $prescription = $this->getUser();
+        $fourPrescription = $this->prescriptionRepository->findByPatientName($prescription, ['id' => 'DESC'], 4, 0);
+        return $this->render('admin/patient/prescription/seeLastPrescription.html.twig', [
+            'fourPrescription' => $fourPrescription
+        ]);
+
+    }
+
+    /**
+     * @Route("/delete/{id}",name="delete_prescription")
      * @param Request $request
+     * @param MedicPrescription $prescription
      * @param $id
-     * @param Appointment $appointment
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete(Request $request,$id,Appointment $appointment)
+    public function delete(Request $request, MedicPrescription $prescription, $id)
     {
-        if ($this->isCsrfTokenValid('delete'.$appointment->getId(), $request->request->get('_token'))) {
+        ///////////////over here we have the delete method which will delete one item////////////
+        /// ///////////we need to inject the concern entity as argument in delete function //////
+        if ($this->isCsrfTokenValid('delete' . $prescription->getId(), $request->request->get('_token'))) {
 
-            $this->manager->remove($appointment);
+            //////here we are using the object manager of the entityManagerInterface class //////////
+            /////to call remove function the item will be removed from the data base
+            $this->manager->remove($prescription);
             $this->manager->flush();
         }
 
 
-        return $this->redirectToRoute('patient_index');
+        return $this->redirectToRoute('prescription_index');
 
     }
 }

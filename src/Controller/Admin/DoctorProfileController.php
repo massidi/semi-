@@ -3,13 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Doctor;
-use App\Entity\User;
 use App\Form\DoctorType;
-use App\Form\User1Type;
 use App\Form\UserProfileType;
 use App\Repository\DoctorRepository;
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,9 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/Admin/userProfile")
+ * @Route("/Admin/doctorProfile")
  */
-class UserProfileController extends AbstractController
+class DoctorProfileController extends AbstractController
 {
 
 
@@ -52,7 +49,7 @@ class UserProfileController extends AbstractController
             return  $this->redirectToRoute('new_profile');
         }
 
-        return $this->render('admin/userProfile/index.html.twig', [
+        return $this->render('admin/doctorProfile/index.html.twig', [
             'users' => $userRepository->find($user)
         ]);
     }
@@ -69,10 +66,10 @@ class UserProfileController extends AbstractController
     {
         $user = $this->getUser();
 
-//    dd($userProfile);
+//    dd($doctorProfile);
         $userProfile = $doctorRepository->findOneBy();
-        return $this->render('admin/userProfile/show.html.twig', [
-            'userProfile' => $userProfile,
+        return $this->render('admin/doctorProfile/show.html.twig', [
+            'doctorProfile' => $userProfile,
         ]);
     }
 
@@ -104,7 +101,7 @@ class UserProfileController extends AbstractController
 
         }
 
-        return $this->render('admin/userProfile/new.html.twig', ['form' => $form->createView(),
+        return $this->render('admin/doctorProfile/new.html.twig', ['form' => $form->createView(),
             'doctors' => $doctors,]);
     }
 
@@ -129,7 +126,7 @@ class UserProfileController extends AbstractController
                     return $this->redirectToRoute('user_show');
                 }
 
-                return $this->render('admin/userProfile/edit.html.twig', [
+                return $this->render('admin/doctorProfile/edit.html.twig', [
                     'user' => $user,
                     'form' => $form->createView(),
                 ]);

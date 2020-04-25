@@ -4,8 +4,8 @@ security:
       my_provider:
         entity:
           class: App\Entity\User
-          property: email
-      # used to reload userProfile from session & other features (e.g. switch_user)
+          property: username
+      # used to reload doctorProfile from session & other features (e.g. switch_user)
       app_user_provider:
           entity:
               class: App\Entity\User

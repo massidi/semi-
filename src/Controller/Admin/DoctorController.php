@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping\OrderBy;
 use Doctrine\ORM\Tools\Pagination\LimitSubqueryOutputWalker;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +24,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 //use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- *
+ * @Security("is_granted('ROLE_DOCTOR')")
  * @Route("/Admin/doctor")
  */
 class DoctorController extends AbstractController
@@ -73,6 +74,8 @@ class DoctorController extends AbstractController
 
     public function dashboard($page)
     {
+        $this->denyAccessUnlessGranted('ROLE_DOCTOR', null, 'User tried to access a page without having ROLE_ADMIN');
+
 
         if ($page < 1) {
             throw $this->createNotFoundException('page."' . $page . '" does not exit');
@@ -97,7 +100,7 @@ class DoctorController extends AbstractController
         $currentUser = $this->getUser();
 
 
-        $prescriptions = $this->medicPrescriptionRepository->findByMedicName($currentUser
+        $prescriptions = $this->medicPrescriptionRepository->findByMedicName($currentUser,['createdAt'=>'ASC']
 
         );
 
@@ -265,31 +268,4 @@ class DoctorController extends AbstractController
 
 
     }
-
-    /**
-     * @Route("/userprofile",name="userprofile")
-     * @return Response
-     */
-    public  function userprofile()
-    {
-        return $this->render('admin/doctor/profile.html.twig');
-    }
-//    /**
-//     * @Route("/prescriptlatest",name="prescript_latest")
-//     *
-//     */
-    /*
-        public  function  prescriptLatest()
-        {
-            $prescription=$this->medicPrescriptionRepository->findLatestprescript();
-
-
-            return $this->render('admin/doctor/seelatest.html.twig',
-                [
-                    'prescription'=>$prescription,
-                ]);
-
-
-        }*/
-
 }

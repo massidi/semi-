@@ -53,7 +53,7 @@ class UserSubscriber implements EventSubscriberInterface
     {
 
         $body = $this->twig->render('email/registration.html.twig', [
-            'userProfile' => $event->getRegisterUser(),
+            'doctorProfile' => $event->getRegisterUser(),
         ]);
         $massage = (new \Swift_Message())
             ->setSubject('welcome to DMP application')

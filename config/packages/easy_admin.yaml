@@ -29,7 +29,7 @@ easy_admin:
             - {entity: Patients, label: "Add Patient", icon: "plus", params: {action: 'new'}}
 
         - {label: "settings"}
-        - {entity: Users,  icon: "userProfile"}
+        - {entity: Users,  icon: "doctorProfile"}
         - {entity: AboutUs}
         - {entity: MedicPrescription}
 

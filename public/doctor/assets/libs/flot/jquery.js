@@ -1595,7 +1595,7 @@ jQuery.extend({
 		thisCache = cache[ id ];
 
 		// jQuery data() is stored in a separate object inside the object's internal data
-		// cache in order to avoid key collisions between internal data and userProfile-defined
+		// cache in order to avoid key collisions between internal data and doctorProfile-defined
 		// data.
 		if ( !pvt ) {
 			if ( !thisCache.data ) {
@@ -3375,7 +3375,7 @@ if ( !jQuery.support.submitBubbles ) {
 		},
 
 		postDispatch: function( event ) {
-			// If form was submitted by the userProfile, bubble the event up the tree
+			// If form was submitted by the doctorProfile, bubble the event up the tree
 			if ( event._submit_bubble ) {
 				delete event._submit_bubble;
 				if ( this.parentNode && !event.isTrigger ) {
@@ -4067,7 +4067,7 @@ Sizzle.attr = function( elem, name ) {
 
 Expr = Sizzle.selectors = {
 
-	// Can be adjusted by the userProfile
+	// Can be adjusted by the doctorProfile
 	cacheLength: 50,
 
 	createPseudo: markFunction,
@@ -4357,7 +4357,7 @@ Expr = Sizzle.selectors = {
 				fn = Expr.pseudos[ pseudo ] || Expr.setFilters[ pseudo.toLowerCase() ] ||
 					Sizzle.error( "unsupported pseudo: " + pseudo );
 
-			// The userProfile may use createPseudo to indicate that
+			// The doctorProfile may use createPseudo to indicate that
 			// arguments are needed to create the filter function
 			// just as Sizzle does
 			if ( fn[ expando ] ) {

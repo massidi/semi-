@@ -107,7 +107,7 @@ $(function() {
     $(function() {
         $(document).on('keypress', "#textarea1", function(e) {
             if (e.keyCode == 13) {
-                var id = $(this).attr("data-userProfile-id");
+                var id = $(this).attr("data-doctorProfile-id");
                 var msg = $(this).val();
                 msg = msg_sent(msg);
                 $("#someDiv").append(msg);

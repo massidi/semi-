@@ -7,8 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
+use Symfony\Component\Validator\Constraints as Assert;
+
 use Symfony\Component\Security\Core\User\UserInterface;
-use Traversable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -24,6 +25,8 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email( message = "The email '{{ value }}' is not a valid email.")
+     *
      */
     private $email;
 
@@ -102,6 +105,11 @@ class User implements UserInterface
      */
     private $infoPharmacist;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Patient", inversedBy="patientUser", cascade={"persist", "remove"})
+     */
+    private $infoPatient;
+
 
     public function __construct()
     {
@@ -119,7 +127,7 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every userProfile at least has ROLE_USER
+        // guarantee every doctorProfile at least has ROLE_USER
         //$roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -164,7 +172,7 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the userProfile, clear it here
+        // If you store any temporary, sensitive data on the doctorProfile, clear it here
         // $this->plainPassword = null;
     }
 
@@ -230,7 +238,7 @@ class User implements UserInterface
 //    }
 
     /**
-     * A visual identifier that represents this userProfile.
+     * A visual identifier that represents this doctorProfile.
      *
      * @see UserInterface
      */
@@ -611,6 +619,18 @@ class User implements UserInterface
     public function __toString():string
     {
         return $this->username;
+    }
+
+    public function getInfoPatient(): ?Patient
+    {
+        return $this->infoPatient;
+    }
+
+    public function setInfoPatient(?Patient $infoPatient): self
+    {
+        $this->infoPatient = $infoPatient;
+
+        return $this;
     }
 
 
