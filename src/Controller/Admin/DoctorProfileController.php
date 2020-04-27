@@ -50,7 +50,7 @@ class DoctorProfileController extends AbstractController
         }
 
         return $this->render('admin/doctorProfile/index.html.twig', [
-            'users' => $userRepository->find($user)
+            'users' => $doctor
         ]);
     }
 
@@ -87,16 +87,30 @@ class DoctorProfileController extends AbstractController
 
         $doctors->setDoctorUser($users);
 
-
-
         $form = $this->createForm(DoctorType::class, $doctors);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            $entityManager = $this->getDoctrine()->getManager();
-            $this->manager->persist($doctors);
-            $this->manager->flush();
+            $image = $form->get('fichier')->getData();
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
+                try {
+                    $image->move(
+                        $this->getParameter('image_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
 
+                }
+                $doctors->setImage($newFilename);
+                $this->manager->persist($doctors);
+                $this->manager->flush();
+            }else{
+                $this->manager->persist($doctors);
+                $this->manager->flush();
+            }
             return $this->redirectToRoute('doctor_index');
 
         }

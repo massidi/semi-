@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Doctor;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
@@ -19,14 +20,12 @@ class DoctorType extends AbstractType
             ->add('mobile')
             ->add('hospital_name')
             ->add('specialization')
-//            ->add('imageFile',VichImageType::class, [
-////                'required' => false,
-////                'download_link' => false,
-////                'image_uri' => false])
-///
-->add('image')
+            ->add('fichier', FileType::class, [
+                'label' => 'Brochure (PDF file)',
+                'mapped' => false,
+                'required' => false,
+            ])
             ->add('updatedAt')
-//            ->add('doctorUser')
         ;
     }
 

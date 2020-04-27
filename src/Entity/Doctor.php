@@ -80,6 +80,7 @@ class Doctor implements \Serializable
      * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="infoDoctor", cascade={"persist", "remove"})
      */
     private $doctorUser;
+    private $fichier;
 
 
     public function __construct()
@@ -87,8 +88,6 @@ class Doctor implements \Serializable
         $this->updatedAt = new \DateTime();
 
     }
-
-
 
 
     public function getId(): ?int
@@ -266,6 +265,24 @@ class Doctor implements \Serializable
     {
         return $this->hospital_name;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFichier()
+    {
+        return $this->fichier;
+    }
+
+    /**
+     * @param mixed $fichier
+     */
+    public function setFichier($fichier)
+    {
+        $this->fichier = $fichier;
+    }
+
+
 
 
 //    /**

@@ -14,8 +14,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
-{#                        <img src="{{ vich_uploader_asset(product, 'image') }}" alt="{{ product.name }}" />#}
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                        <img src="{{ asset('/uploads/profil/'~users.infoDoctor.image) }}" style="width: 275px; height: 183px" alt=""/>
 
                         <div class="file btn btn-lg btn-primary">
                             Change Photo
