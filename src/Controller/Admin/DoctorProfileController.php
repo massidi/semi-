@@ -42,11 +42,10 @@ class DoctorProfileController extends AbstractController
     {
         $user = $this->getUser();
 //        $users= $doctorRepository->find($user);
-        $doctor= $userRepository->find($user);
+        $doctor = $userRepository->find($user);
 //        $doctor->getInfoDoctor();
-        if (empty( $doctor->getInfoDoctor()))
-        {
-            return  $this->redirectToRoute('new_profile_doctor');
+        if (empty($doctor->getInfoDoctor())) {
+            return $this->redirectToRoute('new_profile_doctor');
         }
 
         return $this->render('admin/doctorProfile/index.html.twig', [
@@ -95,7 +94,7 @@ class DoctorProfileController extends AbstractController
             if ($image) {
                 $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
                 try {
                     $image->move(
                         $this->getParameter('image_directory'),
@@ -107,7 +106,7 @@ class DoctorProfileController extends AbstractController
                 $doctors->setImage($newFilename);
                 $this->manager->persist($doctors);
                 $this->manager->flush();
-            }else{
+            } else {
                 $this->manager->persist($doctors);
                 $this->manager->flush();
             }
@@ -129,24 +128,23 @@ class DoctorProfileController extends AbstractController
     public function edit($id, Request $request, UserRepository $userRepository): Response
     {
         $user = $userRepository->find($id);
-
         $form = $this->createForm(UserProfileType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-                    $this->manager->flush();
+            $this->manager->flush();
 
-                    return $this->redirectToRoute('user_show');
-                }
-
-                return $this->render('admin/doctorProfile/edit.html.twig', [
-                    'user' => $user,
-                    'form' => $form->createView(),
-                ]);
-
+            return $this->redirectToRoute('user_show');
         }
+
+        return $this->render('admin/doctorProfile/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+
     }
+}
 
 
 //    /**

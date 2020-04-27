@@ -57,6 +57,8 @@ class Pharmacist
      */
     private $image;
 
+    private $fichier;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -172,4 +174,21 @@ class Pharmacist
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFichier()
+    {
+        return $this->fichier;
+    }
+
+    /**
+     * @param mixed $fichier
+     */
+    public function setFichier($fichier)
+    {
+        $this->fichier = $fichier;
+    }
+
 }

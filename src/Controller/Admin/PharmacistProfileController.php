@@ -9,6 +9,7 @@ use App\Form\User1Type;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -65,10 +66,26 @@ class PharmacistProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            $entityManager = $this->getDoctrine()->getManager();
-            $this->manager->persist($pharmacist);
-            $this->manager->flush();
+            $image = $form->get('fichier')->getData();
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
+                try {
+                    $image->move(
+                        $this->getParameter('image_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
 
+                }
+                $pharmacist->setImage($newFilename);
+                $this->manager->persist($pharmacist);
+                $this->manager->flush();
+            } else {
+                $this->manager->persist($pharmacist);
+                $this->manager->flush();
+            }
             return $this->redirectToRoute('pharmacistProfile_index');
         }
 
