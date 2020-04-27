@@ -46,7 +46,7 @@ class DoctorProfileController extends AbstractController
 //        $doctor->getInfoDoctor();
         if (empty( $doctor->getInfoDoctor()))
         {
-            return  $this->redirectToRoute('new_profile');
+            return  $this->redirectToRoute('new_profile_doctor');
         }
 
         return $this->render('admin/doctorProfile/index.html.twig', [
@@ -74,7 +74,7 @@ class DoctorProfileController extends AbstractController
     }
 
     /**
-     * @Route("/new",name="new_profile")
+     * @Route("/new",name="new_profile_doctor")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @throws \Exception

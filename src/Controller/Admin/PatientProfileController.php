@@ -52,7 +52,7 @@ class PatientProfileController extends AbstractController
     }
 
     /**
-     * @Route("/new",name="new_profile")
+     * @Route("/new",name="new_profile_patient")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
