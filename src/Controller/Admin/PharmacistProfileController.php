@@ -5,9 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Pharmacist;
 use App\Entity\User;
 use App\Form\PharmacistType;
-use App\Form\User1Type;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * @Security("is_granted('ROLE_PHARMACIST')")
  * @Route("/Admin/pharmacistProfile")
  */
 class PharmacistProfileController extends AbstractController

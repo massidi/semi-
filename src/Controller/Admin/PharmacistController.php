@@ -3,16 +3,19 @@
 namespace App\Controller\Admin;
 
 use App\Repository\MedicPrescriptionRepository;
+use App\Repository\UserRepository;
 use Artprima\QueryFilterBundle\QueryFilter\Config\BaseConfig;
 use Artprima\QueryFilterBundle\QueryFilter\QueryFilter;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\This;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("Admin/")
+ * @Security("is_granted('ROLE_PHARMACIST')")
+ * @Route("Admin/pharmacist")
  * Class PharmacistController
  * @package App\Controller\Admin
  */
@@ -26,13 +29,18 @@ class PharmacistController extends AbstractController
      * @var MedicPrescriptionRepository
      */
     private $medicPrescriptionRepository;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
     public function __construct(EntityManagerInterface $manager
-        , MedicPrescriptionRepository $medicPrescriptionRepository)
+        , MedicPrescriptionRepository $medicPrescriptionRepository,UserRepository $userRepository)
     {
 
         $this->manager = $manager;
         $this->medicPrescriptionRepository = $medicPrescriptionRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -42,11 +50,16 @@ class PharmacistController extends AbstractController
      */
     public function dashboard($page)
     {
+//        $this->denyAccessUnlessGranted('ROLE_PHARMACIST', null, 'User tried to access a page without having ROLE_PHARMACIST');
 
         if ($page < 1) {
             throw $this->createNotFoundException('page."' . $page . '" does not exit');
         }
-        return $this->render('admin/pharmacist/dashboard.html.twig');
+        $pharmacist=$this->getUser();
+        $users=$this->userRepository->find($pharmacist);
+        return $this->render('admin/pharmacist/dashboard.html.twig',
+            ['users'=>$users]
+            );
     }
 
 
@@ -55,6 +68,8 @@ class PharmacistController extends AbstractController
      */
     public function index()
     {
+        $this->denyAccessUnlessGranted('ROLE_PHARMACIST', null, 'User tried to access a page without having ROLE_PHARMACIST');
+
 
         $currentUser = $this->getUser();
 

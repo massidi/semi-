@@ -18,10 +18,7 @@ class Patient
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -53,24 +50,22 @@ class Patient
      */
     private $patientUser;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
+    private  $fichier;
+
 
     public function __construct()
     {
     }
 
-
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     public function getType(): ?string
     {
@@ -153,6 +148,45 @@ class Patient
         }
 
         return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+    /**
+     * @return mixed
+     */
+    public function getFichier()
+    {
+        return $this->fichier;
+    }
+
+    /**
+     * @param mixed $fichier
+     */
+    public function setFichier($fichier)
+    {
+        $this->fichier = $fichier;
     }
 
 

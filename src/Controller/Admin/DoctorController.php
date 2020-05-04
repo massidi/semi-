@@ -74,15 +74,16 @@ class DoctorController extends AbstractController
 
     public function dashboard($page)
     {
-        $this->denyAccessUnlessGranted('ROLE_DOCTOR', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_DOCTOR', null, 'User tried to access a page without having ROLE_DOCTOR');
 
 
         if ($page < 1) {
             throw $this->createNotFoundException('page."' . $page . '" does not exit');
         }
-//        $users=$this->getUser();
-//        $doctor= $this->doctorRepository->findByDoctorUser($users);
-        return $this->render('admin/doctor/prescription/dashboard.html.twig');
+        $doctor=$this->getUser();
+        $users= $this->userRepository->find($doctor);
+        return $this->render('admin/doctor/prescription/dashboard.html.twig',
+            ['users'=>$users]);
 
     }
 
@@ -116,7 +117,7 @@ class DoctorController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function new1(Request $request, EventDispatcherInterface $eventDispatcher)
+    public function new(Request $request, EventDispatcherInterface $eventDispatcher)
     {
 //        $doctor= $this->tokenStorage->getToken();
 //        here are getting the current doctor who is connected
@@ -133,9 +134,8 @@ class DoctorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($doctorPrescription);
-            $entityManager->flush();
+            $this->manager->persist($doctorPrescription);
+            $this->manager->flush();
             $medication = new MedicationEvent($doctorPrescription);
             $eventDispatcher->dispatch($medication, MedicationEvent::Name);
 

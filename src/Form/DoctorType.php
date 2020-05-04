@@ -21,7 +21,7 @@ class DoctorType extends AbstractType
             ->add('hospital_name')
             ->add('specialization')
             ->add('fichier', FileType::class, [
-                'label' => 'Brochure (PDF file)',
+                'label' => 'image (jpg)',
                 'mapped' => false,
                 'required' => false,
             ])

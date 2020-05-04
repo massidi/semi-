@@ -21,7 +21,7 @@ class MedicPrescription extends \App\Repository\MedicPrescriptionRepository
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\Timezone
+     * @
      */
     private $createdAt;
 

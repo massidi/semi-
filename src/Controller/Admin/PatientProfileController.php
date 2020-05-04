@@ -7,6 +7,7 @@ use App\Form\PatientType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -39,15 +40,15 @@ class PatientProfileController extends AbstractController
      */
     public function index()
     {
-        $users=$this->getUser();
-        $patient=$this->userRepository->find($users);
+        $user=$this->getUser();
+        $patient_profile=$this->userRepository->find($user);
 
-        if (empty($patient->getInfoPatient()))
+        if (empty($patient_profile->getInfoPatient()))
         {
-            return $this->redirectToRoute('new_profile');
+            return $this->redirectToRoute('new_profile_patient');
         }
         return $this->render('admin/patientProfile/index.html.twig', [
-            'controller_name' => 'PatientProfileController',
+            'users' => $patient_profile,
         ]);
     }
 
@@ -58,23 +59,43 @@ class PatientProfileController extends AbstractController
      */
     public function new(Request $request)
     {
-        $users=$this->getUser();
-        $patientPrescription= new Patient();
+        $users = $this->getUser();
+        $patientPrescription = new Patient();
         $patientPrescription->setPatientUser($users);
-        $form=$this->createForm(PatientType::class,$patientPrescription);
+        $form = $this->createForm(PatientType::class, $patientPrescription);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $this->manager->persist($patientPrescription);
-            $this->addFlash('success','your profile has been updated successfully');
-            $this->manager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('fichier')->getData();
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
+                try {
+                    $image->move(
+                        $this->getParameter('image_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
 
+                }
+                $patientPrescription->setImage($newFilename);
+                $this->manager->persist($patientPrescription);
+                $this->manager->flush();
+                $this->addFlash('success', 'your profile has been updated successfully');
+
+            } else {
+                $this->manager->persist($patientPrescription);
+                $this->manager->flush();
+            }
             return $this->redirectToRoute('patient_profile');
-        }
-        return $this->render('admin/patientProfile/new.html.twig',
-        ['form'=> $form->createView(),
-            'patientPrescription'=>$patientPrescription
 
-        ]);
+        }
+
+
+        return $this->render('admin/patientProfile/new.html.twig',
+            ['form' => $form->createView(),
+                'patientPrescription' => $patientPrescription
+
+            ]);
     }
 }

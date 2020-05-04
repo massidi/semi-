@@ -42,13 +42,13 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'username' => $request->request->get('username'),
+            'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $credentials['username']
+            $credentials['email']
         );
 
         return $credentials;
@@ -61,11 +61,11 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $credentials['username']]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Username could not be found.');
+            throw new CustomUserMessageAuthenticationException('Oh no! It doesn\'t look like that email exists!.');
         }
 
         return $user;
@@ -88,7 +88,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         if (in_array("ROLE_DOCTOR", $roles)) {
             return new RedirectResponse($this->urlGenerator->generate('doctor_dashboard'));
         }elseif (in_array("ROLE_PATIENT", $roles)){
-            return new RedirectResponse($this->urlGenerator->generate('patient_index'));
+            return new RedirectResponse($this->urlGenerator->generate('patient_dashboard'));
         }elseif (in_array("ROLE_PHARMACIST", $roles)){
             return new RedirectResponse($this->urlGenerator->generate('pharmacist_dashboard'));
         }

@@ -35,7 +35,8 @@
         "symfony/web-link": "4.4.*",
         "symfony/web-server-bundle": "4.4.*",
         "symfony/yaml": "4.4.*",
-        "vich/uploader-bundle": "^1.8"
+        "vich/uploader-bundle": "^1.8",
+        "ext-intl": "*"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",

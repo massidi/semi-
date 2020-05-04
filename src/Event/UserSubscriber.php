@@ -66,7 +66,9 @@ class UserSubscriber implements EventSubscriberInterface
 
     /**
      * @param MedicationEvent $event
-     * @param $id
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function onMedicate(MedicationEvent $event)
     {

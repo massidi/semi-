@@ -1,0 +1,102 @@
+{% extends 'Admin.html.twig' %}
+
+{#{% block css %}#}
+{#    {{ parent() }}#}
+
+{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">#}
+{#    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">#}
+{#    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">#}
+
+{#    {{ parent() }}#}
+{#{% endblock %}#}
+
+{% block title %}{{  parent() }}TABLE OF PRESCRIPTION{% endblock %}
+
+
+{% block contenu %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Basic Datatable</h5>
+                        <div class="table-responsive">
+                            <table id="zero_config" class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>DOCTOR NAME</th>
+                                    <th>CONTACT</th>
+                                    <th>Age</th>
+                                    <th>DATE</th>
+                                    <th>ACTION</th>
+                                    <th>DELETE</th>
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for prescriptions in prescriptions %}
+                                    <tr>
+                                        <td>{{prescriptions.id}}</td>
+                                        <td>{{prescriptions.patientName}}</td>
+                                        <td>{{prescriptions.diagnostic}}</td>
+                                        <td>{{prescriptions.age}}</td>
+                                        <td>{{prescriptions.createdAt |date }}
+                                        <td>
+                                            <a href="{{ path('doctor_edit', {'id': prescriptions.id}) }}" class="btn btn-primary " >Edit
+
+                                            </a>
+                                            <a href="{{ path('show_doctor',{'id': prescriptions.id}) }}" ><span class="btn btn-warning">show</span></a>
+                                            <a href="{{ path('print_prescription',{'id': prescriptions.id}) }}">
+                                                <button class="btn btn-success" type="submit">print </button>
+                                            </a>
+
+                                        </td>
+                                        <td>
+                                            {{ include('admin/doctor/prescription/_delete_form.html.twig') }}
+                                        </td>
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>PATIENT NAME</th>
+                                    <th>CONTACT</th>
+                                    <th>Age</th>
+                                    <th>DATE</th>
+                                    <th>ACTION</th>
+                                    <th>DELETE</th>
+
+
+
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+    <!-- this page js -->
+    <script src="{{asset('doctor/assets/extra-libs/multicheck/datatable-checkbox-init.js')}}"></script>
+    <script src="{{asset('doctor/assets/extra-libs/multicheck/jquery.multicheck.js')}}"></script>
+    <script src="{{asset('doctor/assets/extra-libs/DataTables/datatables.min.js')}}"></script>
+    <script>
+        /****************************************
+         *       Basic Table                   *
+         ****************************************/
+        $('#zero_config').DataTable();
+    </script>
+
+{% endblock %}

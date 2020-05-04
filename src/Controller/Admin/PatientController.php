@@ -8,6 +8,7 @@ use App\Entity\MedicPrescription;
 ;
 
 use App\Repository\MedicPrescriptionRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,12 +31,37 @@ class PatientController extends AbstractController
      * @var MedicPrescriptionRepository
      */
     private $prescriptionRepository;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
-    public function __construct(MedicPrescriptionRepository $prescriptionRepository, EntityManagerInterface $manager)
+    public function __construct(MedicPrescriptionRepository $prescriptionRepository, EntityManagerInterface $manager,UserRepository $userRepository)
     {
 
         $this->manager = $manager;
         $this->prescriptionRepository = $prescriptionRepository;
+        $this->userRepository = $userRepository;
+    }
+
+    /**
+     * @Route("/dashboard",name="patient_dashboard",requirements={"page"="\d+"},defaults={"page"=1})
+     */
+
+    public  function  dashboard($page)
+    {
+        $this->denyAccessUnlessGranted('ROLE_PATIENT', null, 'User tried to access a page without having ROLE_PATIENT');
+
+        if ($page < 1)
+        {
+            throw  $this->createNotFoundException('page."' . $page . '" does not exit');
+        }
+        $patient=$this->getUser();
+        $users= $this->userRepository->find($patient);
+        return $this->render('admin/patient/dashboard.html.twig',
+            ['users'=>$users]
+        );
+
     }
 
 
