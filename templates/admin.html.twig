@@ -214,7 +214,7 @@
                     {% block profile %}
                     <li class="nav-item dropdown">
                         {% if is_granted('ROLE_PATIENT') %}
-                        {% if users.infoPatient is empty %}
+                        {% if users.infoPatient is defined %}
                         <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle" width="31"></a>
                        {% elseif users.infoPatient.image  %}
                         <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('uploads/profil/'~users.infoPatient.image) }}" alt="user" class="rounded-circle" width="31"/>
@@ -222,7 +222,7 @@
                         {% endif %}
                         {% endif %}
                         {% if is_granted('ROLE_DOCTOR') %}
-                            {% if users.infoDoctor is null %}
+                            {% if users.infoDoctor is not defined %}
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle" width="31"></a>
                             {% elseif users.infoDoctor.image  %}
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('uploads/profil/'~users.infoDoctor.image) }}" alt="user" class="rounded-circle" width="31"/>
@@ -230,9 +230,9 @@
                             {% endif %}
                         {% endif %}
                         {% if is_granted('ROLE_PHARMACIST') %}
-                            {% if users.infoPharmacist is null %}
+                            {% if users.infoPharmacist is not defined %}
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle" width="31"></a>
-                            {% elseif users.infoPharmacist.image is not null  %}
+                            {% elseif users.infoPharmacist  %}
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('uploads/profil/'~users.infoPharmacist.image) }}" alt="user" class="rounded-circle" width="31"/>
                                 </a>
 
