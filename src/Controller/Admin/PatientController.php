@@ -57,9 +57,11 @@ class PatientController extends AbstractController
             throw  $this->createNotFoundException('page."' . $page . '" does not exit');
         }
         $patient=$this->getUser();
+        $fourPrescription = $this->prescriptionRepository->findByPatientName($patient, ['id' => 'DESC'], 3, 0);
         $users= $this->userRepository->find($patient);
         return $this->render('admin/patient/dashboard.html.twig',
-            ['users'=>$users]
+            ['users'=>$users,
+                'patient'=>$fourPrescription]
         );
 
     }
@@ -115,6 +117,8 @@ class PatientController extends AbstractController
 
     }
 
+
+
     /**
      * @Route("/delete/{id}",name="delete_prescription")
      * @param Request $request
@@ -136,6 +140,14 @@ class PatientController extends AbstractController
 
 
         return $this->redirectToRoute('prescription_index');
+
+    }
+    /**
+     * @Route("/patient_calendar",name="pcalendar")
+     */
+    public function  calendar()
+    {
+        return $this->render('admin/patient/calendar.html.twig');
 
     }
 }

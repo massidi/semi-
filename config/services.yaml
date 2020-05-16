@@ -25,10 +25,8 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-#    App\Event\UserSubscriber:
-#        tags:
-#             -{ name: kernel.event_subscriber}
-
+#    App\Service\DoctorService:
+#        configirator: '@App\Service\DoctorService'
 
 
     # add more service definitions when explicit configuration is needed

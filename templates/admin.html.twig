@@ -52,7 +52,7 @@
     <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <header class="topbar" data-navbarbg="skin5">
-        <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+        <nav class="navbar top-navbar navbar-expand-md navbar-dark fixed-top">
             <div class="navbar-header" data-logobg="skin5">
                 <!-- This is for the sidebar toggle which is visible on mobile only -->
                 <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
@@ -214,26 +214,28 @@
                     {% block profile %}
                     <li class="nav-item dropdown">
                         {% if is_granted('ROLE_PATIENT') %}
-                        {% if users.infoPatient is defined %}
+                        {% if app.user.infoPatient is not defined %}
                         <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle" width="31"></a>
-                       {% elseif users.infoPatient.image  %}
-                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('uploads/profil/'~users.infoPatient.image) }}" alt="user" class="rounded-circle" width="31"/>
+                       {% elseif app.user.infoPatient.image  %}
+                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('uploads/profil/'~app.user.infoPatient.image) }}" alt="user" class="rounded-circle" width="31"/>
                         </a>
+
                         {% endif %}
                         {% endif %}
+{#                      {{ dump(app.user.infoDoctor.image) }}#}
                         {% if is_granted('ROLE_DOCTOR') %}
-                            {% if users.infoDoctor is not defined %}
+                            {% if app.user.infoDoctor.image is not defined %}
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle" width="31"></a>
-                            {% elseif users.infoDoctor.image  %}
-                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('uploads/profil/'~users.infoDoctor.image) }}" alt="user" class="rounded-circle" width="31"/>
+                            {% elseif app.user.infoDoctor.image  %}
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('uploads/profil/'~app.user.infoDoctor.image) }}" alt="user" class="rounded-circle" width="31"/>
                                 </a>
                             {% endif %}
                         {% endif %}
                         {% if is_granted('ROLE_PHARMACIST') %}
-                            {% if users.infoPharmacist is not defined %}
+                            {% if app.user.infoPharmacist is not defined %}
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle" width="31"></a>
-                            {% elseif users.infoPharmacist  %}
-                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('uploads/profil/'~users.infoPharmacist.image) }}" alt="user" class="rounded-circle" width="31"/>
+                            {% elseif app.user.infoPharmacist.image  %}
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('uploads/profil/'~app.user.infoPharmacist.image) }}" alt="user" class="rounded-circle" width="31"/>
                                 </a>
 
                             {% endif %}
@@ -275,6 +277,11 @@
                 </ul>
             </div>
         </nav>
+        {% for message in app.flashes('notice') %}
+            <div class="flash-notice">
+                {{ message }}
+            </div>
+        {% endfor %}
     </header>
     <!-- ============================================================== -->
     <!-- End Topbar header -->
@@ -284,16 +291,17 @@
     <!-- ============================================================== -->
     <aside class="left-sidebar" data-sidebarbg="skin5">
         <!-- Sidebar scroll-->
-        <div class="scroll-sidebar">
+        <div class="scroll-sidebar ">
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav">
                 <ul id="sidebarnav" class="p-t-30">
                     {% if is_granted('ROLE_DOCTOR') %}
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('doctor_dashboard') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item" > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('doctor_dashboard') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 
                     {% endif %}
                     {% if is_granted('ROLE_PATIENT') %}
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('patient_dashboard') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+{#                        <li class="sidebar-item" > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('patient_dashboard') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>#}
+                        <li class="sidebar-item" > <a class="sidebar-link waves-effect waves-dark sidebar-link"  href="{{ path('patient_dashboard') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 
                     {% endif %}
                     {% if is_granted('ROLE_PHARMACIST') %}
@@ -311,34 +319,53 @@
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{path('latestrecord')}}" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Doctor Record</span></a></li>
                     {% endif %}
                     {% if is_granted('ROLE_PATIENT') %}
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('doctor_index') }}" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Calendar</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('pcalendar') }}" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Calendar</span></a></li>
 {#                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{path('latestrecord')}}" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Doctor Record</span></a></li>#}
                     {% endif %}
 
                             {% if is_granted('ROLE_DOCTOR') %}
-                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Prescription </span></a>
+                    <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
+                                                href="javascript:void(0)" aria-expanded="false"><i
+                                    class="mdi mdi-receipt"></i><span class="hide-menu">Prescription </span></a>
                         <ul aria-expanded="false" class="collapse  first-level">
-                            <li class="sidebar-item"><a href="{{ path('doctor_new') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu">New Prescription </span></a></li>
-{#                            <li class="sidebar-item"><a href="{{ path('doctor_edit') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Edit Prescription </span></a></li>#}
+                            <li class="sidebar-item"><a href="{{ path('doctor_new') }}" class="sidebar-link"><i
+                                            class="mdi mdi-note-outline"></i><span
+                                            class="hide-menu">New Prescription </span></a></li>
+                            {#                            <li class="sidebar-item"><a href="{{ path('doctor_edit') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Edit Prescription </span></a></li>#}
                             {% endif %}
                             {% if is_granted('ROLE_PHARMACIST') %}
-                            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Prescription </span></a>
+                            <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
+                                                        href="javascript:void(0)" aria-expanded="false"><i
+                                            class="mdi mdi-receipt"></i><span class="hide-menu">Prescription </span></a>
                                 <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="{{ path('search_prescription') }}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu">Show Prescription </span></a></li>
-                                {#                            <li class="sidebar-item"><a href="{{ path('doctor_edit') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Edit Prescription </span></a></li>#}
-                            {% endif %}
-                            {% if is_granted('ROLE_PATIENT') %}
-                                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Setting </span></a>
+                                    <li class="sidebar-item"><a href="{{ path('search_prescription') }}"
+                                                                class="sidebar-link"><i
+                                                    class="mdi mdi-note-outline"></i><span class="hide-menu">Show Prescription </span></a>
+                                    </li>
+                                    {#                            <li class="sidebar-item"><a href="{{ path('doctor_edit') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Edit Prescription </span></a></li>#}
+                                    {% endif %}
+                                    {% if is_granted('ROLE_PATIENT') %}
+                                    <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
+                                                                href="javascript:void(0)" aria-expanded="false"><i
+                                                    class="ti-settings m-r-5 m-l-5"></i><span
+                                                    class="hide-menu">Setting </span></a>
                                         <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu">User infos </span></a></li>
-                                <li class="sidebar-item"><a href="" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Edit Profile </span></a></li>
-                            {% endif %}
+                                            <li class="sidebar-item"><a href="" class="sidebar-link"><i
+                                                            class="mdi mdi-note-outline"></i><span class="hide-menu">User infos </span></a>
+                                            </li>
+                                            <li class="sidebar-item"><a href="" class="sidebar-link"><i
+                                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Edit Profile </span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    {% endif %}
+                                </ul>
 
+                            </li>
                         </ul>
                     </li>
+
                 </ul>
-                            </li>
-                            </li>
             </nav>
 
 
@@ -477,7 +504,15 @@
                     <div class="card card-hover">
                         <div class="box bg-success text-center">
                             <h1 class="font-light text-white"><i class="mdi mdi-calendar-check"></i></h1>
+                            {% if is_granted('ROLE_DOCTOR') %}
                             <a href="{{ path('calendar') }}">
+                                {% endif %}
+                                {% if is_granted('ROLE_PATIENT') %}
+                                <a href="{{ path('pcalendar') }}">
+                                    {% endif %}
+                                    {% if is_granted('ROLE_PHARMACIST') %}
+                                    <a href="">
+                                        {% endif %}
                             <h6 class="text-white">Calendar</h6>
                             </a>
                         </div>

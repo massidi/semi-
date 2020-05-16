@@ -1,0 +1,89 @@
+{% extends 'admin.html.twig' %}
+{% block css %}{{ parent() }}
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+{% endblock %}
+
+{% block contenu %}
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="{{ asset('uploads/profil/'~app.user.infoPatient.image) }}"
+                             style="width: 275px; height: 183px" alt=""/>
+
+                                            <div class="file btn btn-lg btn-primary">
+                                                Change Photo
+                                                <input type="file" name="file"/>
+                                            </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+
+                        <h5>
+                            {{ app.user.firstName }} {{ app.user.lastName }}
+                        </h5>
+                        <h6>
+                            {#                        {{ users.type}}#}
+                        </h6>
+                    </div>
+                </div>
+                <hr>
+                {#            <div class="col-md-2">#}
+                {#                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>#}
+                {#            </div>#}
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="profile-work">
+                        <p>WORK LINK</p>
+                        <a href="">Website Link</a><br/>
+                        <a href="">Bootsnipp Profile</a><br/>
+                        <a href="">Bootply Profile</a>
+                        <p>SKILLS</p>
+                        <a href="">Web Designer</a><br/>
+                        <a href="">Web Developer</a><br/>
+                        <a href="">WordPress</a><br/>
+                        <a href="">WooCommerce</a><br/>
+                        <a href="">PHP, .Net</a><br/>
+                    </div>
+
+                </div>
+                <div class="col-md-7">
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.type) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.age) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.weigth) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.address) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.mobile) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.fichier) }}
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit"> save</button>
+
+                </div>
+                {{ form_end(form) }}
+
+            </div>
+    </div>
+{% endblock %}

@@ -24,7 +24,7 @@ class PatientType extends AbstractType
                 'mapped' => false,
                 'required' => false,
             ])
-            ->add('updatedAt')
+//            ->add('updatedAt')
         ;
     }
 

@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Patient;
 use App\Form\PatientType;
+use App\Repository\PatientRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,12 +28,17 @@ class PatientProfileController extends AbstractController
      * @var EntityManagerInterface
      */
     private $manager;
+    /**
+     * @var PatientRepository
+     */
+    private $patientRepository;
 
-    public function __construct(UserRepository $userRepository,EntityManagerInterface $manager)
+    public function __construct(UserRepository $userRepository,EntityManagerInterface $manager,PatientRepository $patientRepository)
     {
 
         $this->userRepository = $userRepository;
         $this->manager = $manager;
+        $this->patientRepository = $patientRepository;
     }
 
     /**
@@ -42,6 +48,11 @@ class PatientProfileController extends AbstractController
     {
         $user=$this->getUser();
         $patient_profile=$this->userRepository->find($user);
+//       $users= $patient_profile->getInfoPatient();
+//       dd($users->getAge());
+
+
+
 
         if (empty($patient_profile->getInfoPatient()))
         {
@@ -97,5 +108,35 @@ class PatientProfileController extends AbstractController
                 'patientPrescription' => $patientPrescription
 
             ]);
+    }
+
+    /**
+     * @Route("/{id}/edit",name="edit_pprofile")
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function edit( Request $request ,$id)
+    {
+        $users= $this->getUser();
+        $patient=$this->patientRepository->find($id);
+
+
+        $form=$this->createForm(PatientType::class,$patient);
+        $form->handleRequest($request);
+
+
+        if ( $form->isSubmitted() && $form->isValid())
+        {
+            $this->manager->flush();
+            $this->addFlash('success' ,'your profile has been updated successful');
+            return $this->redirectToRoute('patient_profile');
+
+        }
+        return $this->render('admin/patientProfile/edit.html.twig',
+            [   'form' => $form->createView(),
+                'users' => $patient]
+        );
+
     }
 }

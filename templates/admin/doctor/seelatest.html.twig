@@ -17,7 +17,13 @@
                         <!-- Comment Row -->
                         <div class="d-flex flex-row comment-row">
                             <ul><li>
-                            <div class="p-2"><img src="{{ asset('doctor/assets/images/users/3.jpg') }}" alt="user" width="50" class="rounded-circle"></div>
+                                    {{ dump(users) }}
+{#                                    {% if app.user.infoPatient is not defined %}#}
+{#                            <div class="p-2"><img src="{{ asset('doctor/assets/images/users/3.jpg') }}" alt="user" width="50" class="rounded-circle"></div>#}
+{#                           {% elseif app.user.infoPatient.image %}#}
+{#                               <div class="p-2"><img src="{{ asset('uploads/profil/'~app.user.infoPatient.image) }}" alt="user" width="50" class="rounded-circle"></div>#}
+
+{#                                    {% endif %}#}
                             <div class="comment-text w-100">
                                 <h6 class="font-medium">{{ patient.patientName}}</h6>
                                 <span class="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry. </span>

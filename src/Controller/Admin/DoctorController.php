@@ -8,6 +8,7 @@ use App\Event\MedicationEvent;
 use App\Form\MedicPrescriptionType;
 use App\Repository\DoctorRepository;
 use App\Repository\MedicPrescriptionRepository;
+use App\Repository\PatientRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\OrderBy;
@@ -80,10 +81,9 @@ class DoctorController extends AbstractController
         if ($page < 1) {
             throw $this->createNotFoundException('page."' . $page . '" does not exit');
         }
-        $doctor=$this->getUser();
-        $users= $this->userRepository->find($doctor);
-        return $this->render('admin/doctor/prescription/dashboard.html.twig',
-            ['users'=>$users]);
+//        $doctor=$this->getUser();
+//        $users= $this->userRepository->find($doctor);
+        return $this->render('admin/doctor/prescription/dashboard.html.twig');
 
     }
 
@@ -250,19 +250,24 @@ class DoctorController extends AbstractController
 
     /**
      * @Route("/latestrecord",name="latestrecord")
+     * @param PatientRepository $patientRepository
+     * @return Response
      */
 
-    public function recordLatest()
+    public function recordLatest(PatientRepository $patientRepository)
     {
+
 
         $user = $this->getUser();
 
         $patient = $this->medicPrescriptionRepository->findByMedicName($user, ['id' => 'DESC'], 4, 0);
+         $users=$patientRepository->find($user);
 
 
         return $this->render('admin/doctor/seelatest.html.twig',
             [
                 'patient' => $patient,
+                'users'=>$users
 
             ]);
 

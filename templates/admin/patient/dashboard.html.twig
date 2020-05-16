@@ -1,8 +1,185 @@
 {% extends 'admin.html.twig' %}
+{% block css %}
+    {{ parent() }}
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .my-card{
+            background-color:brown;
+        }
+        .my-title{
+            color: #2a2358;
+        }
+        .my-body{
+            background-color:#9d3d00;
+        }
+        .jumbotron{
+            background-color: #aa2c4e;
+        }
+        .my-name{
+            color:white;
+        }
+        .my-align{
+            padding-bottom: 2rem;
+            text-decoration-width: 4pxcm;
+        }
+        /*.my-back{*/
+        /*    background-color: #2a2358;*/
+        /*}*/
+    </style>
+{% endblock %}
 
 {% block contenu %}
+    <div class="container">
+        <div class="row align-items-center my-align">
+            <div class="col-md-3 offset-1">
+                <a href="" style="color: #32383e">
+                    <i class="mdi mdi-account"></i>My record</a>
+            </div>
+            <div class="col-md-3 offset-1">
+                <a href="" style="color: #32383e">
+                    <i class="mdi mdi-medical-bag">My prescriptions</i></a>
+            </div>
+            <div class="col-md-3 offset-1">
+                <a href="" style="color: #32383e">
+                    <i class="mdi mdi-folder-plus">My data</i></a>
+            </div>
 
-{% endblock %}
+
+
+        </div>
+        <hr>
+
+    </div>
+{#<div class="container" >#}
+    {#        <div class="row justify-content-center">#}
+    {#    <div class="row">#}
+    {#    <ul class="col-xs-3 list-inline" >#}
+    {#        <li class="list-inline-item">  <i class="mdi mdi-account">Lorem ipsum</i></li>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;#}
+    {#        <li class="list-inline-item"><i class="mdi mdi-medical-bag">Lorem ipsum</i></li>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;#}
+    {#        <li class="list-inline-item"><i class="mdi mdi-folder-plus">Lorem ipsum</i></li>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;#}
+    {#        <li class="list-inline-item"><i class="mdi mdi-account-settings-variant">Lorem ipsum</i></li>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;#}
+    {#        &nbsp;#}
+    {#    </ul>#}
+    {#    </div>#}
+    {#    </div>#}
+
+
+    <div class="row" >
+        <div class="col-12">
+            <div class="card my-back ">
+                <div class="card-body ">
+                    {#                    <table class="table table-hover">#}
+                    {#                        <thead class="thead-ligh" style="opacity: initial">#}
+                    {#                        <tr>#}
+
+                    {#                            <th scope="col" >#}
+{#                    <a href="" style="color: #32383e">#}
+{#                        <i class="mdi mdi-account"></i>My record</a></th>#}
+                    {#                            <th scope="col">#}
+                    {#                                <a href=""style="color: #32383e">#}
+                    {#                                    <i class= "mdi mdi-medical-bag"></i> My prescriptions</a>#}
+                    {#                            </th>#}
+                    {#                            <th scope="col">#}
+                    {#                                <a href=""style="color: #32383e">#}
+                    {#                                    <i class= "mdi mdi-folder-plus "></i> My Data</a></th>#}
+                    {#                            <th scope="col">#}
+                    {#                                <a href=""style="color: #32383e">#}
+                    {#                                    <i class= "mdi mdi-account-settings-variant "></i> Setting</a></th>#}
+                    {#                        </tr>#}
+                    {#                        </thead>#}
+                    {#                    </table>#}
+                    <div class="row align-items-center" >
+{#                        <div class="row">#}
+{#                            <ul class="col-xs-3 list-inline">#}
+{#                                <li class="list-inline-item"><a href="" style="color: #32383e">#}
+{#                                        <i class="mdi mdi-account"></i>My record</a>#}
+{#                                </li>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;#}
+{#                                <li class="list-inline-item"><a href="" style="color: #32383e">#}
+{#                                        <i class="mdi mdi-medical-bag">My prescriptions</i></a>#}
+{#                                </li> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;#}
+{#                                <li class="list-inline-item"><a href="" style="color: #32383e">#}
+{#                                        <i class="mdi mdi-folder-plus">My data</i></a>#}
+{#                                </li>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;#}
+{#                                <li class="list-inline-item"><a href="" style="color: #32383e">#}
+{#                                        <i class="mdi mdi-account-settings-variant">Setting</i></a>#}
+{#                                </li> &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;#}
+{#                                &nbsp;#}
+
+{#                            </ul>#}
+
+                        <div class="jumbotron" >
+{#            <div class="jumbotron jumbotron-fluid" >#}
+                            <div class="container">
+{#                                <div class="row">#}
+                                    <h1 class="display-3 my-name">Hello, {{ users.firstName }}!</h1>
+                                    <p class="lead my-name">This is a simple hero unit, a simple jumbotron-style component for
+                                        calling extra attention to featured content or information.</p>
+                                    <hr class="my-4">
+                                    <p class="my-name">It uses utility classes for typography and spacing to space content out within
+                                        the
+                                        larger container.</p>
+                                    <p class="lead">
+                                        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div class="row align-items-center ">
+                                <div class="col-12 col-md">
+                                    <div class="card-columns">
+                                        {% for patient in patient %}
+{#                                            <div class="card text-white bg-success mb-3" style="max-width: 20rem;">#}
+{#                                                <div class="card bg-light mb-3" style="max-width: 20rem;">#}
+                                            <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+
+                                            {#                                            <div class="card border-light mb-3" style="max-width: 20rem;">#}
+                                                <div class="card-header my-card">{{ patient.createdAt|date }}</div>
+                                                <div class="card-body my-body">
+                                                    <h4 class="card-title ">Dr.{{ patient.medicName }}</h4>
+                                                    <p class="card-text">Some quick example text to build on the card
+                                                        title and make up the bulk of the card's content.</p>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            {#      <div class="card border-light mb-3" style="max-width: 20rem;">#}
+                            {#          <div class="card-header">Header</div>#}
+                            {#          <div class="card-body">#}
+                            {#              <h4 class="card-title">Light card title</h4>#}
+                            {#              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>#}
+                            {#          </div>#}
+                            {#      </div>#}
+                            {#        .row align-items-center#}
+                            {#        <div class="card border-light mb-3" style="max-width: 20rem;">#}
+                            {#            <div class="card-header">Header</div>#}
+                            {#            <div class="card-body">#}
+                            {#                <h4 class="card-title">Light card title</h4>#}
+                            {#                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>#}
+                            {#            </div>#}
+                            {#        </div>#}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        {% endblock %}
+        {#{% block js %}#}
+
+{#            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>#}
+{#            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>#}
+{#            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>#}
+{#            {{ parent() }}#}
+        {#{% endblock %}#}
 
 
 

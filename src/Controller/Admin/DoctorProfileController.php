@@ -109,11 +109,14 @@ class DoctorProfileController extends AbstractController
                 $doctors->setImage($newFilename);
                 $this->manager->persist($doctors);
                 $this->manager->flush();
+                $this->addFlash('notice','the profile has been have successfully');
             } else {
                 $this->manager->persist($doctors);
                 $this->manager->flush();
+                $this->addFlash('notice','the profile has been have successfully');
+
             }
-            return $this->redirectToRoute('doctor_index');
+            return $this->redirectToRoute('profile_index');
 
         }
 
