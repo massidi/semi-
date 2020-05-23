@@ -10,26 +10,29 @@
     <meta name="description" content="">
     <meta name="author" content="">
     {% block css %}
-    <link rel="icon" type="doctor/image/png" sizes="16x16" href="{{ asset('doctor/assets/images/favicon.png') }}">
-    <link href="{{ asset('doctor/assets/libs/flot/css/float-chart.css') }}" rel="stylesheet">
-    <link href="{{ asset('doctor/dist/css/style.min.css') }}" rel="stylesheet">
+        <link rel="icon" type="doctor/image/png" sizes="16x16" href="{{ asset('doctor/assets/images/favicon.png') }}">
+        <link href="{{ asset('doctor/assets/libs/flot/css/float-chart.css') }}" rel="stylesheet">
+        <link href="{{ asset('doctor/dist/css/style.min.css') }}" rel="stylesheet">
         <link href="{{ asset('doctor/bootstrap.css') }}" rel="stylesheet">
 
         <!-- ============================================================== -->
         <!-- calendar -->
-        <link href="{{ asset('doctor/assets/libs/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet" />
-        <link href="{{ asset('doctor/assets/extra-libs/calendar/calendar.css') }}" rel="stylesheet" />
+        <link href="{{ asset('doctor/assets/libs/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('doctor/assets/extra-libs/calendar/calendar.css') }}" rel="stylesheet"/>
         <link href="{{ asset('doctor/dist/css/style.min.css') }}" rel="stylesheet">
         <!-- Custom CSS for form-->
-        <link rel="stylesheet" type="text/css" href="{{ asset('doctor/assets/libs/select2/dist/css/select2.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('doctor/assets/libs/jquery-minicolors/jquery.minicolors.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('doctor/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+        <link rel="stylesheet" type="text/css"
+              href="{{ asset('doctor/assets/libs/select2/dist/css/select2.min.css') }}">
+        <link rel="stylesheet" type="text/css"
+              href="{{ asset('doctor/assets/libs/jquery-minicolors/jquery.minicolors.css') }}">
+        <link rel="stylesheet" type="text/css"
+              href="{{ asset('doctor/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('doctor/assets/libs/quill/dist/quill.snow.css') }}">
         <link href="{{ asset('doctor/dist/css/style.min.css') }}" rel="stylesheet">
         <!-- ============================================================== -->
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
     {% endblock %}
 </head>
 {% block body %}
@@ -55,29 +58,30 @@
         <nav class="navbar top-navbar navbar-expand-md navbar-dark fixed-top">
             <div class="navbar-header" data-logobg="skin5">
                 <!-- This is for the sidebar toggle which is visible on mobile only -->
-                <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
+                            class="ti-menu ti-close"></i></a>
                 <!-- ============================================================== -->
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <a class="navbar-brand" href="">
                     <!-- Logo icon -->
                     {% if is_granted('ROLE_DOCTOR') %}
-                    <b class="logo-icon p-l-10">
+                        <b class="logo-icon p-l-10">
 
 
-                             Dr {{ app.user.firstName }}
+                            Dr {{ app.user.firstName }}
 
-                        <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                        <!-- Dark Logo icon -->
-                        <!-- <img src="../../assets/images/logo-icon.png" alt="homepage" class="light-logo" /> -->
-                    </b>
-                        {% endif %}
-                        {% if is_granted('ROLE_PHARMACIST') %}
-                    <b class="logo-icon p-l-10">
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <!-- <img src="../../assets/images/logo-icon.png" alt="homepage" class="light-logo" /> -->
+                        </b>
+                    {% endif %}
+                    {% if is_granted('ROLE_PHARMACIST') %}
+                        <b class="logo-icon p-l-10">
                             Mr {{ app.user.firstName }}
 
-                    </b>
-                        {% endif %}
+                        </b>
+                    {% endif %}
                     {% if is_granted('ROLE_PATIENT') %}
                         <b class="logo-icon p-l-10">
                             Mr {{ app.user.firstName }}
@@ -86,11 +90,10 @@
                     {% endif %}
 
 
-
                     <!--End Logo icon -->
                     <!-- Logo text -->
                     <!--  <span class="logo-text">-->
-                           <!-- dark Logo text -->
+                    <!-- dark Logo text -->
                     <!--  <img src="../../assets/images/logo-text.png" alt="homepage" class="light-logo" />
 
                  </span> -->
@@ -109,7 +112,9 @@
                 <!-- ============================================================== -->
                 <!-- Toggle which is visible on mobile only -->
                 <!-- ============================================================== -->
-                <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+                <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
+                   data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                   aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
             </div>
             <!-- ============================================================== -->
             <!-- End Logo -->
@@ -119,7 +124,9 @@
                 <!-- toggle and nav items -->
                 <!-- ============================================================== -->
                 <ul class="navbar-nav float-left mr-auto">
-                    <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
+                    <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light"
+                                                              href="javascript:void(0)" data-sidebartype="mini-sidebar"><i
+                                    class="mdi mdi-menu font-24"></i></a></li>
                     <!-- ============================================================== -->
                     <!-- create new -->
                     <!-- ============================================================== -->
@@ -137,7 +144,8 @@
                     <!-- Comment -->
                     <!-- ============================================================== -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
+                        <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Action</a>
@@ -153,16 +161,20 @@
                     <!-- Messages -->
                     <!-- ============================================================== -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="font-24 mdi mdi-comment-processing"></i>
+                        <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i
+                                    class="font-24 mdi mdi-comment-processing"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
+                        <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown"
+                             aria-labelledby="2">
                             <ul class="list-style-none">
                                 <li>
                                     <div class="">
                                         <!-- Message -->
                                         <a href="javascript:void(0)" class="link border-top">
                                             <div class="d-flex no-block align-items-center p-10">
-                                                <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
+                                                <span class="btn btn-success btn-circle"><i
+                                                            class="ti-calendar"></i></span>
                                                 <div class="m-l-10">
                                                     <h5 class="m-b-0">Event today</h5>
                                                     <span class="mail-desc">Just a reminder that event</span>
@@ -192,7 +204,8 @@
                                         <!-- Message -->
                                         <a href="javascript:void(0)" class="link border-top">
                                             <div class="d-flex no-block align-items-center p-10">
-                                                <span class="btn btn-danger btn-circle"><i class="fa fa-link"></i></span>
+                                                <span class="btn btn-danger btn-circle"><i
+                                                            class="fa fa-link"></i></span>
                                                 <div class="m-l-10">
                                                     <h5 class="m-b-0">Doctor Admin</h5>
                                                     <span class="mail-desc">Just see the my new admin!</span>
@@ -212,76 +225,106 @@
                     <!-- User profile and search -->
                     <!-- ============================================================== -->
                     {% block profile %}
-                    <li class="nav-item dropdown">
-                        {% if is_granted('ROLE_PATIENT') %}
-                        {% if app.user.infoPatient is not defined %}
-                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle" width="31"></a>
-                       {% elseif app.user.infoPatient.image  %}
-                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('uploads/profil/'~app.user.infoPatient.image) }}" alt="user" class="rounded-circle" width="31"/>
-                        </a>
-
-                        {% endif %}
-                        {% endif %}
-{#                      {{ dump(app.user.infoDoctor.image) }}#}
-                        {% if is_granted('ROLE_DOCTOR') %}
-                            {% if app.user.infoDoctor.image is not defined %}
-                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle" width="31"></a>
-                            {% elseif app.user.infoDoctor.image  %}
-                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('uploads/profil/'~app.user.infoDoctor.image) }}" alt="user" class="rounded-circle" width="31"/>
-                                </a>
-                            {% endif %}
-                        {% endif %}
-                        {% if is_granted('ROLE_PHARMACIST') %}
-                            {% if app.user.infoPharmacist is not defined %}
-                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle" width="31"></a>
-                            {% elseif app.user.infoPharmacist.image  %}
-                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('uploads/profil/'~app.user.infoPharmacist.image) }}" alt="user" class="rounded-circle" width="31"/>
-                                </a>
-
-                            {% endif %}
-                        {% endif %}
-
-
-                        <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
-                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('logout')}}"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
-                            <div class="dropdown-divider"></div>
-
-                            {% if is_granted('ROLE_DOCTOR') %}
-{#                            {% if users is not null %}#}
-                                <div class="p-l-30 p-10"><a href="{{path('profile_index')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
-{#                            {% elseif users is null %}#}
-{#                                <div class="p-l-30 p-10"><a href="{{path('new_profile')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>#}
-{#                                {% endif %}#}
-                            {% endif %}
-
-                            {% if is_granted('ROLE_PHARMACIST') %}
-                            <div class="p-l-30 p-10"><a href="{{path('pharmacistProfile_index')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
-                            {% endif %}
+                        <li class="nav-item dropdown">
                             {% if is_granted('ROLE_PATIENT') %}
-                                <div class="p-l-30 p-10"><a href="{{path('patient_profile')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                                {% if app.user.infoPatient is not defined %}
+                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                                       href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                                src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user"
+                                                class="rounded-circle" width="31"></a>
+                                {% elseif app.user.infoPatient.image %}
+                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                                       href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                                src="{{ asset('uploads/profil/'~app.user.infoPatient.image) }}"
+                                                alt="user" class="rounded-circle" width="31"/>
+                                    </a>
+
+                                {% endif %}
+                            {% endif %}
+                            {#                      {{ dump(app.user.infoDoctor.image) }}#}
+                            {% if is_granted('ROLE_DOCTOR') %}
+                                {% if app.user.infoDoctor.image is not defined %}
+                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                                       href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                                src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user"
+                                                class="rounded-circle" width="31"></a>
+                                {% elseif app.user.infoDoctor.image %}
+                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                                       href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                                src="{{ asset('uploads/profil/'~app.user.infoDoctor.image) }}"
+                                                alt="user" class="rounded-circle" width="31"/>
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                            {% if is_granted('ROLE_PHARMACIST') %}
+
+                                {% if app.user.infoPharmacist is not null %}
+
+                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                                       href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                                src="{{ asset('uploads/profil/'~app.user.infoPharmacist.image) }}"
+                                                alt="user" class="rounded-circle" width="31"/>
+                                    </a>
+                                {% elseif app.user.infoPharmacist is null %}
+
+                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                                       href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                                src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user"
+                                                class="rounded-circle" width="31"></a>
+
+                                {% endif %}
                             {% endif %}
 
 
-                         </div>
-                    </li>
-                    {% endblock %}
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
+                                    My Profile</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i>
+                                    My Balance</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i>
+                                    Inbox</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                            class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('logout') }}"><i
+                                            class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <div class="dropdown-divider"></div>
+
+                                {% if is_granted('ROLE_DOCTOR') %}
+                                    {#                            {% if users is not null %}#}
+                                    <div class="p-l-30 p-10"><a href="{{ path('profile_index') }}"
+                                                                class="btn btn-sm btn-success btn-rounded">View
+                                            Profile</a></div>
+                                    {#                            {% elseif users is null %}#}
+                                    {#                                <div class="p-l-30 p-10"><a href="{{path('new_profile')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>#}
+                                    {#                                {% endif %}#}
+                                {% endif %}
+
+                                {% if is_granted('ROLE_PHARMACIST') %}
+                                    <div class="p-l-30 p-10"><a href="{{ path('pharmacistProfile_index') }}"
+                                                                class="btn btn-sm btn-success btn-rounded">View
+                                            Profile</a></div>
+                                {% endif %}
+                                {% if is_granted('ROLE_PATIENT') %}
+                                    <div class="p-l-30 p-10"><a href="{{ path('patient_profile') }}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                                {% endif %}
+                                {% endblock %}
+
+                            </div>
+                        </li>
+
                     <!-- ============================================================== -->
                     <!-- User profile and search -->
                     <!-- ============================================================== -->
                 </ul>
             </div>
         </nav>
-        {% for message in app.flashes('notice') %}
-            <div class="flash-notice">
-                {{ message }}
-            </div>
-        {% endfor %}
+{#        {% for message in app.flashes('notice') %}#}
+{#            <div class="flash-notice">#}
+{#                {{ message }}#}
+{#            </div>#}
+{#        {% endfor %}#}
     </header>
     <!-- ============================================================== -->
     <!-- End Topbar header -->
@@ -293,37 +336,60 @@
         <!-- Sidebar scroll-->
         <div class="scroll-sidebar ">
             <!-- Sidebar navigation-->
-            <nav class="sidebar-nav">
+            <nav class="sidebar-nav position-fixed">
                 <ul id="sidebarnav" class="p-t-30">
                     {% if is_granted('ROLE_DOCTOR') %}
-                        <li class="sidebar-item" > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('doctor_dashboard') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                    href="{{ path('doctor_dashboard') }}" aria-expanded="false"><i
+                                        class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
+                        </li>
 
                     {% endif %}
                     {% if is_granted('ROLE_PATIENT') %}
-{#                        <li class="sidebar-item" > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('patient_dashboard') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>#}
-                        <li class="sidebar-item" > <a class="sidebar-link waves-effect waves-dark sidebar-link"  href="{{ path('patient_dashboard') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+                        {#                        <li class="sidebar-item" > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('patient_dashboard') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>#}
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                    href="{{ path('patient_dashboard') }}" aria-expanded="false"><i
+                                        class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
+                        </li>
 
                     {% endif %}
                     {% if is_granted('ROLE_PHARMACIST') %}
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('pharmacist_dashboard') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                    href="{{ path('pharmacist_dashboard') }}" aria-expanded="false"><i
+                                        class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
+                        </li>
 
                     {% endif %}
 
                     {% if is_granted('ROLE_PATIENT') %}
 
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">My record</span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="widgets.html" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">My prescription</span></a></li>
-                   {% endif %}
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                    href="charts.html" aria-expanded="false"><i
+                                        class="mdi mdi-chart-bar"></i><span class="hide-menu">My record</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                    href="{{ path('patient_index') }}" aria-expanded="false"><i
+                                        class="mdi mdi-chart-bubble"></i><span class="hide-menu">My prescription</span></a>
+                        </li>
+                    {% endif %}
                     {% if is_granted('ROLE_DOCTOR') %}
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('doctor_index') }}" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Prescription tables</span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{path('latestrecord')}}" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Doctor Record</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                    href="{{ path('doctor_index') }}" aria-expanded="false"><i
+                                        class="mdi mdi-border-inside"></i><span
+                                        class="hide-menu">Prescription tables</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                    href="{{ path('latestrecord') }}" aria-expanded="false"><i
+                                        class="mdi mdi-blur-linear"></i><span class="hide-menu">Doctor Record</span></a>
+                        </li>
                     {% endif %}
                     {% if is_granted('ROLE_PATIENT') %}
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ path('pcalendar') }}" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Calendar</span></a></li>
-{#                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{path('latestrecord')}}" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Doctor Record</span></a></li>#}
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                    href="{{ path('pcalendar') }}" aria-expanded="false"><i
+                                        class="mdi mdi-border-inside"></i><span class="hide-menu">Calendar</span></a>
+                        </li>
+                        {#                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{path('latestrecord')}}" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Doctor Record</span></a></li>#}
                     {% endif %}
 
-                            {% if is_granted('ROLE_DOCTOR') %}
+                    {% if is_granted('ROLE_DOCTOR') %}
                     <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                                 href="javascript:void(0)" aria-expanded="false"><i
                                     class="mdi mdi-receipt"></i><span class="hide-menu">Prescription </span></a>
@@ -345,19 +411,21 @@
                                     {#                            <li class="sidebar-item"><a href="{{ path('doctor_edit') }}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Edit Prescription </span></a></li>#}
                                     {% endif %}
                                     {% if is_granted('ROLE_PATIENT') %}
-                                    <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
-                                                                href="javascript:void(0)" aria-expanded="false"><i
-                                                    class="ti-settings m-r-5 m-l-5"></i><span
-                                                    class="hide-menu">Setting </span></a>
-                                        <ul aria-expanded="false" class="collapse  first-level">
-                                            <li class="sidebar-item"><a href="" class="sidebar-link"><i
-                                                            class="mdi mdi-note-outline"></i><span class="hide-menu">User infos </span></a>
-                                            </li>
-                                            <li class="sidebar-item"><a href="" class="sidebar-link"><i
-                                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Edit Profile </span></a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                        <li class="sidebar-item"><a
+                                                    class="sidebar-link has-arrow waves-effect waves-dark"
+                                                    href="javascript:void(0)" aria-expanded="false"><i
+                                                        class="ti-settings m-r-5 m-l-5"></i><span
+                                                        class="hide-menu">Setting </span></a>
+                                            <ul aria-expanded="false" class="collapse  first-level">
+                                                <li class="sidebar-item"><a href="" class="sidebar-link"><i
+                                                                class="mdi mdi-note-outline"></i><span
+                                                                class="hide-menu">User infos </span></a>
+                                                </li>
+                                                <li class="sidebar-item"><a href="" class="sidebar-link"><i
+                                                                class="mdi mdi-note-plus"></i><span class="hide-menu"> Edit Profile </span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
                                     {% endif %}
                                 </ul>
 
@@ -401,199 +469,205 @@
         <!-- ============================================================== -->
         <div class="container-fluid">
             {% block contenu %}
-            <!-- ============================================================== -->
-            <!-- Sales Cards  -->
-            <!-- ============================================================== -->
-            <div class="row">
-                <!-- Column -->
-                <div class="col-md-6 col-lg-2 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-cyan text-center">
-                            <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+                <!-- ============================================================== -->
+                <!-- Sales Cards  -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- Column -->
+{#                    <div class="col-md-6 col-lg-2 col-xlg-3">#}
+{#                        <div class="card card-hover">#}
+{#                            <div class="box bg-cyan text-center">#}
+{#                                <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>#}
 
-                            <h6 class="text-white">Dashboard</h6>
+{#                                <h6 class="text-white">Dashboard</h6>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!-- Column -->#}
+{#                    <div class="col-md-6 col-lg-4 col-xlg-3">#}
+{#                        <div class="card card-hover">#}
+{#                            <div class="box bg-success text-center">#}
+{#                                <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>#}
+{#                                <h6 class="text-white">Charts</h6>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!-- Column -->#}
+{#                    <div class="col-md-6 col-lg-2 col-xlg-3">#}
+{#                        <div class="card card-hover">#}
+{#                            <div class="box bg-warning text-center">#}
+{#                                <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>#}
+{#                                <h6 class="text-white">Widgets</h6>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+                    <!-- Column -->
+                    {% if is_granted('ROLE_DOCTOR') %}
+
+                    <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-danger text-center">
+
+                                    <a href="{{ path('doctor_index') }}">
+                                        <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
+                                        <h6 class="text-white">Prescription Tables</h6>
+                                    </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Column -->
-                <div class="col-md-6 col-lg-4 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-success text-center">
-                            <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>
-                            <h6 class="text-white">Charts</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column -->
-                <div class="col-md-6 col-lg-2 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-warning text-center">
-                            <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
-                            <h6 class="text-white">Widgets</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column -->
-                <div class="col-md-6 col-lg-2 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-danger text-center">
-                            {% if is_granted('ROLE_DOCTOR') %}
+                    {% endif %}
 
-                            <a href="{{ path('doctor_index') }}">
-                            <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
-                            <h6 class="text-white">Prescription Tables</h6>
-                            </a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                <!-- Column -->
-                <div class="col-md-6 col-lg-2 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-info text-center">
-{#                            <a href="{{ path('patient_latest') }}">#}
-                            <h1 class="font-light text-white"><i class="mdi mdi-arrow-all"></i></h1>
-                            {% if is_granted('ROLE_DOCTOR') %}
-                            <a href="{{ path('latestrecord') }}">
-                            <h6 class="text-white">Doctor Record</h6>
-                            </a>
-                            {% endif %}
-                            {% if is_granted('ROLE_PHARMACIST') %}
-{#                                <a href="{{ path('patient_latest') }}">#}
-                                <h6 class="text-white">Pharmacist Records</h6>
-                            {% endif %}
-{#                            </a>#}
-                        </div>
-                    </div>
-                </div>
-                <!-- Column -->
-                <!-- Column -->
-                {% if is_granted('ROLE_DOCTOR') %}
-                <div class="col-md-6 col-lg-4 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-danger text-center">
-                            <a href="{{ path('doctor_new') }}">
-                            <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
-
-                                    <h6 class="text-white"> New Prescription</h6>
-
-
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                {% if is_granted('ROLE_PHARMACIST') %}
-                <div class="col-md-6 col-lg-4 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-danger text-center">
-                            <a href="{{ path('search_prescription') }}" >
-                                <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
-                                <h6 class="text-white" >Show Prescription</h6>
-
-
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-
-
-                <!-- Column -->
-                <div class="col-md-6 col-lg-2 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-success text-center">
-                            <h1 class="font-light text-white"><i class="mdi mdi-calendar-check"></i></h1>
-                            {% if is_granted('ROLE_DOCTOR') %}
-                            <a href="{{ path('calendar') }}">
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-info text-center">
+                                {#                            <a href="{{ path('patient_latest') }}">#}
+                                <h1 class="font-light text-white"><i class="mdi mdi-arrow-all"></i></h1>
+                                {% if is_granted('ROLE_DOCTOR') %}
+                                    <a href="{{ path('latestrecord') }}">
+                                        <h6 class="text-white">Doctor Record</h6>
+                                    </a>
                                 {% endif %}
-                                {% if is_granted('ROLE_PATIENT') %}
-                                <a href="{{ path('pcalendar') }}">
-                                    {% endif %}
-                                    {% if is_granted('ROLE_PHARMACIST') %}
-                                    <a href="">
-                                        {% endif %}
-                            <h6 class="text-white">Calendar</h6>
-                            </a>
+                                {% if is_granted('ROLE_PHARMACIST') %}
+{#                                                                    <a href="{{ path('patient_latest') }}">#}
+                                    <h6 class="text-white">Pharmacist Records</h6>
+                                {% endif %}
+                                {#                            </a>#}
+                                                                    </a>                         <
+                            </div>
+
                         </div>
                     </div>
-                </div>
-                <!-- Column -->
+                    <!-- Column -->
+                    <!-- Column -->
+                    {% if is_granted('ROLE_DOCTOR') %}
+                        <div class="col-md-6 col-lg-4 col-xlg-3">
+                            <div class="card card-hover">
+                                <div class="box bg-danger text-center">
+                                    <a href="{{ path('doctor_new') }}">
+                                        <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
 
-                <!-- Column -->
-            </div>
-            <!-- ============================================================== -->
-            <!-- Sales chart -->
-            <!-- ============================================================== -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-md-flex align-items-center">
-                                <div>
-                                    {% if is_granted('ROLE_DOCTOR') %}
-                                        <h4 class="card-title">Doctor Analysis</h4>
-                                    {% endif %}
-                                    {% if is_granted('ROLE_PHARMACIST') %}
-                                        <h4 class="card-title">Pharmacit Analysis</h4>
-                                    {% endif %}
+                                        <h6 class="text-white"> New Prescription</h6>
 
-                                    <h5 class="card-subtitle">Overview of Latest Month</h5>
+
+                                    </a>
                                 </div>
                             </div>
-                            <div class="row">
-                                <!-- column -->
-                                <div class="col-lg-9">
-                                    <div class="flot-chart">
-                                        <div class="flot-chart-content" id="flot-line-chart"></div>
+                        </div>
+                    {% endif %}
+                    {% if is_granted('ROLE_PHARMACIST') %}
+                        <div class="col-md-6 col-lg-4 col-xlg-3">
+                            <div class="card card-hover">
+                                <div class="box bg-danger text-center">
+                                    <a href="{{ path('search_prescription') }}">
+                                        <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
+                                        <h6 class="text-white">Show Prescription</h6>
+
+
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-success text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-calendar-check"></i></h1>
+                                {% if is_granted('ROLE_DOCTOR') %}
+                                <a href="{{ path('calendar') }}">
+                                    {% endif %}
+                                    {% if is_granted('ROLE_PATIENT') %}
+                                    <a href="{{ path('pcalendar') }}">
+                                        {% endif %}
+                                        {% if is_granted('ROLE_PHARMACIST') %}
+                                        <a href="">
+                                            {% endif %}
+                                            <h6 class="text-white">Calendar</h6>
+                                        </a>
+                                    </a>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+
+                    <!-- Column -->
+                </div>
+                <!-- ============================================================== -->
+                <!-- Sales chart -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-md-flex align-items-center">
+                                    <div>
+                                        {% if is_granted('ROLE_DOCTOR') %}
+                                            <h4 class="card-title">Doctor Analysis</h4>
+                                        {% endif %}
+                                        {% if is_granted('ROLE_PHARMACIST') %}
+                                            <h4 class="card-title">Pharmacit Analysis</h4>
+                                        {% endif %}
+
+                                        <h5 class="card-subtitle">Overview of Latest Month</h5>
                                     </div>
                                 </div>
-                                <div class="col-lg-3">
-                                    <div class="row">
-                                        <div class="col-6">
+                                <div class="row">
+                                    <!-- column -->
+                                    <div class="col-lg-9">
+                                        <div class="flot-chart">
+                                            <div class="flot-chart-content" id="flot-line-chart"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="bg-dark p-10 text-white text-center">
+                                                    <i class="fa fa-user m-b-5 font-16"></i>
+                                                    <h5 class="m-b-0 m-t-5">2540</h5>
+                                                    <small class="font-light">Total Users</small>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-6 m-t-15">
                                             <div class="bg-dark p-10 text-white text-center">
-                                                <i class="fa fa-user m-b-5 font-16"></i>
-                                                <h5 class="m-b-0 m-t-5">2540</h5>
-                                                <small class="font-light">Total Users</small>
+                                                <i class="fa fa-cart-plus m-b-5 font-16"></i>
+                                                <h5 class="m-b-0 m-t-5">656</h5>
+                                                <small class="font-light">Total Shop</small>
                                             </div>
                                         </div>
-
-                                    </div>
-                                    <div class="col-6 m-t-15">
-                                        <div class="bg-dark p-10 text-white text-center">
-                                            <i class="fa fa-cart-plus m-b-5 font-16"></i>
-                                            <h5 class="m-b-0 m-t-5">656</h5>
-                                            <small class="font-light">Total Shop</small>
+                                        <div class="col-6 m-t-15">
+                                            <div class="bg-dark p-10 text-white text-center">
+                                                <i class="fa fa-tag m-b-5 font-16"></i>
+                                                <h5 class="m-b-0 m-t-5">9540</h5>
+                                                <small class="font-light">Total Prescription</small>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-6 m-t-15">
-                                        <div class="bg-dark p-10 text-white text-center">
-                                            <i class="fa fa-tag m-b-5 font-16"></i>
-                                            <h5 class="m-b-0 m-t-5">9540</h5>
-                                            <small class="font-light">Total Prescription</small>
+                                        <div class="col-6 m-t-15">
+                                            <div class="bg-dark p-10 text-white text-center">
+                                                <i class="fa fa-table m-b-5 font-16"></i>
+                                                <h5 class="m-b-0 m-t-5">100</h5>
+                                                <small class="font-light">Pending Prescription</small>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-6 m-t-15">
-                                        <div class="bg-dark p-10 text-white text-center">
-                                            <i class="fa fa-table m-b-5 font-16"></i>
-                                            <h5 class="m-b-0 m-t-5">100</h5>
-                                            <small class="font-light">Pending Prescription</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 m-t-15">
-                                        <div class="bg-dark p-10 text-white text-center">
-                                            <i class="fa fa-globe m-b-5 font-16"></i>
-                                            <h5 class="m-b-0 m-t-5">8540</h5>
-                                            <small class="font-light">Online Orders</small>
+                                        <div class="col-6 m-t-15">
+                                            <div class="bg-dark p-10 text-white text-center">
+                                                <i class="fa fa-globe m-b-5 font-16"></i>
+                                                <h5 class="m-b-0 m-t-5">8540</h5>
+                                                <small class="font-light">Online Orders</small>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- column -->
                             </div>
-                            <!-- column -->
                         </div>
                     </div>
                 </div>
-            </div>
             {% endblock %}
         </div>
         <!-- ============================================================== -->
@@ -603,99 +677,99 @@
 </div>
 {% endblock %}
 {% block js %}
-    <script src="{{ asset('doctor/assets/libs/jquery/dist/jquery.min.js') }}"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="{{ asset('doctor/assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script>
-    <script src="{{ asset('doctor/assets/extra-libs/sparkline/sparkline.js') }}"></script>
-    <!--Wave Effects -->
-    <script src="{{ asset('doctor/dist/js/waves.js') }}"></script>
-    <!--Menu sidebar -->
-    <script src="{{ asset('doctor/dist/js/sidebarmenu.js') }}"></script>
-    <!--Custom JavaScript -->
-    <script src="{{ asset('doctor/dist/js/custom.min.js') }}"></script>
-    <!--This page JavaScript -->
-    <!-- <script src="../../dist/js/pages/dashboards/dashboard1.js"></script> -->
-    <!-- Charts js Files -->
-    <script src="{{ asset('doctor/assets/libs/flot/excanvas.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/flot/jquery.flot.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/flot/jquery.flot.pie.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/flot/jquery.flot.time.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/flot/jquery.flot.stack.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/flot/jquery.flot.crosshair.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js') }}"></script>
-    <script src="{{ asset('doctor/dist/js/pages/chart/chart-page-init.js') }}"></script>
-    <!-- ============================================================== -->
-    <!-- This form Page JS -->
-    <script src="{{ asset('doctor/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js') }}"></script>
-    <script src="{{ asset('doctor/dist/js/pages/mask/mask.init.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/select2/dist/js/select2.full.min.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/select2/dist/js/select2.min.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/jquery-asColor/dist/jquery-asColor.min.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/jquery-asGradient/dist/jquery-asGradient.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/jquery-minicolors/jquery.minicolors.min.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/quill/dist/quill.min.js') }}"></script>
-    <!-- calendar -->
-    <script src="{{ asset('doctor/assets/libs/moment/min/moment.min.js') }}"></script>
-    <script src="{{ asset('doctor/assets/libs/fullcalendar/dist/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('doctor/dist/js/pages/calendar/cal-init.js') }}"></script>
-    <script>
+<script src="{{ asset('doctor/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="{{ asset('doctor/assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script>
+<script src="{{ asset('doctor/assets/extra-libs/sparkline/sparkline.js') }}"></script>
+<!--Wave Effects -->
+<script src="{{ asset('doctor/dist/js/waves.js') }}"></script>
+<!--Menu sidebar -->
+<script src="{{ asset('doctor/dist/js/sidebarmenu.js') }}"></script>
+<!--Custom JavaScript -->
+<script src="{{ asset('doctor/dist/js/custom.min.js') }}"></script>
+<!--This page JavaScript -->
+<!-- <script src="../../dist/js/pages/dashboards/dashboard1.js"></script> -->
+<!-- Charts js Files -->
+<script src="{{ asset('doctor/assets/libs/flot/excanvas.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/flot/jquery.flot.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/flot/jquery.flot.pie.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/flot/jquery.flot.time.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/flot/jquery.flot.stack.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/flot/jquery.flot.crosshair.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js') }}"></script>
+<script src="{{ asset('doctor/dist/js/pages/chart/chart-page-init.js') }}"></script>
+<!-- ============================================================== -->
+<!-- This form Page JS -->
+<script src="{{ asset('doctor/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js') }}"></script>
+<script src="{{ asset('doctor/dist/js/pages/mask/mask.init.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/select2/dist/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/select2/dist/js/select2.min.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/jquery-asColor/dist/jquery-asColor.min.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/jquery-asGradient/dist/jquery-asGradient.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/jquery-minicolors/jquery.minicolors.min.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/quill/dist/quill.min.js') }}"></script>
+<!-- calendar -->
+<script src="{{ asset('doctor/assets/libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('doctor/assets/libs/fullcalendar/dist/fullcalendar.min.js') }}"></script>
+<script src="{{ asset('doctor/dist/js/pages/calendar/cal-init.js') }}"></script>
+<script>
 
 
-        //***********************************//
-        // For select 2
-        //***********************************//
-        $(".select2").select2();
+    //***********************************//
+    // For select 2
+    //***********************************//
+    $(".select2").select2();
 
-        /*colorpicker*/
-        $('.demo').each(function() {
-            //
-            // Dear reader, it's actually very easy to initialize MiniColors. For example:
-            //
-            //  $(selector).minicolors();
-            //
-            // The way I've done it below is just for the demo, so don't get confused
-            // by it. Also, data- attributes aren't supported at this time...they're
-            // only used for this demo.
-            //
-            $(this).minicolors({
-                control: $(this).attr('data-control') || 'hue',
-                position: $(this).attr('data-position') || 'bottom left',
+    /*colorpicker*/
+    $('.demo').each(function () {
+        //
+        // Dear reader, it's actually very easy to initialize MiniColors. For example:
+        //
+        //  $(selector).minicolors();
+        //
+        // The way I've done it below is just for the demo, so don't get confused
+        // by it. Also, data- attributes aren't supported at this time...they're
+        // only used for this demo.
+        //
+        $(this).minicolors({
+            control: $(this).attr('data-control') || 'hue',
+            position: $(this).attr('data-position') || 'bottom left',
 
-                change: function(value, opacity) {
-                    if (!value) return;
-                    if (opacity) value += ', ' + opacity;
-                    if (typeof console === 'object') {
-                        console.log(value);
-                    }
-                },
-                theme: 'bootstrap'
-            });
-
-        });
-        /*datwpicker*/
-        jQuery('.mydatepicker').datepicker();
-        jQuery('#datepicker-autoclose').datepicker({
-            autoclose: true,
-            todayHighlight: true
-        });
-        var quill = new Quill('#editor', {
-            theme: 'snow'
+            change: function (value, opacity) {
+                if (!value) return;
+                if (opacity) value += ', ' + opacity;
+                if (typeof console === 'object') {
+                    console.log(value);
+                }
+            },
+            theme: 'bootstrap'
         });
 
-    </script>
-    <script>
-        $(document).ready(function() {
-            // you may need to change this code if you are not using Bootstrap Datepicker
-            $('.js-datepicker').datepicker({
-                format: 'yyyy-mm-dd'
-            });
+    });
+    /*datwpicker*/
+    jQuery('.mydatepicker').datepicker();
+    jQuery('#datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        // you may need to change this code if you are not using Bootstrap Datepicker
+        $('.js-datepicker').datepicker({
+            format: 'yyyy-mm-dd'
         });
-    </script>
-    <!-- ============================================================== -->
+    });
+</script>
+<!-- ============================================================== -->
 
 </body>
 {% endblock %}

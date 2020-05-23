@@ -1,8 +1,8 @@
-{% extends 'admin.html.twig' %}
 
-{% block title %}MedicPrescription{% endblock %}
+{% block body %}
 
-{% block contenu %}
+
+
     <div class="container-fluid">
         <!-- ============================================================== -->
         <!-- Start Page Content -->
@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-body printableArea">
-{#                    <h3><b>PRESCRIPTION ID:</b> <span class="pull-right">{{ patientprescription.id }}</span></h3>#}
+                    <h3><b>PRESCRIPTION ID:</b> <span class="pull-right" style="text-emphasis-color:red">{{ patientprescription.id }}</span></h3>
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
@@ -19,44 +19,35 @@
                                     <h3> &nbsp;<b class="text-danger">Dr. {{ patientprescription.medicName }}</b></h3>
                                     <p class="text-muted m-l-5">{{ patientprescription.medicName.lastNaME }}
                                         <br> {{ patientprescription.medicName.firstName }},
+                                        <br> Tel:{{ patientprescription.contact }},
                                         <br> {{ patientprescription.medicName.email}}
-{#                                    {{ dump(patientprescription.medicName.infoDoctor.mobile) }}#}
-                                    <br> {{ patientprescription.medicName.infoDoctor.mobile}}</p>
-
+                                        <br> {{ patientprescription.medicName.infoDoctor.mobile}}
+                                    </p>
                                 </address>
                             </div>
-                            <div class="pull-right text-right">
-
+                            <div style="text-align: right"  >
                                 <address>
                                     <h3>To,</h3>
-                                    <h4 class="font-bold">{{ patientprescription.patientName.firstname}}</h4>
+                                    <h4 class="font-bold">{{ patientprescription.patientName.firstName}}</h4>
                                     <p class="text-muted m-l-30">
-                                        <br> {{ patientprescription.patientName.lastName}},
-                                        <br> {{ patientprescription.patientName.username}}
-                                        <br>Tel:{{ patientprescription.contact }}
+                                        <br> {{ patientprescription.patientName.lastName}}
+                                        <br> {{ patientprescription.patientName.username}},
                                         <br> {{ patientprescription.patientName.email}}</p>
-                                    <p class="m-t-30"><b> Date :</b> <i class="fa fa-calendar"></i> {{ patientprescription.createdAt |date }}</p>
+                                    <p class="m-t-30"><b>Due Date :</b> <i class="fa fa-calendar"></i> {{ patientprescription.createdAt |date }}</p>
                                     {#                                <p><b>Due Date :</b> <i class="fa fa-calendar"></i> 25th Jan 2018</p>#}
                                 </address>
+
+
+
                             </div>
+                            <p> <b> AGE:</b>{{ patientprescription.age }} &nbsp; &nbsp; &nbsp;<b>BLOOD PRESSURE:</b>{{ patientprescription.bloodPressure }} &nbsp;&nbsp;&nbsp; <b>PULSE RATE:</b>{{ patientprescription.pulseRate }}</p>
+                            <hr>
                         </div>
                         <div class="col-md-12">
                             <div class="table-responsive m-t-40" style="clear: both;">
-                                <table class="table table-hover">
-                                    {#                            <table class="table">#}
+                                {#                                <table class="table table-hover>#}
+                                <table class="table">
                                     <tbody>
-
-                                    <tr>
-
-                                        <th>Age</th>
-                                        <td>{{ patientprescription.age }}</td>
-                                        <th>Blood_pressure</th>
-                                        <td>{{ patientprescription.bloodPressure }}</td>
-                                        <th>Pulse_rate</th>
-                                        <td>{{ patientprescription.pulseRate }}</td>
-
-                                    </tr>
-
                                     <tr>
                                         <th>Diagnostic</th>
                                         <td>{{ patientprescription.diagnostic }}</td>
@@ -64,14 +55,15 @@
 
                                     <tr>
                                         <th>Drug</th>
-                                        <td>{{ patientprescription.drug | raw}}</td>
+                                        <td>{{ patientprescription.drug|raw }}</td>
                                     </tr>
+
                                     <tr>
                                         <th>Examination</th>
-                                        <td>{{ patientprescription.examination}}</td>
+                                        <td>{{ patientprescription.examination |raw}}</td>
                                     </tr>
                                     <tr>
-                                        <th>Health_regine</th>
+                                        <th>Health_regime</th>
                                         <td>{{ patientprescription.healthRegine }}</td>
                                     </tr>
                                     </tbody>
@@ -80,7 +72,7 @@
 
 
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12" style="text-align: right">
 
                                 <div class="pull-right m-t-30 text-right">
                                     {#                                <p>Sub - Total amount: $13,848</p>#}
@@ -90,17 +82,27 @@
                                 </div>
                                 <div class="clearfix"></div>
                                 <hr>
-                                <div class="text-right">
-                                    <a href="{{ path('print-patient-prescription',{'id': patientprescription.id}) }}">
-                                        <button class="btn btn-success" type="submit">print </button>
-                                    </a>
-                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- ============================================================== -->
+            <!-- End PAge Content -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Right sidebar -->
+            <!-- ============================================================== -->
+            <!-- .right-sidebar -->
+            <!-- ============================================================== -->
+            <!-- End Right sidebar -->
+            <!-- ============================================================== -->
         </div>
     </div>
+
 {% endblock %}
+
+
+

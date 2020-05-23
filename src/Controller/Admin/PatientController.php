@@ -7,10 +7,14 @@ use App\Entity\MedicPrescription;
 
 ;
 
+use App\Event\MedicationEvent;
 use App\Repository\MedicPrescriptionRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -68,7 +72,7 @@ class PatientController extends AbstractController
 
 
     /**
-     * @Route("/", name="patient_index")
+     * @Route("/patientlist", name="patient_index")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index()
@@ -79,16 +83,16 @@ class PatientController extends AbstractController
         $patient = $this->getUser();
         $PatientPrescription = $this->prescriptionRepository->findByPatientName($patient);
 
-        dd($PatientPrescription);
+//        dd($PatientPrescription);
 
         return $this->render('Admin/patient/prescription/index.html.twig', [
-            'PatientPrescription' => $PatientPrescription,
+            'patientPrescription' => $PatientPrescription,
         ]);
     }
 
 
     /**
-     * @Route("/show",name="show_prescription")
+     * @Route("/patientshow/{id}/",name="show_prescription")
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -97,9 +101,10 @@ class PatientController extends AbstractController
         /////////////////over her the patient will display one prescription at the time with ///////////
         /// ///////////// all the details//////////////////////////////////////////////////////////////
         $patientPrescription = $this->prescriptionRepository->find($id);
+//      dd($patientPrescription);
 
         return $this->render('admin/patient/prescription/show.html.twig', [
-            'patientPrescription' => $patientPrescription,
+            'patientprescription' => $patientPrescription,
         ]);
     }
 
@@ -113,6 +118,43 @@ class PatientController extends AbstractController
         $fourPrescription = $this->prescriptionRepository->findByPatientName($prescription, ['id' => 'DESC'], 4, 0);
         return $this->render('admin/patient/prescription/seeLastPrescription.html.twig', [
             'fourPrescription' => $fourPrescription
+        ]);
+
+    }
+
+    /**
+     * @Route("/print-patient-prescription/{id}/",name="print-patient-prescription")
+     * @param $id
+     */
+    public function print($id)
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        $prescription = $this->prescriptionRepository->find($id);
+
+        ///////here we are sending prescription to patient Email//////////
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('Admin/patient/prescription/print.html.twig', [
+            'patientprescription' => $prescription
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("my prescription.pdf", [
+            "Attachment" => false
         ]);
 
     }

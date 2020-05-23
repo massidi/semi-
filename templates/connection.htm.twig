@@ -23,31 +23,42 @@
 </head>
 {% block body %}
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top " style="background: white">
+    <a class="navbar-brand" href="#">
+        <img src="{{ asset('images/logo dpp.png') }}" alt="home" class="light-logo"/>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
 
-    <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{path('contact')}}">contact Us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{path('about')}}">About</a>
-            </li>
-        </ul>
-        <a  class="navbar-brand"  href="{{ path('app_register') }}">Sign Up</a>
-        &nbsp;&nbsp;&nbsp;
-        <a  class="navbar-brand"  href="{{ path('login') }}">Sign In</a>
+    <div class="collapse navbar-collapse " id="navbarColor01">
+
+        <div class="top-left-part">
+            <ul class="nav navbar-nav navbar-right ">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{path('home')}}" style="color: #0b0b0b">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"  style="color: #0b0b0b">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('contact')}}"  style="color: #0b0b0b">contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('about')}}"  style="color: #0b0b0b">About</a>
+                </li>
+                <li>
+                    <a class="profile-pic" href="{{path('app_register')}}"> <b class="hidden-xs">
+                            <button class="btn btn-primay" style="background-color: #EB5757"><span>sing up</span></button></b></a>
+                </li>
+
+            </ul>
+        </div>
+
+        {#                            <a  class="navbar-brand"  href="{{ path('app_register') }}"  style="color: #0b0b0b">Sign Up</a>#}
+        {#                            &nbsp;&nbsp;&nbsp;#}
+        {#                            <a  class="navbar-brand"  href="{{ path('login') }}"  style="color: #0b0b0b">Sign In</a>#}
 
 
 

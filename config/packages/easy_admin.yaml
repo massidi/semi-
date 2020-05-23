@@ -81,8 +81,8 @@ easy_admin:
                 - prescriptions
 
 
-          list:
-            filters: ['id', 'name']
+#          list:
+#            filters: ['id', 'name']
 
 
         Pharmacist:

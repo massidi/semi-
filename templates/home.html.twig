@@ -16,6 +16,13 @@
     <link rel="stylesheet" href="{{ asset('home/css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/aos.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/style.css') }}">
+{#    <style>#}
+{#        nav ul.nav > li {#}
+{#            list-style-type:disc;#}
+
+{#        }#}
+{#    </style>#}
+
 
 </head>
 
@@ -24,60 +31,93 @@
 <div class="site-wrap">
 
 
-    <div class="site-navbar py-2">
+{#    <div class="site-navbar py-2">#}
 
-        <div class="search-wrap">
-            <div class="container">
-                <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
-                <form action="#" method="post">
-                    <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
-                </form>
-            </div>
-        </div>
+{#        <div class="search-wrap">#}
+{#            <div class="container">#}
+{#                <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>#}
+{#                <form action="#" method="post">#}
+{#                    <input type="text" class="form-control" placeholder="Search keyword and hit enter...">#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
 
         <div class="container">
             <div class="d-flex align-items-center justify-content-between">
                 <div class="logo">
                     <div class="site-logo">
-                        <a href="{{ path('home') }}" class="js-logo-clone">DDP System</a>
+                        <a href="{{ path('home') }}" class="js-logo-clone" >DDP System</a>
                     </div>
                 </div>
-                <div class="main-nav d-none d-lg-block">
-                    <nav class="site-navigation text-right text-md-center" role="navigation">
-                        <ul class="site-menu js-clone-nav d-none d-lg-block">
-                            <li class="active"><a href="{{ path('home') }}">Home</a></li>
-                            <li><a href="#">Store</a></li>
-                            <li class="has-children">
-                                <a href="#">Dropdown</a>
-                                <ul class="dropdown">
-
-                                    <li><a  data-target="#patientInfoModal" data-toggle="modal" href="#">Patient Info</a></li>
-                                    <li><a href="chat.html">Chat</a></li>
-                                    <li><a data-target="#presModal" data-toggle="modal" href="#">Prescription</a></li>
-
-                                </ul>
-                            </li>
-                            <li><a href="{{ path('about') }}">About</a></li>
-                            <li><a href="{{ path('contact') }}">Contact</a></li>
-
-                            <!-- <div class="incons"> -->
-                            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+                <div class="main-nav d-none d-lg-block ">
+                    <nav class="navbar navbar-expand-lg navbar-dark fixed-top " style="background: white">
+                        <a class="navbar-brand" href="#">
+                            <img src="{{ asset('images/logo dpp.png') }}" alt="home" class="light-logo"/>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
 
 
-                            <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
-                                        class="icon-menu"></span>
+                        <div class="collapse navbar-collapse " id="navbarColor01">
+                            <div class="top-right-part">
+                            <ul class="nav navbar-nav navbar-right ">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{path('home')}}" style="color: #0b0b0b">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"  style="color: #0b0b0b">service</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{path('contact')}}"  style="color: #0b0b0b">contact Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{path('about')}}"  style="color: #0b0b0b">About</a>
+                                </li>
+                                <li>
+                                    <a class="profile-pic" href="{{ path('login') }}"> <b class="hidden-xs">
+                                            <button class="btn btn-primay" style="background-color: #EB5757"><span>Connection</span></button></b></a>
+                                </li>
 
-                            </a>
-                            <li class="has-children">
-                                <a href="{{ path('login') }}" class="icons-btn d-inline-block bag">
-                                    <span class="icon-user"></span></a>
-                                <ul class="dropdown">
-                                    <li><a  data-target="#userProfilModalModal" data-toggle="modal" href="#">Profile</a></li>
-                                    <li><a href="#">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                            </ul>
+                            </div>
+{#                            <a  class="navbar-brand"  href="{{ path('app_register') }}"  style="color: #0b0b0b">Sign Up</a>#}
+{#                            &nbsp;&nbsp;&nbsp;#}
+{#                            <a  class="navbar-brand"  href="{{ path('login') }}"  style="color: #0b0b0b">Sign In</a>#}
+
+
+
+                        </div>
                     </nav>
+                </div>
+{#                    <nav class="site-navigation text-right text-md-center" role="navigation">#}
+{#                        <ul class="site-menu js-clone-nav d-none d-lg-block">#}
+{#                            <li class="active"><a href="{{ path('home') }}">Home</a></li>#}
+{#                            <li><a href="#">Store</a></li>#}
+{#                            <li class="nav-item">#}
+{#                                <a href="#">Dropdown</a>#}
+{#                            </li>#}
+{#                            <li><a href="{{ path('about') }}">About</a></li>#}
+{#                            <li><a href="{{ path('contact') }}">Contact</a></li>#}
+
+{#                            <!-- <div class="incons"> -->#}
+{#                            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>#}
+
+
+{#                            <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span#}
+{#                                        class="icon-menu"></span>#}
+
+{#                            </a>#}
+{#                            <li class="has-children">#}
+{#                                <a href="{{ path('login') }}" class="icons-btn d-inline-block bag">#}
+{#                                    <span class="icon-user"></span></a>#}
+{#                                <ul class="dropdown">#}
+{#                                    <li><a  data-target="#userProfilModalModal" data-toggle="modal" href="#">Profile</a></li>#}
+{#                                    <li><a href="#">Logout</a></li>#}
+{#                                </ul>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </nav>#}
                 </div>
 
                 <!-- Button trigger modal -->
