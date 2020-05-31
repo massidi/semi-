@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pharmacist index{% endblock %}
+
+{% block body %}
+    <h1>Pharmacist index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Certificate</th>
+                <th>Pharmacy_name</th>
+                <th>Type</th>
+                <th>Address</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pharmacist in pharmacists %}
+            <tr>
+                <td>{{ pharmacist.id }}</td>
+                <td>{{ pharmacist.certificate }}</td>
+                <td>{{ pharmacist.pharmacyName }}</td>
+                <td>{{ pharmacist.type }}</td>
+                <td>{{ pharmacist.address }}</td>
+                <td>{{ pharmacist.mobile }}</td>
+                <td>{{ pharmacist.email }}</td>
+                <td>{{ pharmacist.image }}</td>
+                <td>
+                    <a href="{{ path('pharmacist_show', {'id': pharmacist.id}) }}">show</a>
+                    <a href="{{ path('pharmacist_edit', {'id': pharmacist.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('pharmacist_new') }}">Create new</a>
+{% endblock %}

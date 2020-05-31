@@ -1,0 +1,16 @@
+{% extends 'backend.html.twig' %}
+
+{% block title %}New Doctor{% endblock %}
+
+{% block contenu %}
+   <div class="module">
+       <div class="row">
+
+       <h1>Create new Doctor</h1>
+
+       {{ include('backend/doctor/_form.html.twig') }}
+
+       <a href="{{ path('doctor_index') }}">back to list</a>
+       </div>
+   </div>
+{% endblock %}

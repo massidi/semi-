@@ -121,6 +121,17 @@ class PatientController extends AbstractController
         ]);
 
     }
+    /**
+     * @Route("/see-list-of prescriotion",name="see-list")
+     */
+    public function cardlist()
+    {
+        $users=$this->getUser();
+        $listprescription=$this->prescriptionRepository->findByPatientName($users);
+        return $this->render('admin/patient/prescription/cardlist.html.twig',
+            ['listprescription'=>$listprescription]
+            );
+    }
 
     /**
      * @Route("/print-patient-prescription/{id}/",name="print-patient-prescription")

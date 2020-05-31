@@ -31,7 +31,7 @@ class RegistrationFormType extends AbstractType
             ->add('lastName')
             ->add('age')
             ->add('username')
-            ->add('roles', ChoiceType::class, [
+            ->add('roles',CheckboxType::class, [
                 'choices' => [
                     'Doctor' => 'ROLE_DOCTOR',
                     'Patient' => "ROLE_PATIENT",

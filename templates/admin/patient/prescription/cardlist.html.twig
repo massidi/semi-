@@ -1,0 +1,29 @@
+{% extends 'admin.html.twig' %}
+
+{% block contenu %}
+    <div class="container">
+        <div class="row">
+            {% for list in listprescription %}
+            <div class="col-lg-4">
+{#                {{ dump(list) }}#}
+                <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                  <a href="{{ path('show_prescription', {'id': list.id}) }}">
+                      <div class="card-header">PRESCRIPTION Id:{{ list.id }}</div>
+                  </a>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ list.medicName }}</h4>
+                        <p class="card-text">{{ list.diagnostic }} {{ list.examination }}</p>
+                        <p class="text-lg-right">{{ list.createdAt|date }}</p>
+
+
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}
+

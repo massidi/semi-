@@ -61,7 +61,13 @@ class UserSubscriber implements EventSubscriberInterface
             ->setTo($event->getRegisterUser()->getEmail())
             ->setBody($body, 'text/html');
 
-        $this->mailer->send($massage);
+        try {
+            $this->mailer->send($massage);
+        }
+        catch (\Exception $e)
+        {
+            echo ($e);
+        }
     }
 
     /**

@@ -1,0 +1,51 @@
+{% extends 'backend.html.twig' %}
+
+{#{% block contenu %}#}
+{#  <div class="module" style="width: 900px">#}
+{#      <div class="module-body" >#}
+{#        <h1>Doctor</h1>#}
+
+{#        <table class="table table-striped " style="width: 500px">#}
+{#            <thead class="thead-dark" style="background-color: #2a2358">#}
+{#            <tr>#}
+{#                <th  scope="col"><strong style="color: white">  Id </strong></th>#}
+{#                <th  scope="col"><strong style="color: white">  Type</strong></th>#}
+{#                <th  scope="col"><strong style="color: white">  Department</strong></th>#}
+{#                <th  scope="col"><strong style="color: white">  Mobile</strong></th>#}
+{#                <th  scope="col"><strong style="color: white">  Hospital_name</strong></th>#}
+{#                <th  scope="col"><strong style="color: white">  Specialization</strong></th>#}
+{#                <th  scope="col"><strong style="color: white">  Image</strong></th>#}
+{#                <th  scope="col"><strong style="color: white">  UpdatedAt</strong></th>#}
+{#                <th  scope="col"><strong style="color: white">  actions</strong></th>#}
+{#            </tr>#}
+{#            </thead>#}
+{#            <tbody>#}
+{#            {% for doctor in doctors %}#}
+{#                <tr>#}
+{#                    <td class="bg-primary">{{ doctor.id }}</td>#}
+{#                    <td>{{ doctor.type }}</td>#}
+{#                    <td>{{ doctor.department }}</td>#}
+{#                    <td>{{ doctor.mobile }}</td>#}
+{#                    <td>{{ doctor.hospitalName }}</td>#}
+{#                    <td>{{ doctor.specialization }}</td>#}
+{#                    <td>{{ doctor.image }}</td>#}
+{#                    <td>{{ doctor.updatedAt ? doctor.updatedAt|date('Y-m-d H:i:s') : '' }}</td>#}
+{#                    <td style="LINE-HEIGHT:50px" >#}
+{#                        <a href="{{ path('doctor_show', {'id': doctor.id}) }}" class="btn btn-info"> <i class="icon-eye-open"></i> show</a>#}
+{#                        &nbsp;#}
+{#                        <a href="{{ path('doctor_edit', {'id': doctor.id}) }}" class="btn btn-warning"><i class="icon-edit"></i> edit</a>#}
+{#                    </td>#}
+{#                </tr>#}
+{#            {% else %}#}
+{#                <tr>#}
+{#                    <td colspan="9">no records found</td>#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{#            </tbody>#}
+{#        </table>#}
+
+{#        <a href="{{ path('doctor_new') }}" class="btn btn-primary"><i class="icon-inbox"></i> Create new</a>#}
+{#      </div>#}
+{#    </div>#}
+
+{#{% endblock %}#}

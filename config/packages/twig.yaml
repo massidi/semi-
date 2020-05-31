@@ -4,6 +4,8 @@ twig:
     strict_variables: '%kernel.debug%'
     exception_controller: null
     form_themes: ['bootstrap_4_layout.html.twig']
+
+
     globals:
         doctor: '@App\Service\DoctorService'
         pharmacist: '@App\Service\PharmacistService'

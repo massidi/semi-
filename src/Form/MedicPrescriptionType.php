@@ -35,7 +35,7 @@ class MedicPrescriptionType extends AbstractType
             ->add('blood_pressure')
             ->add('pulse_rate')
             ->add('drug',CKEditorType::class)
-            ->add('examination',TextareaType::class)
+            ->add('examination',CKEditorType::class)
             ->add('health_regine',TextareaType::class)
             ->add('patientName')
         ;

@@ -1,0 +1,50 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Doctor{% endblock %}
+
+{% block contenu %}
+    <h1>Doctor</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ doctor.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ doctor.type }}</td>
+            </tr>
+            <tr>
+                <th>Department</th>
+                <td>{{ doctor.department }}</td>
+            </tr>
+            <tr>
+                <th>Mobile</th>
+                <td>{{ doctor.mobile }}</td>
+            </tr>
+            <tr>
+                <th>Hospital_name</th>
+                <td>{{ doctor.hospitalName }}</td>
+            </tr>
+            <tr>
+                <th>Specialization</th>
+                <td>{{ doctor.specialization }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ doctor.image }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ doctor.updatedAt ? doctor.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('doctor_index') }}">back to list</a>
+
+    <a href="{{ path('doctor_edit', {'id': doctor.id}) }}">edit</a>
+
+    {{ include('backend/doctor/_delete_form.html.twig') }}
+{% endblock %}

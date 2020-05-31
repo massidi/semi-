@@ -1,0 +1,11 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}New Pharmacist{% endblock %}
+
+{% block contenu %}
+    <h1>Create new Pharmacist</h1>
+
+    {{ include('backend/pharmacist/_form.html.twig') }}
+
+    <a href="{{ path('pharmacist_index') }}">back to list</a>
+{% endblock %}

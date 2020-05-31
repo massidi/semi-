@@ -65,29 +65,23 @@
                 <!-- ============================================================== -->
                 <a class="navbar-brand" href="">
                     <!-- Logo icon -->
+                    <b class="logo-icon p-l-10">
+                        <img src="{{ asset('images/logo4.png') }}" alt="home" class="light-logo"/>
+                    </b>
+
+                    <span class="logo-text">
                     {% if is_granted('ROLE_DOCTOR') %}
-                        <b class="logo-icon p-l-10">
 
+                        Dr {{ app.user.firstName }}
 
-                            Dr {{ app.user.firstName }}
-
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
-                            <!-- <img src="../../assets/images/logo-icon.png" alt="homepage" class="light-logo" /> -->
-                        </b>
                     {% endif %}
-                    {% if is_granted('ROLE_PHARMACIST') %}
-                        <b class="logo-icon p-l-10">
+                        {% if is_granted('ROLE_PHARMACIST') %}
                             Mr {{ app.user.firstName }}
-
-                        </b>
-                    {% endif %}
-                    {% if is_granted('ROLE_PATIENT') %}
-                        <b class="logo-icon p-l-10">
+                        {% endif %}
+                        {% if is_granted('ROLE_PATIENT') %}
                             Mr {{ app.user.firstName }}
-
-                        </b>
-                    {% endif %}
+                        {% endif %}
+    </span>
 
 
                     <!--End Logo icon -->
@@ -131,7 +125,7 @@
                     <!-- create new -->
                     <!-- ============================================================== -->
 
-                    </li>
+
                     <!-- ============================================================== -->
                     <!-- Search -->
 
@@ -225,94 +219,96 @@
                     <!-- User profile and search -->
                     <!-- ============================================================== -->
                     {% block profile %}
-                        <li class="nav-item dropdown">
-                            {% if is_granted('ROLE_PATIENT') %}
-                                {% if app.user.infoPatient is not defined %}
-                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
-                                       href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                                src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user"
-                                                class="rounded-circle" width="31"></a>
-                                {% elseif app.user.infoPatient.image %}
-                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
-                                       href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                                src="{{ asset('uploads/profil/'~app.user.infoPatient.image) }}"
-                                                alt="user" class="rounded-circle" width="31"/>
-                                    </a>
+                    <li class="nav-item dropdown">
+                        {% if is_granted('ROLE_PATIENT') %}
+                            {% if app.user.infoPatient is null %}
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                                   href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                            src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user"
+                                            class="rounded-circle" width="31"></a>
+                            {% elseif app.user.infoPatient.image %}
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                                   href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                            src="{{ asset('uploads/profil/'~app.user.infoPatient.image) }}"
+                                            alt="user" class="rounded-circle" width="31"/>
+                                </a>
 
-                                {% endif %}
                             {% endif %}
-                            {#                      {{ dump(app.user.infoDoctor.image) }}#}
+                        {% endif %}
+                        {#                      {{ dump(app.user.infoDoctor.image) }}#}
+                        {% if is_granted('ROLE_DOCTOR') %}
+                            {% if app.user.infoDoctor.image is not null %}
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                                   href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                            src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user"
+                                            class="rounded-circle" width="31"></a>
+                            {% elseif app.user.infoDoctor.image %}
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                                   href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                            src="{{ asset('uploads/profil/'~app.user.infoDoctor.image) }}"
+                                            alt="user" class="rounded-circle" width="31"/>
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                        {% if is_granted('ROLE_PHARMACIST') %}
+
+                            {% if app.user.infoPharmacist is not null %}
+
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                                   href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                            src="{{ asset('uploads/profil/'~app.user.infoPharmacist.image) }}"
+                                            alt="user" class="rounded-circle" width="31"/>
+                                </a>
+                            {% elseif app.user.infoPharmacist is null %}
+
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+                                   href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                            src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user"
+                                            class="rounded-circle" width="31"></a>
+
+                            {% endif %}
+                        {% endif %}
+
+
+                        <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
+                                My Profile</a>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i>
+                                My Balance</a>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i>
+                                Inbox</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0)"><i
+                                        class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('logout') }}"><i
+                                        class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                            <div class="dropdown-divider"></div>
+
                             {% if is_granted('ROLE_DOCTOR') %}
-                                {% if app.user.infoDoctor.image is not defined %}
-                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
-                                       href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                                src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user"
-                                                class="rounded-circle" width="31"></a>
-                                {% elseif app.user.infoDoctor.image %}
-                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
-                                       href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                                src="{{ asset('uploads/profil/'~app.user.infoDoctor.image) }}"
-                                                alt="user" class="rounded-circle" width="31"/>
-                                    </a>
-                                {% endif %}
+                                {#                            {% if users is not null %}#}
+                                <div class="p-l-30 p-10"><a href="{{ path('profile_index') }}"
+                                                            class="btn btn-sm btn-success btn-rounded">View
+                                        Profile</a></div>
+                                {#                            {% elseif users is null %}#}
+                                {#                                <div class="p-l-30 p-10"><a href="{{path('new_profile')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>#}
+                                {#                                {% endif %}#}
                             {% endif %}
+
                             {% if is_granted('ROLE_PHARMACIST') %}
-
-                                {% if app.user.infoPharmacist is not null %}
-
-                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
-                                       href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                                src="{{ asset('uploads/profil/'~app.user.infoPharmacist.image) }}"
-                                                alt="user" class="rounded-circle" width="31"/>
-                                    </a>
-                                {% elseif app.user.infoPharmacist is null %}
-
-                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
-                                       href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                                src=" {{ asset('doctor/assets/images/users/1.jpg') }}" alt="user"
-                                                class="rounded-circle" width="31"></a>
-
-                                {% endif %}
+                                <div class="p-l-30 p-10"><a href="{{ path('pharmacistProfile_index') }}"
+                                                            class="btn btn-sm btn-success btn-rounded">View
+                                        Profile</a></div>
                             {% endif %}
+                            {% if is_granted('ROLE_PATIENT') %}
+                                <div class="p-l-30 p-10"><a href="{{ path('patient_profile') }}"
+                                                            class="btn btn-sm btn-success btn-rounded">View Profile</a>
+                                </div>
+                            {% endif %}
+                            {% endblock %}
 
-
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
-                                    My Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i>
-                                    My Balance</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i>
-                                    Inbox</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i
-                                            class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ path('logout') }}"><i
-                                            class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
-                                <div class="dropdown-divider"></div>
-
-                                {% if is_granted('ROLE_DOCTOR') %}
-                                    {#                            {% if users is not null %}#}
-                                    <div class="p-l-30 p-10"><a href="{{ path('profile_index') }}"
-                                                                class="btn btn-sm btn-success btn-rounded">View
-                                            Profile</a></div>
-                                    {#                            {% elseif users is null %}#}
-                                    {#                                <div class="p-l-30 p-10"><a href="{{path('new_profile')}}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>#}
-                                    {#                                {% endif %}#}
-                                {% endif %}
-
-                                {% if is_granted('ROLE_PHARMACIST') %}
-                                    <div class="p-l-30 p-10"><a href="{{ path('pharmacistProfile_index') }}"
-                                                                class="btn btn-sm btn-success btn-rounded">View
-                                            Profile</a></div>
-                                {% endif %}
-                                {% if is_granted('ROLE_PATIENT') %}
-                                    <div class="p-l-30 p-10"><a href="{{ path('patient_profile') }}" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
-                                {% endif %}
-                                {% endblock %}
-
-                            </div>
-                        </li>
+                        </div>
+                    </li>
 
                     <!-- ============================================================== -->
                     <!-- User profile and search -->
@@ -320,11 +316,11 @@
                 </ul>
             </div>
         </nav>
-{#        {% for message in app.flashes('notice') %}#}
-{#            <div class="flash-notice">#}
-{#                {{ message }}#}
-{#            </div>#}
-{#        {% endfor %}#}
+        {#        {% for message in app.flashes('notice') %}#}
+        {#            <div class="flash-notice">#}
+        {#                {{ message }}#}
+        {#            </div>#}
+        {#        {% endfor %}#}
     </header>
     <!-- ============================================================== -->
     <!-- End Topbar header -->
@@ -451,16 +447,16 @@
         <!-- ============================================================== -->
         <!-- Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->
-        <div class="page-breadcrumb">
-            <div class="row">
-                <div class="col-12 d-flex no-block align-items-center">
-                    <h4 class="page-title"></h4>
-                    <div class="ml-auto text-right">
+{#        <div class="page-breadcrumb">#}
+{#            <div class="row">#}
+{#                <div class="col-12 d-flex no-block align-items-center">#}
+{#                    <h4 class="page-title"></h4>#}
+{#                    <div class="ml-auto text-right">#}
 
-                    </div>
-                </div>
-            </div>
-        </div>
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
         <!-- ============================================================== -->
         <!-- End Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->
@@ -469,211 +465,175 @@
         <!-- ============================================================== -->
         <div class="container-fluid">
             {% block contenu %}
-                <!-- ============================================================== -->
-                <!-- Sales Cards  -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <!-- Column -->
-{#                    <div class="col-md-6 col-lg-2 col-xlg-3">#}
-{#                        <div class="card card-hover">#}
-{#                            <div class="box bg-cyan text-center">#}
-{#                                <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>#}
+            <!-- ============================================================== -->
+            <!-- Sales Cards  -->
+            <!-- ============================================================== -->
+            <div class="row">
 
-{#                                <h6 class="text-white">Dashboard</h6>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <!-- Column -->#}
-{#                    <div class="col-md-6 col-lg-4 col-xlg-3">#}
-{#                        <div class="card card-hover">#}
-{#                            <div class="box bg-success text-center">#}
-{#                                <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>#}
-{#                                <h6 class="text-white">Charts</h6>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <!-- Column -->#}
-{#                    <div class="col-md-6 col-lg-2 col-xlg-3">#}
-{#                        <div class="card card-hover">#}
-{#                            <div class="box bg-warning text-center">#}
-{#                                <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>#}
-{#                                <h6 class="text-white">Widgets</h6>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-                    <!-- Column -->
-                    {% if is_granted('ROLE_DOCTOR') %}
-
-                    <div class="col-md-6 col-lg-2 col-xlg-3">
+                {#                            <a href="{{ path('patient_latest') }}">#}
+                {% if is_granted('ROLE_DOCTOR') %}
+                    <div class="  col-md-6 col-lg-3">
                         <div class="card card-hover">
                             <div class="box bg-danger text-center">
-
-                                    <a href="{{ path('doctor_index') }}">
-                                        <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
-                                        <h6 class="text-white">Prescription Tables</h6>
-                                    </a>
-                            </div>
-                        </div>
-                    </div>
-                    {% endif %}
-
-                    <!-- Column -->
-                    <div class="col-md-6 col-lg-2 col-xlg-3">
-                        <div class="card card-hover">
-                            <div class="box bg-info text-center">
-                                {#                            <a href="{{ path('patient_latest') }}">#}
-                                <h1 class="font-light text-white"><i class="mdi mdi-arrow-all"></i></h1>
-                                {% if is_granted('ROLE_DOCTOR') %}
-                                    <a href="{{ path('latestrecord') }}">
-                                        <h6 class="text-white">Doctor Record</h6>
-                                    </a>
-                                {% endif %}
-                                {% if is_granted('ROLE_PHARMACIST') %}
-{#                                                                    <a href="{{ path('patient_latest') }}">#}
-                                    <h6 class="text-white">Pharmacist Records</h6>
-                                {% endif %}
-                                {#                            </a>#}
-                                                                    </a>                         <
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <!-- Column -->
-                    {% if is_granted('ROLE_DOCTOR') %}
-                        <div class="col-md-6 col-lg-4 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="box bg-danger text-center">
-                                    <a href="{{ path('doctor_new') }}">
-                                        <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
-
-                                        <h6 class="text-white"> New Prescription</h6>
-
-
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
-                    {% if is_granted('ROLE_PHARMACIST') %}
-                        <div class="col-md-6 col-lg-4 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="box bg-danger text-center">
-                                    <a href="{{ path('search_prescription') }}">
-                                        <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
-                                        <h6 class="text-white">Show Prescription</h6>
-
-
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
-
-
-                    <!-- Column -->
-                    <div class="col-md-6 col-lg-2 col-xlg-3">
-                        <div class="card card-hover">
-                            <div class="box bg-success text-center">
-                                <h1 class="font-light text-white"><i class="mdi mdi-calendar-check"></i></h1>
-                                {% if is_granted('ROLE_DOCTOR') %}
-                                <a href="{{ path('calendar') }}">
-                                    {% endif %}
-                                    {% if is_granted('ROLE_PATIENT') %}
-                                    <a href="{{ path('pcalendar') }}">
-                                        {% endif %}
-                                        {% if is_granted('ROLE_PHARMACIST') %}
-                                        <a href="">
-                                            {% endif %}
-                                            <h6 class="text-white">Calendar</h6>
-                                        </a>
-                                    </a>
+                                <a href="{{ path('latestrecord') }}">
+                                    <h1 class="font-light text-white"><i class="mdi mdi-arrow-all"></i></h1>
+                                    <h6 class="text-white">Doctor Record</h6>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <!-- Column -->
+                {% endif %}
 
-                    <!-- Column -->
-                </div>
-                <!-- ============================================================== -->
-                <!-- Sales chart -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-md-flex align-items-center">
-                                    <div>
-                                        {% if is_granted('ROLE_DOCTOR') %}
-                                            <h4 class="card-title">Doctor Analysis</h4>
-                                        {% endif %}
-                                        {% if is_granted('ROLE_PHARMACIST') %}
-                                            <h4 class="card-title">Pharmacit Analysis</h4>
-                                        {% endif %}
 
-                                        <h5 class="card-subtitle">Overview of Latest Month</h5>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <!-- column -->
-                                    <div class="col-lg-9">
-                                        <div class="flot-chart">
-                                            <div class="flot-chart-content" id="flot-line-chart"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="bg-dark p-10 text-white text-center">
-                                                    <i class="fa fa-user m-b-5 font-16"></i>
-                                                    <h5 class="m-b-0 m-t-5">2540</h5>
-                                                    <small class="font-light">Total Users</small>
-                                                </div>
-                                            </div>
+                <!-- Column -->
+                <!-- Column -->
+                {% if is_granted('ROLE_DOCTOR') %}
+                    <div class="  col-md-6 col-lg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-cyan text-center">
+                                <a href="{{ path('doctor_new') }}">
+                                    <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
 
-                                        </div>
-                                        <div class="col-6 m-t-15">
-                                            <div class="bg-dark p-10 text-white text-center">
-                                                <i class="fa fa-cart-plus m-b-5 font-16"></i>
-                                                <h5 class="m-b-0 m-t-5">656</h5>
-                                                <small class="font-light">Total Shop</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 m-t-15">
-                                            <div class="bg-dark p-10 text-white text-center">
-                                                <i class="fa fa-tag m-b-5 font-16"></i>
-                                                <h5 class="m-b-0 m-t-5">9540</h5>
-                                                <small class="font-light">Total Prescription</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 m-t-15">
-                                            <div class="bg-dark p-10 text-white text-center">
-                                                <i class="fa fa-table m-b-5 font-16"></i>
-                                                <h5 class="m-b-0 m-t-5">100</h5>
-                                                <small class="font-light">Pending Prescription</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 m-t-15">
-                                            <div class="bg-dark p-10 text-white text-center">
-                                                <i class="fa fa-globe m-b-5 font-16"></i>
-                                                <h5 class="m-b-0 m-t-5">8540</h5>
-                                                <small class="font-light">Online Orders</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- column -->
+                                    <h6 class="text-white"> New Prescription</h6>
+
+
+                                </a>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endblock %}
-        </div>
-        <!-- ============================================================== -->
-        <!-- Sales chart -->
+                {% endif %}
+                {% if is_granted('ROLE_PHARMACIST') %}
+                    <div class="  col-md-6 col-lg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-danger text-center">
+                                <a href="{{ path('search_prescription') }}">
+                                    <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
+                                    <h6 class="text-white">Show Prescription</h6>
 
+
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+
+                <!-- Column -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-hover">
+                        <div class="box bg-success text-center">
+                            <h1 class="font-light text-white"><i class="mdi mdi-calendar-check"></i></h1>
+                            {% if is_granted('ROLE_DOCTOR') %}
+                            <a href="{{ path('calendar') }}">
+                                {% endif %}
+                                {% if is_granted('ROLE_PATIENT') %}
+                                <a href="{{ path('pcalendar') }}">
+                                    {% endif %}
+                                    {% if is_granted('ROLE_PHARMACIST') %}
+                                    <a href="">
+                                        {% endif %}
+                                        <h6 class="text-white">Calendar</h6>
+                                    </a>
+                                </a>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-hover">
+                        <div class="box bg-warning text-center">
+                            <a href="{{ path('doctor_index') }}">
+                                <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
+                                <h6 class="text-white">Prescription table</h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column -->
+
+            <!-- Column -->
+
+            <!-- ============================================================== -->
+            <!-- Sales chart -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-md-flex align-items-center">
+                                <div>
+                                    {% if is_granted('ROLE_DOCTOR') %}
+                                        <h4 class="card-title">Doctor Analysis</h4>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_PHARMACIST') %}
+                                        <h4 class="card-title">Pharmacit Analysis</h4>
+                                    {% endif %}
+
+                                    <h5 class="card-subtitle">Overview of Latest Month</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- column -->
+                                <div class="col-lg-9">
+                                    <div class="flot-chart">
+                                        <div class="flot-chart-content" id="flot-line-chart"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="bg-dark p-10 text-white text-center">
+                                                <i class="fa fa-user m-b-5 font-16"></i>
+                                                <h5 class="m-b-0 m-t-5">2540</h5>
+                                                <small class="font-light">Total Users</small>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-6 m-t-15">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                            <i class="fa fa-cart-plus m-b-5 font-16"></i>
+                                            <h5 class="m-b-0 m-t-5">656</h5>
+                                            <small class="font-light">Total Shop</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 m-t-15">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                            <i class="fa fa-tag m-b-5 font-16"></i>
+                                            <h5 class="m-b-0 m-t-5">9540</h5>
+                                            <small class="font-light">Total Prescription</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 m-t-15">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                            <i class="fa fa-table m-b-5 font-16"></i>
+                                            <h5 class="m-b-0 m-t-5">100</h5>
+                                            <small class="font-light">Pending Prescription</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 m-t-15">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                            <i class="fa fa-globe m-b-5 font-16"></i>
+                                            <h5 class="m-b-0 m-t-5">8540</h5>
+                                            <small class="font-light">Online Orders</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- column -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
     </div>
+    <!-- ============================================================== -->
+    <!-- Sales chart -->
+
+</div>
 </div>
 {% endblock %}
 {% block js %}
